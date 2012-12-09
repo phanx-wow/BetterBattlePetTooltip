@@ -6,7 +6,7 @@
 ## Author: Phanx
 ## X-Email: addons@phanx.net
 ## X-CompatibleLocales: deDE, enUS, esES, esMX, frFR, itIT, ptBR, koKR, ruRU, zhCN, zhTW
-## X-Localizations: enUS
+## X-Localizations: enUS, esES, esMX
 ## X-Website:
 ## X-Curse-Project-Name: better-battle-pet-tooltip
 ## X-WoWI-ID:
