@@ -98,9 +98,15 @@ f:SetScript("OnEvent", function(f, event)
 		end
 	elseif PetBattleUnitTooltip_UpdateForUnit then
 		hooksecurefunc("PetBattleUnitTooltip_UpdateForUnit", function(self, owner, index)
-			if owner == LE_BATTLE_PET_ENEMY and C_PetBattles.IsWildBattle() then
-				local species = C_PetBattles.GetPetSpeciesID(owner, index)
+			local species = C_PetBattles.GetPetSpeciesID(owner, index)
 
+			local color = ITEM_QUALITY_COLORS[C_PetBattles.GetBreedQuality(owner, index) - 1]
+			self:SetBackdropBorderColor(color.r, color.g, color.b)
+			for i = 1, #BorderRegions do
+				self[BorderRegions[i]]:SetVertexColor(color.r, color.g, color.b)
+			end
+
+			if owner == LE_BATTLE_PET_ENEMY and C_PetBattles.IsWildBattle() then
 				local text = C_PetJournal.GetOwnedBattlePetString(species)
 				self.CollectedText:SetText(text)
 
@@ -108,12 +114,6 @@ f:SetScript("OnEvent", function(f, event)
 				if quality then
 					local color = ITEM_QUALITY_COLORS[quality - 1]
 					self.CollectedText:SetTextColor(color.r, color.g, color.b)
-				end
-
-				local color = ITEM_QUALITY_COLORS[C_PetBattles.GetBreedQuality(owner, index) - 1]
-				self:SetBackdropBorderColor(color.r, color.g, color.b)
-				for i = 1, #BorderRegions do
-					self[BorderRegions[i]]:SetVertexColor(color.r, color.g, color.b)
 				end
 			end
 		end)
