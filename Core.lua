@@ -38,14 +38,19 @@ end
 ------------------------------------------------------------------------
 
 local BorderRegions = { "BorderTopLeft", "BorderTopRight", "BorderBottomRight", "BorderBottomLeft", "BorderTop", "BorderRight", "BorderBottom", "BorderLeft" }
+local function SetBorderColor(self, r, g, b)
+	self:SetBackdropBorderColor(r, g, b)
+	for i = 1, #BorderRegions do
+		self[BorderRegions[i]]:SetVertexColor(r, g, b)
+	end
+end
+
+------------------------------------------------------------------------
 
 local function BattlePetTooltip_OnShow(self)
 	if tonumber(ENABLE_COLORBLIND_MODE) > 0 then
 		self.Owned:SetTextColor(1, 1, 1)
-		self:SetBackdropBorderColor(1, 1, 1)
-		for i = 1, #BorderRegions do
-			self[BorderRegions[i]]:SetVertexColor(1, 1, 1)
-		end
+		SetBorderColor(self, 1, 1, 1)
 		return
 	end
 
@@ -58,11 +63,7 @@ local function BattlePetTooltip_OnShow(self)
 		self.Owned:SetTextColor(color.r, color.g, color.b)
 	end
 
-	local r, g, b = self.Name:GetTextColor()
-	self:SetBackdropBorderColor(r, g, b)
-	for i = 1, #BorderRegions do
-		self[BorderRegions[i]]:SetVertexColor(r, g, b)
-	end
+	SetBorderColor(self, self.Name:GetTextColor())
 end
 
 hooksecurefunc("BattlePetToolTip_Show", function() BattlePetTooltip_OnShow(BattlePetTooltip) end)
@@ -78,6 +79,7 @@ f:SetScript("OnEvent", function(f, event)
 		wipe(petCount)
 		wipe(petLevel)
 		wipe(petQuality)
+		wipe(petSpecies)
 		for i = 1, C_PetJournal.GetNumPets(false) do
 			local id, species, owned, _, level, _, _, name, _, _, _, _, _, wild = C_PetJournal.GetPetInfoByIndex(i)
 			if id and name then
@@ -100,19 +102,18 @@ f:SetScript("OnEvent", function(f, event)
 		hooksecurefunc("PetBattleUnitTooltip_UpdateForUnit", function(self, owner, index)
 			local species = C_PetBattles.GetPetSpeciesID(owner, index)
 
-			local color = ITEM_QUALITY_COLORS[C_PetBattles.GetBreedQuality(owner, index) - 1]
-			self:SetBackdropBorderColor(color.r, color.g, color.b)
-			for i = 1, #BorderRegions do
-				self[BorderRegions[i]]:SetVertexColor(color.r, color.g, color.b)
-			end
+			local color = tonumber(ENABLE_COLORBLIND_MODE) > 0 and ITEM_QUALITY_COLORS[C_PetBattles.GetBreedQuality(owner, index) - 1] or TOOLTIP_DEFAULT_COLOR
+			SetBorderColor(self, color.r, color.g, color.b)
 
 			if owner == LE_BATTLE_PET_ENEMY and C_PetBattles.IsWildBattle() then
 				local text = C_PetJournal.GetOwnedBattlePetString(species)
 				self.CollectedText:SetText(text)
 
-				local quality = petQuality[species]
-				if quality then
-					local color = ITEM_QUALITY_COLORS[quality - 1]
+				if tonumber(ENABLE_COLORBLIND_MODE) > 0 then
+					self.CollectedText:SetTextColor(1, 1, 1)
+				else
+					local quality = petQuality[species]
+					local color = quality and ITEM_QUALITY_COLORS[quality - 1] or ITEM_QUALITY_COLORS[5]
 					self.CollectedText:SetTextColor(color.r, color.g, color.b)
 				end
 			end
