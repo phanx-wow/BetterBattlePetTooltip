@@ -1,4 +1,16 @@
-local ADDON, addon = ...
+--[[--------------------------------------------------------------------
+	BetterBattlePetTooltip
+	A World of Warcraft user interface addon
+	Copyright (c) 2012 Akkorian, Phanx
+
+	This addon is freely available, and its source code freely viewable,
+	but it is not "open source software" and you may not distribute it,
+	with or without modifications, without permission from its author.
+
+	See the included README and LICENSE files for more information!
+----------------------------------------------------------------------]]
+
+local ADDON = ...
 
 local L_HIDE_COUNT = "Hide collected count"
 local L_SHOW_LEVEL = "Show highest collected level"
@@ -8,6 +20,19 @@ local L_HIDE_COUNT_OFF = "Collected count shown."
 
 local L_SHOW_LEVEL_ON  = "Highest collected level shown."
 local L_SHOW_LEVEL_OFF = "Highest collected level hidden."
+
+------------------------------------------------------------------------
+
+if GetLocale():match("^es") then
+	L_HIDE_COUNT = "Ocultar la cantidad recogida"
+	L_HIDE_COUNT_ON = "Cantidad recogida está oculta."
+	L_HIDE_COUNT_OFF = "Cantidad recogida está mostrada."
+	L_SHOW_LEVEL = "Mostrar el mayor nivel recogido"
+	L_SHOW_LEVEL_ON = "Mayor nivel está mostrado."
+	L_SHOW_LEVEL_OFF = "Mayor nivel está oculto."
+end
+
+------------------------------------------------------------------------
 
 local Options = CreateFrame("Frame", "BBPTOptions", InterfaceOptionsFramePanelContainer)
 Options.name = GetAddOnMetadata(ADDON, "Title") or ADDON

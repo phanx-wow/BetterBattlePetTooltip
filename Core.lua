@@ -1,87 +1,77 @@
 --[[--------------------------------------------------------------------
-	Based on PetCaught by Lifetapt
+	BetterBattlePetTooltip
+	A World of Warcraft user interface addon
+	Copyright (c) 2012 Akkorian, Phanx
+
+	This addon is freely available, and its source code freely viewable,
+	but it is not "open source software" and you may not distribute it,
+	with or without modifications, without permission from its author.
+
+	See the included README and LICENSE files for more information!
 ----------------------------------------------------------------------]]
 
-local petCount, petLevel, petQuality = {}, {}, {}
+local petCount, petLevel, petQuality, petSpecies = {}, {}, {}, {}
 
-local F_BATTLE_PET_CAGE_TOOLTIP_LEVEL = " (" .. BATTLE_PET_CAGE_TOOLTIP_LEVEL .. ")"
+local F_BATTLE_PET_CAGE_TOOLTIP_LEVEL = "%s (" .. BATTLE_PET_CAGE_TOOLTIP_LEVEL .. ")"
 local S_ITEM_PET_KNOWN = ITEM_PET_KNOWN:gsub("[%(%)]", "%%%1")
 local L_PET_CAPTURABLE = gsub(NOT_COLLECTED, COLLECTED, UNIT_CAPTURABLE)
 
 ------------------------------------------------------------------------
 
-local function GetText(text, name, count, level, quality)
-	if not name then return "" end
-	if not count then count = petCount[name] end
-	if not level then level = petLevel[name] end
-	if not quality then quality = petQuality[name] end
-
-	local level = BBPT_ShowLevel and format(F_BATTLE_PET_CAGE_TOOLTIP_LEVEL, petLevel[name]) or ""
+local get = C_PetJournal.GetOwnedBattlePetString
+C_PetJournal.GetOwnedBattlePetString = function(speciesID)
+	local text = get(speciesID)
+	if not text then
+		return petCount[speciesID] and NOT_COLLECTED
+	end
 	if BBPT_HideCount then
-		text = gsub(text, "%(.+%)", "")
-	end
-	if tonumber(ENABLE_COLORBLIND_MODE) > 0 then
-		return "%s%s (%s)", text, level, _G["BATTLE_PET_BREED_QUALITY"..quality]
+		text = COLLECTED
 	else
-		return "%s%s", text, level
+		text = strmatch(text, S_ITEM_PET_KNOWN) or text -- strips inline color
 	end
+	if BBPT_ShowLevel then
+		text = format(F_BATTLE_PET_CAGE_TOOLTIP_LEVEL, text, petLevel[speciesID])
+	end
+	return text
 end
 
 ------------------------------------------------------------------------
 
-local function BattlePetTooltip_OnShow(f)
-	if f.Owned then
-		f:SetHeight(f:GetHeight() + 12)
+local BorderRegions = { "BorderTopLeft", "BorderTopRight", "BorderBottomRight", "BorderBottomLeft", "BorderTop", "BorderRight", "BorderBottom", "BorderLeft" }
+
+local function BattlePetTooltip_OnShow(self)
+	if tonumber(ENABLE_COLORBLIND_MODE) > 0 then
+		self.Owned:SetTextColor(1, 1, 1)
+		self:SetBackdropBorderColor(1, 1, 1)
+		for i = 1, #BorderRegions do
+			self[BorderRegions[i]]:SetVertexColor(1, 1, 1)
+		end
+		return
 	end
 
-	local line = f.Owned or f.CollectedText
-
-	local name = f.Name:GetText()
-	local quality = name and petQuality[name]
+	local quality = petQuality[self.speciesID]
 	if quality then
-		local text = strmatch(line:GetText(), S_ITEM_PET_KNOWN)
-		if text then
-			line:SetFormattedText(GetText(text, name, nil, nil, quality))
-			if tonumber(ENABLE_COLORBLIND_MODE) == 0 then
-				local color = ITEM_QUALITY_COLORS[quality - 1]
-				line:SetTextColor(color.r, color.g, color.b)
-				f:SetBackdropBorderColor(color.r, color.g, color.b)
-			else
-				line:SetTextColor(1, 1, 1)
-			end
-			return
-		else
-			-- no match, probably already modified it
-		end
-	elseif line:IsShown() then
-		line:SetText(NOT_COLLECTED)
-		line:Hide()
-		line:Show()
-		if tonumber(ENABLE_COLORBLIND_MODE) == 0 then
-			local color = ITEM_QUALITY_COLORS[5]
-			line:SetTextColor(color.r, color.g, color.b)
-
-			local r, g, b = f.Name:GetTextColor()
-			f:SetBackdropBorderColor(r, g, b)
-		else
-			line:SetTextColor(1, 1, 1)
-		end
+		local color = ITEM_QUALITY_COLORS[quality - 1]
+		self.Owned:SetTextColor(color.r, color.g, color.b)
 	else
-		line:SetText(L_NOT_CAPTURABLE)
-		line:SetTextColor(1, 1, 1)
-		line:Show()
-		f.HealthBorder:SetPoint("TOPLEFT", line, "BOTTOMLEFT", -1, -6)
-		f:SetHeight(f:GetHeight() + line:GetHeight())
+		local color = ITEM_QUALITY_COLORS[5]
+		self.Owned:SetTextColor(color.r, color.g, color.b)
+	end
+
+	local r, g, b = self.Name:GetTextColor()
+	self:SetBackdropBorderColor(r, g, b)
+	for i = 1, #BorderRegions do
+		self[BorderRegions[i]]:SetVertexColor(r, g, b)
 	end
 end
 
-local function BattlePetTooltip_OnHide(f)
-	f.alreadyShowing = nil
-end
+hooksecurefunc("BattlePetToolTip_Show", function() BattlePetTooltip_OnShow(BattlePetTooltip) end)
+hooksecurefunc("FloatingBattlePet_Show", function() BattlePetTooltip_OnShow(FloatingBattlePetTooltip) end)
+
+------------------------------------------------------------------------
 
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
-f:RegisterEvent("PLAYER_LOGIN")
 f:RegisterEvent("PET_JOURNAL_LIST_UPDATE")
 f:SetScript("OnEvent", function(f, event)
 	if event == "PET_JOURNAL_LIST_UPDATE" then
@@ -89,37 +79,44 @@ f:SetScript("OnEvent", function(f, event)
 		wipe(petLevel)
 		wipe(petQuality)
 		for i = 1, C_PetJournal.GetNumPets(false) do
-			local id, _, owned, _, level, _, _, name, _, _, _, _, _, wild = C_PetJournal.GetPetInfoByIndex(i)
+			local id, species, owned, _, level, _, _, name, _, _, _, _, _, wild = C_PetJournal.GetPetInfoByIndex(i)
 			if id and name then
+				petSpecies[name] = species
 				if owned then
 					local _, _, _, _, quality = C_PetJournal.GetPetStats(id)
-					petCount[name] = 1 + (petCount[name] or 0)
-					if not petLevel[name] or level > petLevel[name] then
-						petLevel[name] = level
+					petCount[species] = 1 + (petCount[species] or 0)
+					if not petLevel[species] or level > petLevel[species] then
+						petLevel[species] = level
 					end
-					if not petQuality[name] or quality > petQuality[name] then
-						petQuality[name] = quality
+					if not petQuality[species] or quality > petQuality[species] then
+						petQuality[species] = quality
 					end
-				elseif not petCount[name] then
-					petCount[name] = 0
+				elseif not petCount[species] then
+					petCount[species] = 0
 				end
 			end
 		end
+	elseif PetBattleUnitTooltip_UpdateForUnit then
+		hooksecurefunc("PetBattleUnitTooltip_UpdateForUnit", function(self, owner, index)
+			if owner == LE_BATTLE_PET_ENEMY and C_PetBattles.IsWildBattle() then
+				local species = C_PetBattles.GetPetSpeciesID(owner, index)
 
-	elseif event == "PLAYER_LOGIN" then
-		BattlePetTooltip:HookScript("OnShow", BattlePetTooltip_OnShow)
-		BattlePetTooltip:HookScript("OnHide", BattlePetTooltip_OnHide)
+				local text = C_PetJournal.GetOwnedBattlePetString(species)
+				self.CollectedText:SetText(text)
 
-		FloatingBattlePetTooltip:HookScript("OnShow", BattlePetTooltip_OnShow)
-		FloatingBattlePetTooltip:HookScript("OnHide", BattlePetTooltip_OnHide)
+				local quality = petQuality[species]
+				if quality then
+					local color = ITEM_QUALITY_COLORS[quality - 1]
+					self.CollectedText:SetTextColor(color.r, color.g, color.b)
+				end
 
-		BattlePetTooltip.Name:SetFontObject(GameTooltipHeaderText)
-		FloatingBattlePetTooltip.Name:SetFontObject(GameTooltipHeaderText)
-
-	elseif PetBattlePrimaryUnitTooltip then
-		hooksecurefunc(PetBattlePrimaryUnitTooltip, "Show", BattlePetTooltip_OnShow)
-		hooksecurefunc(PetBattlePrimaryUnitTooltip, "Hide", BattlePetTooltip_OnHide)
-
+				local color = ITEM_QUALITY_COLORS[C_PetBattles.GetBreedQuality(owner, index) - 1]
+				self:SetBackdropBorderColor(color.r, color.g, color.b)
+				for i = 1, #BorderRegions do
+					self[BorderRegions[i]]:SetVertexColor(color.r, color.g, color.b)
+				end
+			end
+		end)
 		f:UnregisterEvent("ADDON_LOADED")
 	end
 end)
@@ -127,9 +124,11 @@ end)
 ------------------------------------------------------------------------
 
 local function AddTooltipInfo(tooltip, name)
-	local count, quality = petCount[name], petQuality[name]
-	if not count then
-		-- not a valid pet name
+	if not name then
+		name = _G[tooltip:GetName().."TextLeft1"]:GetText()
+	end
+	local species = petSpecies[name]
+	if not species then
 		return
 	end
 
@@ -138,31 +137,32 @@ local function AddTooltipInfo(tooltip, name)
 		local text = line:GetText()
 		if text == NOT_COLLECTED or text == UNIT_CAPTURABLE then
 			line:SetText(NOT_COLLECTED)
-			if tonumber(ENABLE_COLORBLIND_MODE) == 0 then
-				local color = ITEM_QUALITY_COLORS[5]
-				line:SetTextColor(color.r, color.g, color.b)
-			else
-				line:SetTextColor(1, 1, 1)
-			end
-			return
 
+			local color = tonumber(ENABLE_COLORBLIND_MODE) > 0 and HIGHLIGHT_FONT_COLOR or ITEM_QUALITY_COLORS[5]
+			line:SetTextColor(color.r, color.g, color.b)
+
+			return
 		elseif strmatch(text, S_ITEM_PET_KNOWN) then
-			local color = ITEM_QUALITY_COLORS[quality - 1]
-			line:SetFormattedText(GetText(text, name, count, nil, quality))
+			line:SetText(C_PetJournal.GetOwnedBattlePetString(species))
+
 			if tonumber(ENABLE_COLORBLIND_MODE) == 0 then
+				local quality = petQuality[species]
+				local color = quality and ITEM_QUALITY_COLORS[quality - 1] or ITEM_QUALITY_COLORS[6] -- heirloom for unknown
 				line:SetTextColor(color.r, color.g, color.b)
 				tooltip:SetBackdropBorderColor(color.r, color.g, color.b)
 			else
 				line:SetTextColor(1, 1, 1)
 			end
+
 			tooltip:Show()
 			return
 		end
 	end
 
-	if count > 0 then
-		local color = tonumber(ENABLE_COLORBLIND_MODE) > 0 and HIGHLIGHT_FONT_COLOR or ITEM_QUALITY_COLORS[quality - 1]
-		tooltip:AddLine(format(GetText(BBPT_HideCount and COLLECTED or format(ITEM_PET_KNOWN, count, 3), name, count, nil, quality)), color.r, color.g, color.b)
+	if petCount[species] > 0 then
+		local quality = petQuality[species]
+		local color = quality and (tonumber(ENABLE_COLORBLIND_MODE) > 0 and HIGHLIGHT_FONT_COLOR or ITEM_QUALITY_COLORS[quality - 1]) or ITEM_QUALITY_COLORS[6] -- heirloom for unknown
+		tooltip:AddLine(C_PetJournal.GetOwnedBattlePetString(species), color.r, color.g, color.b)
 		tooltip:SetBackdropBorderColor(color.r, color.g, color.b)
 	else
 		local color = tonumber(ENABLE_COLORBLIND_MODE) > 0 and HIGHLIGHT_FONT_COLOR or ITEM_QUALITY_COLORS[5]
@@ -170,6 +170,9 @@ local function AddTooltipInfo(tooltip, name)
 	end
 	tooltip:Show()
 end
+
+GameTooltip:HookScript("OnTooltipSetItem", AddTooltipInfo)
+ItemRefTooltip:HookScript("OnTooltipSetItem", AddTooltipInfo)
 
 ------------------------------------------------------------------------
 
@@ -191,8 +194,7 @@ updater:SetScript("OnUpdate", function()
 		end
 	else
 		-- Just one
-		local name = gsub(text, ".+|t", "")
-		AddTooltipInfo(GameTooltip, name)
+		AddTooltipInfo(GameTooltip, text)
 	end
 end)
 
