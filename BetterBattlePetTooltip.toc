@@ -3,13 +3,15 @@
 
 ## Title: Better Battle Pet Tooltip
 ## Notes: Adds highest collected level and quality coloring to battle pet tooltips.
+## Notes-esES: Mostrar el mayor nivel y calidad que se ha capturado en las descripciones de las mascotas de combate.
+## Notes-esMX: Mostrar el mayor nivel y calidad que se ha capturado en las descripciones de las mascotas de combate.
 ## Author: Phanx
 ## X-Email: addons@phanx.net
 ## X-CompatibleLocales: deDE, enUS, esES, esMX, frFR, itIT, ptBR, koKR, ruRU, zhCN, zhTW
 ## X-Localizations: enUS, esES, esMX
-## X-Website:
+## X-Website: http://www.wowinterface.com/downloads/info21978-BetterBattlePetTooltip.html
 ## X-Curse-Project-Name: better-battle-pet-tooltip
-## X-WoWI-ID:
+## X-WoWI-ID: 21978
 
 ## SavedVariables: BBPT_HideCount, BBPT_ShowLevel
 

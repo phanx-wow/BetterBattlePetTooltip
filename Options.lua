@@ -15,21 +15,11 @@ local ADDON = ...
 local L_HIDE_COUNT = "Hide collected count"
 local L_SHOW_LEVEL = "Show highest collected level"
 
-local L_HIDE_COUNT_ON  = "Collected count hidden."
-local L_HIDE_COUNT_OFF = "Collected count shown."
-
-local L_SHOW_LEVEL_ON  = "Highest collected level shown."
-local L_SHOW_LEVEL_OFF = "Highest collected level hidden."
-
 ------------------------------------------------------------------------
 
 if GetLocale():match("^es") then
 	L_HIDE_COUNT = "Ocultar la cantidad recogida"
-	L_HIDE_COUNT_ON = "Cantidad recogida está oculta."
-	L_HIDE_COUNT_OFF = "Cantidad recogida está mostrada."
 	L_SHOW_LEVEL = "Mostrar el mayor nivel recogido"
-	L_SHOW_LEVEL_ON = "Mayor nivel está mostrado."
-	L_SHOW_LEVEL_OFF = "Mayor nivel está oculto."
 end
 
 ------------------------------------------------------------------------
@@ -54,14 +44,18 @@ local HideCount = CreateFrame("CheckButton", "$parentHideCount", Options, "Inter
 HideCount:SetPoint("TOPLEFT", SubText, "BOTTOMLEFT", -2, -8)
 HideCount.Text:SetText(L_HIDE_COUNT)
 HideCount:SetScript("OnClick", function(this)
-	BBPT_HideCount = not not this:GetChecked()
+	local checked = not not this:GetChecked()
+	PlaySound(checked and "igMainMenuOptionCheckBoxOn" or "igMainmenuOptionCheckBoxOff")
+	BBPT_HideCount = checked
 end)
 
 local ShowLevel = CreateFrame("CheckButton", "$parentShowLevel", Options, "InterfaceOptionsCheckButtonTemplate")
 ShowLevel:SetPoint("TOPLEFT", HideCount, "BOTTOMLEFT", 0, -8)
 ShowLevel.Text:SetText(L_SHOW_LEVEL)
 ShowLevel:SetScript("OnClick", function(this)
-	BBPT_ShowLevel = not not this:GetChecked()
+	local checked = not not this:GetChecked()
+	PlaySound(checked and "igMainMenuOptionCheckBoxOn" or "igMainmenuOptionCheckBoxOff")
+	BBPT_ShowLevel = checked
 end)
 
 Options.Title = Title
@@ -69,24 +63,19 @@ Options.SubText = SubText
 Options.HideCount = HideCount
 Options.ShowLevel = ShowLevel
 
--- Options.About = LibStub("LibAboutPanel").new(Options.name, ADDON)
-
 Options.refresh = function()
 	HideCount:SetChecked(BBPT_HideCount)
 	ShowLevel:SetChecked(BBPT_ShowLevel)
 end
 
+if LibStub and LibStub("LibAboutPanel", true) then
+	Options.About = LibStub("LibAboutPanel").new(Options.name, ADDON)
+end
+
 SLASH_BBPT1 = "/bbpt"
-SlashCmdList.BBPT = function(cmd)
-	cmd = cmd and strlower(strtrim(cmd))
-	if cmd == "count" then
-		BBPT_HideCount = not BBPT_HideCount
-		print("|cff88ff88BetterBattlePetTooltip:|r", BBPT_HideCount and L_HIDE_COUNT_ON or L.HIDE_COUNT_OFF)
-	elseif cmd == "level" then
-		BBPT_ShowLevel = not BBPT_ShowLevel
-		print("|cff88ff88BetterBattlePetTooltip:|r", BBPT_ShowLevel and L_SHOW_LEVEL_ON or L_SHOW_LEVEL_OFF)
-	else
-		-- InterfaceOptionsFrame_OpenToCategory(Options.About)
-		InterfaceOptionsFrame_OpenToCategory(Options)
+SlashCmdList.BBPT = function()
+	if Options.About then
+		InterfaceOptionsFrame_OpenToCategory(Options.About)
 	end
+	InterfaceOptionsFrame_OpenToCategory(Options)
 end

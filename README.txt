@@ -32,8 +32,10 @@
 
   BetterBattlePetTooltip is compatible with all game localizations.
 
-  The options are translated into English. If you have translations for
-  another language, post a comment on the download page.
+  The options are translated into English and Spanish.
+
+  If you have translations for another language, post a comment on
+  the download page.
 
   Feedback
   ============
@@ -42,6 +44,9 @@
 
   Please *do not* contact us by email or PM about bugs, suggestions,
   questions, or other addon feedback. Use the public comment page.
+
+  If you need to contact us privately for some other reason, you can
+  email addons@phanx.net or send a PM to Phanx on WoWInterface or Curse.
 
   Credits
   ===========
