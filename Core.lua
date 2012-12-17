@@ -76,26 +76,34 @@ f:RegisterEvent("ADDON_LOADED")
 f:RegisterEvent("PET_JOURNAL_LIST_UPDATE")
 f:SetScript("OnEvent", function(f, event)
 	if event == "PET_JOURNAL_LIST_UPDATE" then
-		wipe(petCount)
-		wipe(petLevel)
-		wipe(petQuality)
-		wipe(petSpecies)
-		for i = 1, C_PetJournal.GetNumPets(false) do
+		local wiped
+		for i = C_PetJournal.GetNumPets(false), 1, -1 do
 			local id, species, owned, _, level, _, _, name, _, _, _, _, _, wild = C_PetJournal.GetPetInfoByIndex(i)
-			if id and name then
-				petSpecies[name] = species
-				if owned then
-					local _, _, _, _, quality = C_PetJournal.GetPetStats(id)
-					petCount[species] = 1 + (petCount[species] or 0)
-					if not petLevel[species] or level > petLevel[species] then
-						petLevel[species] = level
-					end
-					if not petQuality[species] or quality > petQuality[species] then
-						petQuality[species] = quality
-					end
-				elseif not petCount[species] then
-					petCount[species] = 0
+			if not id or not name then
+				-- List is filtered. Skip update.
+				break
+			end
+
+			if not wiped then
+				wipe(petCount)
+				wipe(petLevel)
+				wipe(petQuality)
+				wipe(petSpecies)
+				wiped = true
+			end
+
+			petSpecies[name] = species
+			if owned then
+				local _, _, _, _, quality = C_PetJournal.GetPetStats(id)
+				petCount[species] = 1 + (petCount[species] or 0)
+				if not petLevel[species] or level > petLevel[species] then
+					petLevel[species] = level
 				end
+				if not petQuality[species] or quality > petQuality[species] then
+					petQuality[species] = quality
+				end
+			elseif not petCount[species] then
+				petCount[species] = 0
 			end
 		end
 	elseif PetBattleUnitTooltip_UpdateForUnit then
@@ -123,6 +131,7 @@ f:SetScript("OnEvent", function(f, event)
 end)
 
 ------------------------------------------------------------------------
+--	GameTooltip derivatives
 
 local function AddTooltipInfo(tooltip, name)
 	if not name then
@@ -172,10 +181,24 @@ local function AddTooltipInfo(tooltip, name)
 	tooltip:Show()
 end
 
+------------------------------------------------------------------------
+--	Item tooltips
+
 GameTooltip:HookScript("OnTooltipSetItem", AddTooltipInfo)
 ItemRefTooltip:HookScript("OnTooltipSetItem", AddTooltipInfo)
 
 ------------------------------------------------------------------------
+--	Unit tooltips
+
+GameTooltip:HookScript("OnTooltipSetUnit", function(self)
+	local name, unit = GameTooltip:GetUnit()
+	if unit and UnitIsWildBattlePet(unit) then
+		AddTooltipInfo(self, name)
+	end
+end)
+
+------------------------------------------------------------------------
+--	Minimap tracking tooltips
 
 local current
 
@@ -190,19 +213,18 @@ updater:SetScript("OnUpdate", function()
 	if strfind(text, "\n") then
 		-- Multiples
 		for text in gmatch(text, "[^\n]+") do
-			local name = gsub(text, ".+|t", "")
+			local name = strtrim(gsub(text, "|T.-|t", "$"))
 			AddTooltipInfo(GameTooltip, name)
 		end
 	else
 		-- Just one
-		AddTooltipInfo(GameTooltip, text)
+		local name = strtrim(gsub(text, "|T.-|t", ""))
+		AddTooltipInfo(GameTooltip, name)
 	end
 end)
 
 GameTooltip:HookScript("OnShow", function(self)
-	if UnitIsWildBattlePet("mouseover") then
-		AddTooltipInfo(self, UnitName("mouseover"))
-	elseif self:IsOwned(Minimap) then
+	if self:IsOwned(Minimap) then
 		updater:Show()
 	end
 end)
