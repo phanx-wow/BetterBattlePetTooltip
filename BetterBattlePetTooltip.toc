@@ -10,7 +10,7 @@
 ## X-CompatibleLocales: deDE, enUS, esES, esMX, frFR, itIT, ptBR, koKR, ruRU, zhCN, zhTW
 ## X-Localizations: enUS, esES, esMX
 ## X-Website: http://www.wowinterface.com/downloads/info21978-BetterBattlePetTooltip.html
-## X-Curse-Project-Name: better-battle-pet-tooltip
+## X-Curse-Project-Name: betterbattlepettooltip
 ## X-WoWI-ID: 21978
 
 ## SavedVariables: BBPT_HideCount, BBPT_ShowLevel
