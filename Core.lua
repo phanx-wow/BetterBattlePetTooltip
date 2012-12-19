@@ -1,7 +1,7 @@
 --[[--------------------------------------------------------------------
 	BetterBattlePetTooltip
 	A World of Warcraft user interface addon
-	Copyright (c) 2012 Akkorian, Phanx
+	Copyright (c) 2012 Phanx
 
 	This addon is freely available, and its source code freely viewable,
 	but it is not "open source software" and you may not distribute it,
