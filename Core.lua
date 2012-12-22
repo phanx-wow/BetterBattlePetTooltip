@@ -14,7 +14,7 @@ local petCount, petLevel, petQuality, petSpecies = {}, {}, {}, {}
 
 local F_BATTLE_PET_CAGE_TOOLTIP_LEVEL = "%s (" .. BATTLE_PET_CAGE_TOOLTIP_LEVEL .. ")"
 local S_ITEM_PET_KNOWN = ITEM_PET_KNOWN:gsub("[%(%)]", "%%%1")
-local L_PET_CAPTURABLE = gsub(NOT_COLLECTED, COLLECTED, UNIT_CAPTURABLE)
+local L_NOT_CAPTURABLE = gsub(NOT_COLLECTED, COLLECTED, UNIT_CAPTURABLE)
 
 ------------------------------------------------------------------------
 
@@ -133,11 +133,16 @@ end)
 ------------------------------------------------------------------------
 --	GameTooltip derivatives
 
-local function AddTooltipInfo(tooltip, name)
+local function AddTooltipInfo(tooltip, name, species)
 	if not name then
 		name = _G[tooltip:GetName().."TextLeft1"]:GetText()
 	end
-	local species = petSpecies[name]
+	if not name then
+		return
+	end
+	if not species then
+		species = petSpecies[name]
+	end
 	if not species then
 		return
 	end
@@ -184,8 +189,16 @@ end
 ------------------------------------------------------------------------
 --	Item tooltips
 
-GameTooltip:HookScript("OnTooltipSetItem", AddTooltipInfo)
-ItemRefTooltip:HookScript("OnTooltipSetItem", AddTooltipInfo)
+local function AddTooltipItemInfo(tooltip)
+	local name, link = tooltip:GetItem()
+	if link then
+		local _, _, _, _, _, _, _, _, _, species = strsplit(":", link)
+		AddTooltipInfo(tooltip, name, tonumber(species))
+	end
+end
+
+GameTooltip:HookScript("OnTooltipSetItem", AddTooltipItemInfo)
+ItemRefTooltip:HookScript("OnTooltipSetItem", AddTooltipItemInfo)
 
 ------------------------------------------------------------------------
 --	Unit tooltips
