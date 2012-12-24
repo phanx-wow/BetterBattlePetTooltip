@@ -3,8 +3,13 @@
 
 ## Title: BetterBattlePetTooltip
 ## Notes: Adds highest collected level and quality coloring to battle pet tooltips.
-## Notes-esES: Mostrar el mayor nivel y calidad que se ha capturado en las descripciones de las mascotas de combate.
-## Notes-esMX: Mostrar el mayor nivel y calidad que se ha capturado en las descripciones de las mascotas de combate.
+## Notes-deDE: Zeigt im Tooltips für Kampfhaustieren die höchste Stufe und Qualität, die Ihr habt gefangen.
+## Notes-esES: Mostrar en las descripciones de las mascotas de combate el mayor nivel y calidad que se ha capturado.
+## Notes-esMX: Mostrar en las descripciones de las mascotas de combate el mayor nivel y calidad que se ha capturado.
+## Notes-frFR: Afficher le plus haut niveau et qualité qui a capturé dans les bulles d'mascottes de combat.
+## Notes-itIT: Mostrare il più alto livello e qualità che hai catturato nelle descrizioni dei mascotti da combattimento.
+## Notes-ptBR: Mostrar em descrições de mascotes de batalha o mais alto nível e qualidade que tem capturado.
+## Notes-ruRU: Показать высокий уровень и качество, которое вы поймали, во всплывающих подсказках для боевых питомцев.
 
 ## Version: 5.1.0.wowi:revision
 ## Author: Phanx
@@ -12,10 +17,11 @@
 ## X-Copyright: Copyright (c) 2012 Phanx. All rights reserved.
 ## X-License: See the accompanying LICENSE file.
 ## X-CompatibleLocales: deDE, enUS, esES, esMX, frFR, itIT, ptBR, koKR, ruRU, zhCN, zhTW
-## X-Localizations: enUS, esES, esMX
+## X-Localizations: enUS, deDE, esES, esMX, frFR, itIT, ruRU
 ## X-Website: http://www.wowinterface.com/downloads/info21978-BetterBattlePetTooltip.html
 ## X-Curse-Project-Name: betterbattlepettooltip
 ## X-WoWI-ID: 21978
 
+Data.lua
 Core.lua
 Options.lua

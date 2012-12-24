@@ -17,17 +17,21 @@ local L_SHOW_LEVEL = "Show highest collected level"
 
 ------------------------------------------------------------------------
 
-if GetLocale():match("^es") then
+if GetLocale() == "deDE" then
+	L_HIDE_COUNT = "Zeigt die Menge, die Ihr habt gefangen"
+	L_SHOW_LEVEL = "Zeigt die höchste Stufe, die Ihr habt gefangen"
+
+elseif GetLocale():match("^es") then
 	L_HIDE_COUNT = "Ocultar la cantidad que ha capturado"
 	L_SHOW_LEVEL = "Mostrar el mayor nivel que ha capturado"
 
 elseif GetLocale() == "frFR" then
 	L_HIDE_COUNT = "Masquer le montant qui a capturé"
-	L_SHOW_LEVEL = "Voir plus haut niveau qui a capturé"
+	L_SHOW_LEVEL = "Afficher le plus haut niveau qui a capturé"
 
 elseif GetLocale() == "itIT" then
 	L_HIDE_COUNT = "Nascondere la quantità che ha catturato"
-	L_SHOW_LEVEL = "Mostra il livello più alto che hai catturato"
+	L_SHOW_LEVEL = "Mostrare il livello più alto che hai catturato"
 
 elseif GetLocale():match("^pt") then
 	L_HIDE_COUNT = "Esconder a quantidade que tem capturado"
