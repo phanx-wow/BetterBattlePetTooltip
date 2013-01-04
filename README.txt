@@ -1,13 +1,13 @@
 
 BetterBattlePetTooltip
---------------------------
+==========================
 * A World of Warcraft user interface addon
 * Copyright (c) 2012-2013 Phanx
 * http://www.wowinterface.com/downloads/info21978-BetterBattlePetTooltip.html
 * http://www.curse.com/addons/wow/betterbattlepettooltip
 
 Description
-===============
+---------------
 
 Better Battle Pet Tooltip shows your highest collected level and best
 collected quality in battle pet tooltips. It supports item tooltips
@@ -25,13 +25,13 @@ wild battle pets you are not currently battling, as that information
 is not available to addons.
 
 Usage
-=========
+---------
 
 Type “/bbpt” to open the options pane, or browse to it in the game’s
 Interface Options window.
 
 Language Support
-====================
+--------------------
 
 BetterBattlePetTooltip is compatible with all game localizations.
 
@@ -42,7 +42,7 @@ If you have translations for another language, post a comment on
 the WoWInterface download page.
 
 Feedback
-============
+------------
 
 Post a comment on the WoWInterface download page.
 
@@ -53,6 +53,6 @@ If you need to contact me privately for some other reason, you can
 email addons@phanx.net or send a PM to Phanx on WoWInterface or Curse.
 
 Credits
-===========
+-----------
 
 BetterBattlePetTooltip was inspired by Lifetapt’s PetCaught.
