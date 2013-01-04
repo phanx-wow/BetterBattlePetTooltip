@@ -1,7 +1,7 @@
 --[[--------------------------------------------------------------------
 	BetterBattlePetTooltip
 	A World of Warcraft user interface addon
-	Copyright (c) 2012 Phanx
+	Copyright (c) 2012-2013 Phanx
 
 	This addon is freely available, and its source code freely viewable,
 	but it is not "open source software" and you may not distribute it,
@@ -226,7 +226,7 @@ updater:SetScript("OnUpdate", function()
 	if strfind(text, "\n") then
 		-- Multiples
 		for text in gmatch(text, "[^\n]+") do
-			local name = strtrim(gsub(text, "|T.-|t", "$"))
+			local name = strtrim(gsub(text, "|T.-|t", ""))
 			AddTooltipInfo(GameTooltip, name)
 		end
 	else
