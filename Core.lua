@@ -80,36 +80,7 @@ f:RegisterEvent("ADDON_LOADED")
 f:RegisterEvent("PET_JOURNAL_LIST_UPDATE")
 f:SetScript("OnEvent", function(f, event)
 	if event == "PET_JOURNAL_LIST_UPDATE" then
-		local wiped
-		for i = C_PetJournal.GetNumPets(false), 1, -1 do
-			local id, species, owned, _, level, _, _, name, _, _, _, _, _, wild = C_PetJournal.GetPetInfoByIndex(i)
-			if not id or not name then
-				-- List is filtered. Skip update.
-				break
-			end
-
-			if not wiped then
-				wipe(petCount)
-				wipe(petLevel)
-				wipe(petQuality)
-				wipe(petSpecies)
-				wiped = true
-			end
-
-			petSpecies[name] = species
-			if owned then
-				local _, _, _, _, quality = C_PetJournal.GetPetStats(id)
-				petCount[species] = 1 + (petCount[species] or 0)
-				if not petLevel[species] or level > petLevel[species] then
-					petLevel[species] = level
-				end
-				if not petQuality[species] or quality > petQuality[species] then
-					petQuality[species] = quality
-				end
-			elseif not petCount[species] then
-				petCount[species] = 0
-			end
-		end
+		return self:ScanPets()
 	elseif PetBattleUnitTooltip_UpdateForUnit then
 		hooksecurefunc("PetBattleUnitTooltip_UpdateForUnit", function(self, owner, index)
 			local species = C_PetBattles.GetPetSpeciesID(owner, index)
@@ -246,3 +217,153 @@ GameTooltip:HookScript("OnHide", function(self)
 	updater:Hide()
 	current = nil
 end)
+
+------------------------------------------------------------------------
+
+do
+	-- Blizzard, how many drugs were you on when you wrote this shit?
+	-- IsFiltered returns the opposite value you want to send to SetFilter...
+	-- Changing any filter fires the update event...
+	-- Filtering changes the API return values...
+
+	local updating
+
+	local flagDefaults = {
+        [LE_PET_JOURNAL_FLAG_COLLECTED] = true,
+        [LE_PET_JOURNAL_FLAG_FAVORITES] = false,
+        [LE_PET_JOURNAL_FLAG_NOT_COLLECTED] = true,
+	}
+
+	local flags, types, sources = {}, {}, {}
+
+	local search
+	hooksecurefunc(C_PetJournal, "SetSearchFilter", function(x)
+		--print("SetSearchFilter", x)
+		search = x
+	end)
+	hooksecurefunc(C_PetJournal, "ClearSearchFilter", function()
+		--print("ClearSearchFilter")
+		search = nil
+	end)
+
+	function f:ScanPets(event)
+		if updating then return end
+		--print("Scanning pets")
+		updating = true
+
+		--print("Removing events")
+		self:UnregisterEvent(event)
+		if PetJournal then
+			PetJournal:UnregisterEvent(event)
+		end
+		if LibStub and LibStub("LibPetJournal-2.0", true) then
+			LibStub("LibPetJournal-2.0").event_frame:UnregisterEvent(event)
+		end
+
+		for flag, defaultState in pairs(flagDefaults) do
+			local state = not C_PetJournal.IsFlagFiltered(flag)
+			if state ~= defaultState then
+				--print(flag, state, defaultState)
+				flags[flag] = state
+				C_PetJournal.SetFlagFilter(flag, defaultState)
+			end
+		end
+
+		for i = 1, C_PetJournal.GetNumPetTypes() do
+			local hidden = C_PetJournal.IsPetTypeFiltered(i)
+			if hidden then
+				--print("IsPetTypeFiltered", i, hidden)
+				types[i] = hidden
+			end
+		end
+		if next(types) then
+			--print("AddAllPetTypesFilter")
+			C_PetJournal.AddAllPetTypesFilter()
+		end
+
+		for i = 1, C_PetJournal.GetNumPetSources() do
+			local hidden = C_PetJournal.IsPetSourceFiltered(i)
+			if hidden then
+				--print("IsPetSourceFiltered", i, hidden)
+				sources[i] = hidden
+			end
+		end
+		if next(sources) then
+			--print("AddAllPetSourcesFilter")
+			C_PetJournal.AddAllPetSourcesFilter()
+		end
+
+		local currentSearch = search
+		C_PetJournal.ClearSearchFilter()
+
+		local wiped
+		local _, numPets = C_PetJournal.GetNumPets(true)
+		--print("Found pets:", numPets)
+		for i = numPets, 1, -1 do
+			local id, species, owned, _, level, _, _, name = C_PetJournal.GetPetInfoByIndex(i)
+			if not id then
+				--print("STILL FILTERED WTF")
+				break
+			end
+			if not wiped then
+				--print("Scan is good")
+				wipe(petCount)
+				wipe(petLevel)
+				wipe(petQuality)
+				wipe(petSpecies)
+				wiped = true
+			end
+			petSpecies[name] = species
+			if owned then
+				local _, _, _, _, quality = C_PetJournal.GetPetStats(id)
+				petCount[species] = 1 + (petCount[species] or 0)
+				if not petLevel[species] or level > petLevel[species] then
+					petLevel[species] = level
+				end
+				if not petQuality[species] or quality > petQuality[species] then
+					petQuality[species] = quality
+				end
+			elseif not petCount[species] then
+				petCount[species] = 0
+			end
+		end
+
+		if currentSearch then
+			--print("Restoring previous search:", currentSearch)
+			C_PetJournal.SetSearchFilter(currentSearch)
+		end
+
+		for flag, value in pairs(flags) do
+			--print("Restoring previous filter:", flag, value)
+			C_PetJournal.SetFlagFilter(flag, value)
+			flags[flag] = nil
+		end
+
+		for flag in pairs(types) do
+			--print("Restoring previous type filter:", flag)
+			C_PetJournal.SetPetTypeFilter(flag, false)
+			types[flag] = nil
+		end
+
+		for flag in pairs(sources) do
+			--print("Restoring previous source filter:", flag)
+			C_PetJournal.SetPetSourceFilter(flag, false)
+			sources[flag] = nil
+		end
+
+		--print("Restoring events")
+		self:RegisterEvent(event)
+		if PetJournal then
+			PetJournal:RegisterEvent(event)
+			if PetJournal:IsShown() then
+				PetJournal:GetScript("OnEvent")(PetJournal, event)
+			end
+		end
+		if LibStub and LibStub("LibPetJournal-2.0", true) then
+			LibStub("LibPetJournal-2.0").event_frame:RegisterEvent(event)
+		end
+
+		--print("Done")
+		updating = nil
+	end
+end
