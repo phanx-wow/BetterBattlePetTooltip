@@ -80,7 +80,7 @@ f:RegisterEvent("ADDON_LOADED")
 f:RegisterEvent("PET_JOURNAL_LIST_UPDATE")
 f:SetScript("OnEvent", function(f, event)
 	if event == "PET_JOURNAL_LIST_UPDATE" then
-		return self:ScanPets()
+		return f:ScanPets(event)
 	elseif PetBattleUnitTooltip_UpdateForUnit then
 		hooksecurefunc("PetBattleUnitTooltip_UpdateForUnit", function(self, owner, index)
 			local species = C_PetBattles.GetPetSpeciesID(owner, index)
