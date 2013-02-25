@@ -57,24 +57,24 @@ private.speciesFromItem = {
 	-----------------
 	--	BOP items  --
 	-----------------
-	[19450] = 0, -- A Jubling's Tiny Home -> Jubling
-	[66067] = 0, -- Brazie's Sunflower Seeds -> Singing Sunflower
-	[35350] = 0, -- Chuck's Bucket -> Chuck
-	[32616] = 0, -- Egbert's Egg -> Egbert
-	[32622] = 0, -- Elekk Training Collar -> Peanut
-	[53641] = 0, -- Ice Chip -> Frigid Frostling
-	[73797] = 0, -- Lump of Coal -> Lumpy
-	[27445] = 0, -- Magical Crawdad Box -> Magical Crawdad
-	[33818] = 0, -- Muckbreath's Bucket -> Muckbreath
-	[44723] = 0, -- Nurtured Penguin Egg -> Pengu
-	[23007] = 0, -- Piglet's Collar -> Mr. Wiggles
-	[23015] = 0, -- Rat Cage -> Whiskers the Rat
-	[34955] = 0, -- Scorched Stone -> Searing Scorchling
-	[68673] = 0, -- Smolderweb Egg -> Smolderweb Hatchling
-	[35349] = 0, -- Snarly's Bucket -> Snarly
-	[11474] = 0, -- Sprite Darter Egg -> Sprite Darter Hatchling
-	[33816] = 0, -- Toothy's Bucket -> Toothy
-	[23002] = 0, -- Turtle Box -> Speedy
-	[32233] = 0, -- Wolpertinger's Tankard -> Wolpertinger
-	[12264] = 0, -- Worg Carrier -> Worg Pup
+	[19450] = 106, -- A Jubling's Tiny Home -> Jubling
+	[66067] = 291, -- Brazie's Sunflower Seeds -> Singing Sunflower
+	[35350] = 174, -- Chuck's Bucket -> Chuck
+	[32616] = 158, -- Egbert's Egg -> Egbert
+	[32622] = 159, -- Elekk Training Collar -> Peanut
+	[53641] = 253, -- Ice Chip -> Frigid Frostling
+	[73797] = 337, -- Lump of Coal -> Lumpy
+	[27445] = 132, -- Magical Crawdad Box -> Magical Crawdad
+	[33818] = 164, -- Muckbreath's Bucket -> Muckbreath
+	[44723] = 198, -- Nurtured Penguin Egg -> Pengu
+	[23007] = 126, -- Piglet's Collar -> Mr. Wiggles
+	[23015] = 127, -- Rat Cage -> Whiskers the Rat
+	[34955] = 172, -- Scorched Stone -> Searing Scorchling
+	[68673] = 90,  -- Smolderweb Egg -> Smolderweb Hatchling
+	[35349] = 173, -- Snarly's Bucket -> Snarly
+	[11474] = 87,  -- Sprite Darter Egg -> Sprite Darter Hatchling
+	[33816] = 163, -- Toothy's Bucket -> Toothy
+	[23002] = 125, -- Turtle Box -> Speedy
+	[32233] = 153, -- Wolpertinger's Tankard -> Wolpertinger
+	[12264] = 89,  -- Worg Carrier -> Worg Pup
 }
