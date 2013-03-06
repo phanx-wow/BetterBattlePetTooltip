@@ -1,7 +1,7 @@
 --[[--------------------------------------------------------------------
 	BetterBattlePetTooltip
 	A World of Warcraft user interface addon
-	Copyright (c) 2012-2013 Phanx
+	Copyright (c) 2012-2013 A. Kinley (Phanx)
 
 	This addon is freely available, and its source code freely viewable,
 	but it is not "open source software" and you may not distribute it,
@@ -17,6 +17,7 @@ local ADDON, private = ...
 --	some more efficient way to figure this out since they show the
 --	collected count in the item tooltips, but there is no way for addons
 --	to access the same information, so a hardcoded map is required.
+
 private.speciesFromItem = {
 	-----------------
 	--	BOE items  --
