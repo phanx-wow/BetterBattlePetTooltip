@@ -10,37 +10,8 @@
 	See the included README and LICENSE files for more information!
 ----------------------------------------------------------------------]]
 
-local ADDON = ...
-
-local L_ShowCount = "Hide collected count"
-local L_ShowLevel = "Show highest collected level"
-
-if GetLocale() == "deDE" then
-	L_ShowCount = "Zeigt die Menge, die Ihr habt gefangen"
-	L_ShowLevel = "Zeigt die höchste Stufe, die Ihr habt gefangen"
-
-elseif GetLocale():match("^es") then
-	L_ShowCount = "Mostrar la cantidad que ha capturado"
-	L_ShowLevel = "Mostrar el mayor nivel que ha capturado"
-
-elseif GetLocale() == "frFR" then
-	L_ShowCount = "Afficher le montant qui a capturé"
-	L_ShowLevel = "Afficher le plus haut niveau qui a capturé"
-
-elseif GetLocale() == "itIT" then
-	L_ShowCount = "Mostrare la quantità che ha catturato"
-	L_ShowLevel = "Mostrare il livello più alto che hai catturato"
-
-elseif GetLocale():match("^pt") then
-	L_ShowCount = "Mostrar a quantidade que tem capturado"
-	L_ShowLevel = "Mostrar mais alto nível que tem capturado"
-
-elseif GetLocale() == "ruRU" then
-	L_ShowCount = "Отображать количество, которое вы поймали"
-	L_ShowLevel = "Отображать высшее уровень, которое вы поймали"
-end
-
-------------------------------------------------------------------------
+local ADDON, private = ...
+local L = private.L
 
 local Options = CreateFrame("Frame", "BBPTOptions", InterfaceOptionsFramePanelContainer)
 Options.name = GetAddOnMetadata(ADDON, "Title") or ADDON
@@ -62,7 +33,7 @@ Options.SubText = SubText
 
 local ShowCount = CreateFrame("CheckButton", "$parentShowCount", Options, "InterfaceOptionsCheckButtonTemplate")
 ShowCount:SetPoint("TOPLEFT", SubText, "BOTTOMLEFT", -2, -8)
-ShowCount.Text:SetText(L_ShowCount)
+ShowCount.Text:SetText(L.ShowCount)
 ShowCount:SetScript("OnClick", function(this)
 	local checked = not not this:GetChecked()
 	PlaySound(checked and "igMainMenuOptionCheckBoxOn" or "igMainmenuOptionCheckBoxOff")
@@ -72,7 +43,7 @@ Options.ShowCount = ShowCount
 
 local ShowLevel = CreateFrame("CheckButton", "$parentShowLevel", Options, "InterfaceOptionsCheckButtonTemplate")
 ShowLevel:SetPoint("TOPLEFT", ShowCount, "BOTTOMLEFT", 0, -8)
-ShowLevel.Text:SetText(L_ShowLevel)
+ShowLevel.Text:SetText(L.ShowLevel)
 ShowLevel:SetScript("OnClick", function(this)
 	local checked = not not this:GetChecked()
 	PlaySound(checked and "igMainMenuOptionCheckBoxOn" or "igMainmenuOptionCheckBoxOff")
@@ -80,9 +51,21 @@ ShowLevel:SetScript("OnClick", function(this)
 end)
 Options.ShowLevel = ShowLevel
 
+local ShowWildQuality = CreateFrame("CheckButton", "$parentShowWildQuality", Options, "InterfaceOptionsCheckButtonTemplate")
+ShowWildQuality:SetPoint("TOPLEFT", ShowLevel, "BOTTOMLEFT", 0, -8)
+ShowWildQuality.Text:SetText(L.ShowWildQuality)
+ShowWildQuality.tooltipText = L.ShowWildQuality_Tooltip
+ShowWildQuality:SetScript("OnClick", function(this)
+	local checked = not not this:GetChecked()
+	PlaySound(checked and "igMainMenuOptionCheckBoxOn" or "igMainmenuOptionCheckBoxOff")
+	BBPT_WILD_QUALITY = checked
+end)
+Options.ShowWildQuality = ShowWildQuality
+
 Options.refresh = function()
 	ShowCount:SetChecked(BBPT_COUNT)
 	ShowLevel:SetChecked(BBPT_LEVEL)
+	ShowWildQuality:SetChecked(BBPT_WILD_QUALITY)
 end
 
 if LibStub and LibStub("LibAboutPanel", true) then
