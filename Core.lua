@@ -71,16 +71,16 @@ f:SetScript("OnEvent", function(self, event)
 		hooksecurefunc("PetBattleUnitTooltip_UpdateForUnit", function(self, owner, index)
 			local species = C_PetBattles.GetPetSpeciesID(owner, index)
 
-			local SHOW_COLORS = tonumber(ENABLE_COLORBLIND_MODE) == 0
+			local useColor = tonumber(ENABLE_COLORBLIND_MODE) == 0
 
-			local color = SHOW_COLORS and ITEM_QUALITY_COLORS[C_PetBattles.GetBreedQuality(owner, index) - 1] or TOOLTIP_DEFAULT_COLOR
+			local color = useColor and ITEM_QUALITY_COLORS[C_PetBattles.GetBreedQuality(owner, index) - 1] or TOOLTIP_DEFAULT_COLOR
 			SetBorderColor(self, color.r, color.g, color.b)
 
 			if owner == LE_BATTLE_PET_ENEMY and C_PetBattles.IsWildBattle() then
 				local text = C_PetJournal.GetOwnedBattlePetString(species)
 				self.CollectedText:SetText(text)
 
-				if SHOW_COLORS then
+				if useColor then
 					local quality = petQuality[species]
 					local color = quality and ITEM_QUALITY_COLORS[quality - 1] or ITEM_QUALITY_COLORS[5]
 					self.CollectedText:SetTextColor(color.r, color.g, color.b)
@@ -148,16 +148,15 @@ hooksecurefunc("FloatingBattlePet_Show", function() BattlePetTooltip_OnShow(Floa
 --	GameTooltip and derivatives
 
 local function AddTooltipInfo(tooltip, name, species, guid)
-	--print("AddTooltipInfo", name, species)
+	--print("AddTooltipInfo", name, species, guid)
 	if not species then
 		species = petSpecies[name] or petSpecies[_G[tooltip:GetName().."TextLeft1"]:GetText()]
-	end
-	if not species then
-		--print("species not found")
-		return
+		if not species then
+			return
+		end
 	end
 
-	local SHOW_COLORS = tonumber(ENABLE_COLORBLIND_MODE) == 0
+	local useColor = tonumber(ENABLE_COLORBLIND_MODE) == 0
 	local addedInfo
 
 	for i = 2, tooltip:NumLines() do
@@ -165,14 +164,14 @@ local function AddTooltipInfo(tooltip, name, species, guid)
 		local text = line:GetText()
 		if text == NOT_COLLECTED or text == UNIT_CAPTURABLE then
 			--print("modifying line", i, text)
-			local color = SHOW_COLORS and ITEM_QUALITY_COLORS[5] or HIGHLIGHT_FONT_COLOR
+			local color = useColor and ITEM_QUALITY_COLORS[5] or HIGHLIGHT_FONT_COLOR
 			line:SetTextColor(color.r, color.g, color.b)
 			line:SetText(NOT_COLLECTED)
 			addedInfo = true
 
 		elseif strmatch(text, ITEM_PET_KNOWN_S) then
 			--print("modifying line", i, text)
-			if SHOW_COLORS then
+			if useColor then
 				local quality = petQuality[species]
 				local color = quality and ITEM_QUALITY_COLORS[quality-1] or ITEM_QUALITY_COLORS[6] -- heirloom for unknown
 				line:SetTextColor(color.r, color.g, color.b)
@@ -188,7 +187,7 @@ local function AddTooltipInfo(tooltip, name, species, guid)
 	if not addedInfo then
 		if petCount[species] > 0 then
 			--print("adding info")
-			if SHOW_COLORS then
+			if useColor then
 				local quality = petQuality[species]
 				local color = quality and ITEM_QUALITY_COLORS[quality-1] or ITEM_QUALITY_COLORS[6] -- heirloom for unknown
 				tooltip:AddLine(C_PetJournal.GetOwnedBattlePetString(species), color.r, color.g, color.b)
@@ -200,7 +199,7 @@ local function AddTooltipInfo(tooltip, name, species, guid)
 			local _, _, _, _, _, _, _, _, _, _, obtainable = C_PetJournal.GetPetInfoBySpeciesID(species)
 			if obtainable then
 				--print("adding", NOT_COLLECTED)
-				local color = SHOW_COLORS and ITEM_QUALITY_COLORS[5] or HIGHLIGHT_FONT_COLOR
+				local color = useColor and ITEM_QUALITY_COLORS[5] or HIGHLIGHT_FONT_COLOR
 				tooltip:AddLine(NOT_COLLECTED, color.r, color.g, color.b)
 			else
 				--print("not obtainable")
@@ -212,8 +211,10 @@ local function AddTooltipInfo(tooltip, name, species, guid)
 		local quality = battled[guid]
 		if quality then
 			local color = RED_FONT_COLOR
-			local qcolor = SHOW_COLORS and ITEM_QUALITY_COLORS[quality-1]
+			local qcolor = useColor and ITEM_QUALITY_COLORS[quality-1]
 			tooltip:AddLine(format(L.AlreadyBattled, qcolor and qcolor.hex or "|cffffffff", _G["BATTLE_PET_BREED_QUALITY"..quality]), color.r, color.g, color.b)
+		else
+			--print("GUID not seen")
 		end
 	end
 
@@ -249,16 +250,16 @@ end)
 ------------------------------------------------------------------------
 --	Minimap tracking tooltips
 
-local current
+local currentText
 
 local updater = CreateFrame("Frame")
 updater:Hide()
 updater:SetScript("OnUpdate", function()
 	local text = GameTooltipTextLeft1:GetText()
-	if text == current then
+	if text == currentText then
 		return
 	end
-	current = text
+	currentText = text
 	if strfind(text, "\n") then
 		-- Multiples
 		for text in gmatch(text, "[^\n]+") do
@@ -286,3 +287,7 @@ GameTooltip:HookScript("OnHide", function(self)
 end)
 
 ------------------------------------------------------------------------
+
+BBPT_COUNT = false
+BBPT_LEVEL = true
+BBPT_WILD_QUALITY = true
