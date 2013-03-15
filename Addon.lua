@@ -20,6 +20,7 @@ local PetQualityStrings = {}
 for i = 1, 6 do PetQualityStrings[i] =  format(L.Parentheses, _G["BATTLE_PET_BREED_QUALITY"..i]) end
 
 local seenWildPetQualities = {}
+local speciesFromItem = Addon.speciesFromItem
 
 ------------------------------------------------------------------------
 
@@ -90,12 +91,13 @@ do
 			else
 				petString = format(L.PetString, color, COLLECTED, qText)
 			end
+			--print("String:", petString)
 		else
 			--print("Not collected.")
 			petString = format(L.PetString, colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[5].hex, NOT_COLLECTED, "")
 		end
 
-		petStringCache[speciesID] = petString
+		--petStringCache[speciesID] = petString
 		return petString
 	end
 
@@ -301,8 +303,7 @@ local multiparts = {}
 eventFrame:Hide()
 eventFrame:SetScript("OnUpdate", function()
 	local text = GameTooltipTextLeft1:GetText()
---	if text ~= currentText then
---		currentText = text
+	if text ~= currentText then
 		if strfind(text, "\n") then
 			local i = 0
 			for text in gmatch(text, "[^\n]+") do
@@ -318,12 +319,14 @@ eventFrame:SetScript("OnUpdate", function()
 					multiparts[i] = text
 				end
 			end
-			GameTooltipTextLeft1:SetText(table.concat(multiparts, "\n", 1, i))
+			currentText = table.concat(multiparts, "\n", 1, i)
+			GameTooltipTextLeft1:SetText(currentText)
 			GameTooltip:Show()
 		else
+			currentText = text
 			SetTooltipPetInfo(GameTooltip, strtrim(gsub(text, "|T.-|t", "")))
 		end
---	end
+	end
 end)
 
 GameTooltip:HookScript("OnShow", function(self)

@@ -21,12 +21,7 @@
 ## X-Curse-Project-Name: betterbattlepettooltip
 ## X-WoWI-ID: 21978
 
-## OptionalDependencies: LibPetJournal-2.0
 ## SavedVariables: BBPT_COUNT, BBPT_LEVEL, BBPT_WILD_QUALITY
-
-Libs\LibStub\LibStub.lua
-Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
-Libs\LibPetJournal-2.0\LibPetJournal-2.0.lua
 
 Localization.lua
 Data.lua
