@@ -6,29 +6,37 @@ BetterBattlePetTooltip
 * http://www.wowinterface.com/downloads/info21978-BetterBattlePetTooltip.html
 * http://www.curse.com/addons/wow/betterbattlepettooltip
 
+
 Description
 ---------------
 
-Better Battle Pet Tooltip shows your highest collected level and best
-collected quality in battle pet tooltips. It supports item tooltips
-for caged battle pets, unit tooltips for wild battle pets, and minimap
-tracking tooltips.
+BetterBattlePetTooltip modifies the "Collected" lines in battle pet
+tooltips. It supports item tooltips for caged battle pets, unit tooltips
+for wild battle pets, and minimap tracking tooltips.
 
-The default "Collected (N/N)" text is changed to "Collected (N/N)
-(Level N)" both the text and the tooltip border are colored by your
-best collected quality. You can optionally hide the counts and/or
-levels. Users with the game's Colorblind Mode enabled will be shown
-the quality name (Poor, Rare, etc.) instead of the coloring.
+The default "Collected (1/3)" text is changed to "1/3 Collected (L25)",
+to indicate the level of your collected pet, and both the text and the
+tooltip border are colored by the rarity of your collected pet.
 
-Please note that this addon does not show you the actual quality of
-wild battle pets you are not currently battling, as that information
-is not available to addons.
+Colorblind users will be shown the rarity name (eg. "Rare") at the end
+of the info line, and the text won't be colored.
+
+When mousing over a wild battle pet unit you have already battled this
+login session, an additional line in the tooltip will show the pet's
+quality. This only works for unit tooltips (not the tracking tooltips
+on the minimap) and only works for the exact pet you battled (not for
+other pets of the same type).
+
 
 Usage
 ---------
 
 Type “/bbpt” to open the options pane, or browse to it in the game’s
 Interface Options window.
+
+You can toggle the display of quantities, levels, or previously seen
+wild pet qualities.
+
 
 Language Support
 --------------------
@@ -41,16 +49,17 @@ Italian, Portuguese, and Russian.
 If you have translations for another language, post a comment on
 the WoWInterface download page.
 
+
 Feedback
 ------------
 
 Post a comment on the WoWInterface download page.
 
-Please *do not* contact me by email or PM about bugs, suggestions,
-questions, or other addon feedback. Use the public comment page.
+Please *do not* contact me by email or PM about bugs, suggestions, or
+other addon-related feedback. Use the public comment page. If you need
+to contact me privately for some other reason, you can email me at
+addons@phanx.net, or send a PM to Phanx on WoWInterface or Curse.
 
-If you need to contact me privately for some other reason, you can
-email addons@phanx.net or send a PM to Phanx on WoWInterface or Curse.
 
 Credits
 -----------

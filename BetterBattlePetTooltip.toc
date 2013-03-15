@@ -9,7 +9,7 @@
 ## Notes-frFR: Afficher le plus haut niveau et qualité qui a capturé dans les bulles d'mascottes de combat.
 ## Notes-itIT: Mostrare il più alto livello e qualità che hai catturato nelle descrizioni dei mascotti da combattimento.
 ## Notes-ptBR: Mostrar em descrições de mascotes de batalha o mais alto nível e qualidade que tem capturado.
-## Notes-ruRU: Показать высокий уровень и качество, которое вы поймали, во всплывающих подсказках для боевых питомцев.
+## Notes-ruRU: Отображать высокий уровень и качество, которое вы поймали, во всплывающих подсказках для боевых питомцев.
 
 ## Author: Phanx
 ## X-Email: addons@phanx.net
@@ -30,5 +30,5 @@ Libs\LibPetJournal-2.0\LibPetJournal-2.0.lua
 
 Localization.lua
 Data.lua
-Core.lua
+Addon.lua
 Options.lua
