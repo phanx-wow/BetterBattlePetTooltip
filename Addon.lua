@@ -30,8 +30,9 @@ BBPT_WILD_QUALITY = true
 
 ------------------------------------------------------------------------
 
-local eventFrame = CreateFrame("Frame", ADDON)
-eventFrame:SetScript("OnEvent", function(self, event, ...) return self[event] and self[event](self, event, ...) end)
+local EventFrame = CreateFrame("Frame", ADDON)
+EventFrame:SetScript("OnEvent", function(self, event, ...) return self[event] and self[event](self, event, ...) end)
+Addon.EventFrame = EventFrame
 
 ------------------------------------------------------------------------
 --	Rewrite pet strings
@@ -44,10 +45,8 @@ do
 
 	function C_PetJournal.GetOwnedBattlePetString(speciesID)
 		--print("GetOwnedBattlePetString:", speciesID)
-
-		local petID
 		if type(speciesID) == "string" then
-			speciesID, petID = C_PetJournal.FindPetIDByName(speciesID)
+			speciesID = C_PetJournal.FindPetIDByName(speciesID)
 		end
 		if type(speciesID) ~= "number" or speciesID < 1 then
 			--print("Invalid species.")
@@ -57,37 +56,39 @@ do
 			--print("Cached.")
 			return petStringCache[speciesID]
 		end
-		local speciesName, _, _, _, _, _, _, _, _, _, obtainable = C_PetJournal.GetPetInfoBySpeciesID(speciesID)
+
+		local numCollected, bestLevel, bestQuality = 0, 0, 0
+		for _, petID in LibStub("LibPetJournal-2.0"):IteratePetIDs() do
+			local petSpecies, _, petLevel, _, _, _, _, petName = C_PetJournal.GetPetInfoByPetID(petID)
+			if petSpecies == speciesID then
+				numCollected = numCollected + 1
+				local _, _, _, _, petQuality = C_PetJournal.GetPetStats(petID)
+				if petQuality >= bestQuality then
+					bestQuality = petQuality
+					bestLevel = max(bestLevel, petLevel)
+				end
+			end
+		end
+
+		local _, _, _, _, _, _, _, _, _, isUnique, obtainable = C_PetJournal.GetPetInfoBySpeciesID(speciesID)
 		if not obtainable then
 			--print("Not obtainable.")
 			return
 		end
-		if not petID then
-			_, petID = C_PetJournal.FindPetIDByName(speciesName)
-		end
 
 		local petString
 		local colorblindMode = tonumber(ENABLE_COLORBLIND_MODE) > 0
-		if petID then
+		if numCollected > 0 then
 			--print("Collected.")
-			local _, _, _, _, quality = C_PetJournal.GetPetStats(petID)
-			local color = colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[quality].hex
-			local qText = colorblindMode and PetQualityStrings[quality] or ""
-			local count, maxCount, level
+			local color = colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[bestQuality].hex
+			local qText = colorblindMode and PetQualityStrings[bestQuality] or ""
 
-			if BBPT_COUNT then
-				count, maxCount = strmatch(__GetOwnedBattlePetString(speciesID) or "", "(%d+)/(%d+)")
-			end
-			if BBPT_LEVEL then
-				_, _, level = C_PetJournal.GetPetInfoByPetID(petID)
-			end
-
-			if count and level then
-				petString = format(L.PetStringCountLevel, color, count, maxCount, COLLECTED, level, qText)
-			elseif count then
-				petString = format(L.PetStringCount, color, count, maxCount, COLLECTED, qText)
-			elseif level then
-				petString = format(L.PetStringLevel, color, COLLECTED, level, qText)
+			if BBPT_COUNT and BBPT_LEVEL then
+				petString = format(L.PetStringCountLevel, color, numCollected, isUnique and 1 or 3, COLLECTED, bestLevel, qText)
+			elseif BBPT_COUNT then
+				petString = format(L.PetStringCount, color, count, isUnique and 1 or 3, COLLECTED, COLLECTED, qText)
+			elseif BBPT_LEVEL then
+				petString = format(L.PetStringLevel, color, COLLECTED, bestLevel, qText)
 			else
 				petString = format(L.PetString, color, COLLECTED, qText)
 			end
@@ -101,8 +102,8 @@ do
 		return petString
 	end
 
-	eventFrame:RegisterEvent("PET_JOURNAL_UPDATE")
-	function eventFrame:PET_JOURNAL_UPDATE(event)
+	EventFrame:RegisterEvent("PET_JOURNAL_UPDATE")
+	function EventFrame:PET_JOURNAL_UPDATE(event)
 		--print(event)
 		wipe(petStringCache)
 	end
@@ -159,8 +160,8 @@ do
 	if PetBattleUnitTooltip_UpdateForUnit then
 		HookPetBattleUI()
 	else
-		eventFrame:RegisterEvent("ADDON_LOADED")
-		function eventFrame:ADDON_LOADED(event, addon)
+		EventFrame:RegisterEvent("ADDON_LOADED")
+		function EventFrame:ADDON_LOADED(event, addon)
 			if PetBattleUnitTooltip_UpdateForUnit then
 				HookPetBattleUI()
 				f:UnregisterEvents(event)
@@ -300,51 +301,48 @@ GameTooltip:HookScript("OnTooltipSetUnit", OnTooltipSetUnit)
 local currentText
 local multiparts = {}
 
-eventFrame:Hide()
-eventFrame:SetScript("OnUpdate", function()
+EventFrame:Hide()
+EventFrame:SetScript("OnUpdate", function()
 	local text = GameTooltipTextLeft1:GetText()
-	if text ~= currentText then
-		if strfind(text, "\n") then
-			local i = 0
-			for text in gmatch(text, "[^\n]+") do
-				local speciesName = strtrim(gsub(text, "|T.-|t", ""))
-				local petString = C_PetJournal.GetOwnedBattlePetString(speciesName)
-				if petString then
-					i = i + 1
-					multiparts[i] = text
-					i = i + 1
-					multiparts[i] = petString
-				else
-					i = i + 1
-					multiparts[i] = text
-				end
+	if not strfind(text, "\n") then
+		SetTooltipPetInfo(GameTooltip, strtrim(gsub(text, "|T.-|t", "")))
+	elseif text ~= currentText then
+		local i = 0
+		for text in gmatch(text, "[^\n]+") do
+			local speciesName = strtrim(gsub(text, "|T.-|t", ""))
+			local petString = C_PetJournal.GetOwnedBattlePetString(speciesName)
+			if petString then
+				i = i + 1
+				multiparts[i] = text
+				i = i + 1
+				multiparts[i] = petString
+			else
+				i = i + 1
+				multiparts[i] = text
 			end
-			currentText = table.concat(multiparts, "\n", 1, i)
-			GameTooltipTextLeft1:SetText(currentText)
-			GameTooltip:Show()
-		else
-			currentText = text
-			SetTooltipPetInfo(GameTooltip, strtrim(gsub(text, "|T.-|t", "")))
 		end
+		currentText = table.concat(multiparts, "\n", 1, i)
+		GameTooltipTextLeft1:SetText(currentText)
+		GameTooltip:Show()
 	end
 end)
 
 GameTooltip:HookScript("OnShow", function(self)
 	if self:IsOwned(Minimap) then
 		--print("GameTooltip:Show")
-		eventFrame:Show()
+		EventFrame:Show()
 	end
 end)
 
 GameTooltip:HookScript("OnHide", function(self)
-	eventFrame:Hide()
+	EventFrame:Hide()
 	currentText = nil
 end)
 
 hooksecurefunc(GameTooltip, "SetOwner", function(self, owner, ...)
 	if owner == Minimap then
 		--print("GameTooltip:SetOwner")
-		eventFrame:Show()
+		EventFrame:Show()
 	end
 end)
 
@@ -352,8 +350,8 @@ end)
 --	Remember quality of previously battled wild pets
 ------------------------------------------------------------------------
 
-eventFrame:RegisterEvent("PET_BATTLE_OPENING_START")
-function eventFrame:PET_BATTLE_OPENING_START(event)
+EventFrame:RegisterEvent("PET_BATTLE_OPENING_START")
+function EventFrame:PET_BATTLE_OPENING_START(event)
 	--print(event)
 	if UnitIsWildBattlePet("target") then
 		local guid = UnitGUID("target")

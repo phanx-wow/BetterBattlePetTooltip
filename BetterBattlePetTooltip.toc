@@ -2,7 +2,7 @@
 ## Version: 5.2.0.wowi:revision
 
 ## Title: BetterBattlePetTooltip
-## Notes: Adds highest collected level and quality coloring to battle pet tooltips.
+## Notes: Adds your highest collected level and quality to battle pet tooltips.
 ## Notes-deDE: Zeigt im Tooltips für Kampfhaustieren die höchste Stufe und Qualität, die Ihr habt gefangen.
 ## Notes-esES: Mostrar en las descripciones de las mascotas de combate el mayor nivel y calidad que se ha capturado.
 ## Notes-esMX: Mostrar en las descripciones de las mascotas de combate el mayor nivel y calidad que se ha capturado.
@@ -21,7 +21,12 @@
 ## X-Curse-Project-Name: betterbattlepettooltip
 ## X-WoWI-ID: 21978
 
+## OptionalDependencies: LibPetJournal-2.0
 ## SavedVariables: BBPT_COUNT, BBPT_LEVEL, BBPT_WILD_QUALITY
+
+LibStub\LibStub.lua
+CallbackHandler-1.0\CallbackHandler-1.0.lua
+LibPetJournal-2.0\LibPetJournal-2.0.lua
 
 Localization.lua
 Data.lua
