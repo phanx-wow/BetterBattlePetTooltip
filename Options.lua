@@ -38,6 +38,7 @@ ShowCount:SetScript("OnClick", function(this)
 	local checked = not not this:GetChecked()
 	PlaySound(checked and "igMainMenuOptionCheckBoxOn" or "igMainmenuOptionCheckBoxOff")
 	BBPT_COUNT = checked
+	Addon.EventFrame:PET_JOURNAL_UPDATE()
 end)
 Options.ShowCount = ShowCount
 
@@ -48,6 +49,7 @@ ShowLevel:SetScript("OnClick", function(this)
 	local checked = not not this:GetChecked()
 	PlaySound(checked and "igMainMenuOptionCheckBoxOn" or "igMainmenuOptionCheckBoxOff")
 	BBPT_LEVEL = checked
+	Addon.EventFrame:PET_JOURNAL_UPDATE()
 end)
 Options.ShowLevel = ShowLevel
 
