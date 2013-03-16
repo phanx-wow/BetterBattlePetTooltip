@@ -94,7 +94,7 @@ do
 			--print("String:", petString)
 		else
 			--print("Not collected.")
-			petString = format(L.PetString, colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[5].hex, NOT_COLLECTED, "")
+			petString = format(L.PetString, colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[6].hex, NOT_COLLECTED, "")
 		end
 
 		--petStringCache[speciesID] = petString
@@ -203,7 +203,7 @@ local function SetTooltipPetInfo(self, species, guid)
 		local line = _G[tooltip.."TextLeft"..i]
 		local text = line:GetText()
 		--print("Checking line", i, text)
-		if strfind(text, COLLECTED) and not strfind(text, NOT_COLLECTED) then
+		if text == UNIT_CAPTURABLE or text == NOT_COLLECTED or strfind(text, COLLECTED) then
 			--print("Modifying existing line")
 			addString = false
 			local petString = C_PetJournal.GetOwnedBattlePetString(species)
