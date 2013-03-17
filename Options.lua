@@ -10,12 +10,13 @@
 	See the included README and LICENSE files for more information!
 ----------------------------------------------------------------------]]
 
-local ADDON, private = ...
-local L = private.L
+local ADDON, Addon = ...
+local L = Addon.L
 
 local Options = CreateFrame("Frame", "BBPTOptions", InterfaceOptionsFramePanelContainer)
 Options.name = GetAddOnMetadata(ADDON, "Title") or ADDON
 InterfaceOptions_AddCategory(Options)
+Addon.OptionsPanel = Options
 
 local Title = Options:CreateFontString("$parentTitle", "ARTWORK", "GameFontNormalLarge")
 Title:SetPoint("TOPLEFT", 16, -16)

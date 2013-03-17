@@ -98,7 +98,7 @@ do
 			petString = format(L.PetString, colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[6].hex, NOT_COLLECTED, "")
 		end
 
-		--petStringCache[speciesID] = petString
+		petStringCache[speciesID] = petString
 		return petString
 	end
 
@@ -176,13 +176,16 @@ end
 
 local function BattlePetTooltip_OnShow(self)
 	--print("BattlePetTooltip_OnShow")
-	local speciesName = C_PetJournal.GetPetInfoBySpeciesID(self.speciesID)
-	local petID = C_PetJournal.FindPetIDByName(speciesName)
-	if petID then
-		local _, _, _, _, quality = C_PetJournal.GetPetStats(petID)
-		ColorBorderByQuality(self, quality)
-	else
-		ColorBorderByQuality(self, 5)
+	if tonumber(ENABLE_COLORBLIND_MODE) == 0 then
+		local speciesName = C_PetJournal.GetPetInfoBySpeciesID(self.speciesID)
+		local petString = C_PetJournal.GetOwnedBattlePetString(speciesName)
+		local hex = strmatch(petString, "|cff%x%x%x%x%x%x")
+		for quality, color in pairs(PetQualityColors) do
+			if color.hex == hex then
+				ColorBorderByQuality(self, quality)
+				break
+			end
+		end
 	end
 end
 
@@ -204,7 +207,7 @@ local function SetTooltipPetInfo(self, species, guid)
 		local line = _G[tooltip.."TextLeft"..i]
 		local text = line:GetText()
 		--print("Checking line", i, text)
-		if text == UNIT_CAPTURABLE or text == NOT_COLLECTED or strfind(text, COLLECTED) then
+		if text == UNIT_CAPTURABLE or text == NOT_COLLECTED or strfind(text or "", COLLECTED) then -- wat
 			--print("Modifying existing line")
 			addString = false
 			local petString = C_PetJournal.GetOwnedBattlePetString(species)
@@ -224,10 +227,7 @@ local function SetTooltipPetInfo(self, species, guid)
 
 	if addString then
 		--print("Adding new line.")
-		if not species then
-			species = _G[tooltip.."TextLeft1"]:GetText()
-		end
-		local petString = C_PetJournal.GetOwnedBattlePetString(species)
+		local petString = C_PetJournal.GetOwnedBattlePetString(species or _G[tooltip.."TextLeft1"]:GetText())
 		if petString then
 			self:AddLine(petString)
 			if not colorblindMode then
@@ -262,22 +262,32 @@ end
 ------------------------------------------------------------------------
 
 local function OnTooltipSetItem(self)
-	local _, link = self:GetItem()
+	local item, link = self:GetItem()
 	if link then
 		--print("OnTooltipSetItem:", link)
-		local id = tonumber(strmatch(link, "item:(%d+)"))
-		if id then
-			local species = speciesFromItem[id]
-			if species then
-				--print("speciesFromItem")
-				SetTooltipPetInfo(self, species)
-			end
-		end
+		local species = speciesFromItem[tonumber(strmatch(link, "item:(%d+)"))]
+		SetTooltipPetInfo(self, species or item)
 	end
 end
 
 GameTooltip:HookScript("OnTooltipSetItem", OnTooltipSetItem)
 ItemRefTooltip:HookScript("OnTooltipSetItem", OnTooltipSetItem)
+ItemRefTooltip:HookScript("OnShow", OnTooltipSetItem) -- hyperlinks don't trigger OnTooltipSetItem
+
+------------------------------------------------------------------------
+--	Add info to unit tooltips
+------------------------------------------------------------------------
+
+local function OnTooltipSetSpell(self)
+	local spell = GameTooltip:GetSpell()
+	--print("OnTooltipSetSpell:", spell)
+	if spell then
+		SetTooltipPetInfo(self, spell)
+	end
+end
+
+GameTooltip:HookScript("OnTooltipSetSpell", OnTooltipSetSpell)
+ItemRefTooltip:HookScript("OnTooltipSetSpell", OnTooltipSetSpell)
 
 ------------------------------------------------------------------------
 --	Add info to unit tooltips
@@ -309,8 +319,7 @@ EventFrame:SetScript("OnUpdate", function()
 	elseif text ~= currentText then
 		local i = 0
 		for text in gmatch(text, "[^\n]+") do
-			local speciesName = strtrim(gsub(text, "|T.-|t", ""))
-			local petString = C_PetJournal.GetOwnedBattlePetString(speciesName)
+			local petString = C_PetJournal.GetOwnedBattlePetString(strtrim(gsub(text, "|T.-|t", "")))
 			if petString then
 				i = i + 1
 				multiparts[i] = text

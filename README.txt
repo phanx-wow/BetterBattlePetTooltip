@@ -14,7 +14,7 @@ BetterBattlePetTooltip modifies the "Collected" lines in battle pet
 tooltips. It supports item tooltips for caged battle pets, unit tooltips
 for wild battle pets, and minimap tracking tooltips.
 
-The default "Collected (1/3)" text is changed to "1/3 Collected (L25)",
+The default "Collected (1/3)" text is changed to "Collected (Level 25)",
 to indicate the level of your collected pet, and both the text and the
 tooltip border are colored by the rarity of your collected pet.
 
