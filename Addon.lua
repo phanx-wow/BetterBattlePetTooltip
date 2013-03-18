@@ -102,8 +102,8 @@ do
 		return petString
 	end
 
-	EventFrame:RegisterEvent("PET_JOURNAL_UPDATE")
-	function EventFrame:PET_JOURNAL_UPDATE(event)
+	EventFrame:RegisterEvent("PET_JOURNAL_LIST_UPDATE")
+	function EventFrame:PET_JOURNAL_LIST_UPDATE(event)
 		--print(event)
 		wipe(petStringCache)
 	end
