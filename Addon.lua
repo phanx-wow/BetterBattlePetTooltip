@@ -19,6 +19,7 @@ for i = 1, 6 do PetQualityColors[i] = ITEM_QUALITY_COLORS[i-1] end
 local PetQualityStrings = {}
 for i = 1, 6 do PetQualityStrings[i] =  format(L.Parentheses, _G["BATTLE_PET_BREED_QUALITY"..i]) end
 
+local colorblindMode
 local seenWildPetQualities = {}
 local speciesFromItem = Addon.speciesFromItem
 
@@ -33,6 +34,11 @@ BBPT_WILD_QUALITY = true
 local EventFrame = CreateFrame("Frame", ADDON)
 EventFrame:SetScript("OnEvent", function(self, event, ...) return self[event] and self[event](self, event, ...) end)
 Addon.EventFrame = EventFrame
+
+EventFrame:RegisterEvent("PLAYER_LOGIN")
+function EventFrame:PLAYER_LOGIN(event)
+	colorblindMode = tonumber(GetCVar("colorblindMode")) > 0
+end
 
 ------------------------------------------------------------------------
 --	Rewrite pet strings
@@ -77,7 +83,6 @@ do
 		end
 
 		local petString
-		local colorblindMode = tonumber(ENABLE_COLORBLIND_MODE) > 0
 		if numCollected > 0 then
 			--print("Collected.")
 			local color = colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[bestQuality].hex
@@ -107,6 +112,16 @@ do
 		--print(event)
 		wipe(petStringCache)
 	end
+
+	hooksecurefunc("SetCVar", function(cvar, value)
+		if cvar == "colorblindMode" then
+			local enable = tonumber(value) > 0
+			if enable ~= colorblindMode then
+				colorblindMode = enable
+				wipe(petStringCache)
+			end
+		end
+	end)
 end
 
 ------------------------------------------------------------------------
@@ -126,10 +141,13 @@ do
 		"BorderLeft"
 	}
 	function ColorBorderByQuality(self, r, g, b)
-		--print("ColorBorderByQuality")
-		if not g or not b then
+		print("ColorBorderByQuality", r, g, b)
+		if colorblindMode then
+			local color = DEFAULT_TOOLTIP_COLOR
+			r, g, b = color.r, color.g, color.b
+		elseif not g or not b then
 			-- r is quality
-			local color = tonumber(ENABLE_COLORBLIND_MODE) == 0 and PetQualityColors[quality] or TOOLTIP_DEFAULT_COLOR
+			local color = PetQualityColors[quality]
 			r, g, b = color.r, color.g, color.b
 		end
 		self:SetBackdropBorderColor(r, g, b)
@@ -176,7 +194,7 @@ end
 
 local function BattlePetTooltip_OnShow(self)
 	--print("BattlePetTooltip_OnShow")
-	if tonumber(ENABLE_COLORBLIND_MODE) == 0 then
+	if not colorblindMode then
 		local speciesName = C_PetJournal.GetPetInfoBySpeciesID(self.speciesID)
 		local petString = C_PetJournal.GetOwnedBattlePetString(speciesName)
 		local hex = strmatch(petString, "|cff%x%x%x%x%x%x")
@@ -199,9 +217,7 @@ hooksecurefunc("FloatingBattlePet_Show", function() BattlePetTooltip_OnShow(Floa
 local function SetTooltipPetInfo(self, species, guid)
 	local tooltip = self:GetName()
 	--print("SetTooltipPetInfo:", tooltip, species, guid)
-
 	local addString = true
-	local colorblindMode = tonumber(ENABLE_COLORBLIND_MODE) > 0
 
 	for i = 2, self:NumLines() do
 		local line = _G[tooltip.."TextLeft"..i]
@@ -275,7 +291,7 @@ ItemRefTooltip:HookScript("OnTooltipSetItem", OnTooltipSetItem)
 ItemRefTooltip:HookScript("OnShow", OnTooltipSetItem) -- hyperlinks don't trigger OnTooltipSetItem
 
 ------------------------------------------------------------------------
---	Add info to unit tooltips
+--	Add info to spell tooltips
 ------------------------------------------------------------------------
 
 local function OnTooltipSetSpell(self)
