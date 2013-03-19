@@ -141,15 +141,15 @@ do
 		"BorderLeft"
 	}
 	function ColorBorderByQuality(self, r, g, b)
-		print("ColorBorderByQuality", r, g, b)
 		if colorblindMode then
 			local color = DEFAULT_TOOLTIP_COLOR
 			r, g, b = color.r, color.g, color.b
 		elseif not g or not b then
 			-- r is quality
-			local color = PetQualityColors[quality]
+			local color = PetQualityColors[r]
 			r, g, b = color.r, color.g, color.b
 		end
+		--print("ColorBorderByQuality", r, g, b)
 		self:SetBackdropBorderColor(r, g, b)
 		for i = 1, #BorderRegions do
 			local region = self[BorderRegions[i]]
