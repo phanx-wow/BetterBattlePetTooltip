@@ -227,15 +227,21 @@ local function SetTooltipPetInfo(self, species, guid)
 			--print("Modifying existing line")
 			addString = false
 			local petString = C_PetJournal.GetOwnedBattlePetString(species)
-			line:SetText(petString)
-			if not colorblindMode then
-				local hex = strmatch(petString, "|cff%x%x%x%x%x%x")
-				for quality, color in pairs(PetQualityColors) do
-					if color.hex == hex then
-						ColorBorderByQuality(self, quality)
-						break
+			if petString then
+				line:SetText(petString)
+				if not colorblindMode then
+					local hex = strmatch(petString, "|cff%x%x%x%x%x%x")
+					for quality, color in pairs(PetQualityColors) do
+						if color.hex == hex then
+							ColorBorderByQuality(self, quality)
+							break
+						end
 					end
 				end
+			else
+				-- Missing itemID -> speciesID mapping
+				print("Missing pet string for species:", species)
+				return
 			end
 			break
 		end
@@ -331,11 +337,11 @@ EventFrame:Hide()
 EventFrame:SetScript("OnUpdate", function()
 	local text = GameTooltipTextLeft1:GetText()
 	if not strfind(text, "\n") then
-		SetTooltipPetInfo(GameTooltip, strtrim(gsub(text, "|T.-|t", "")))
+		SetTooltipPetInfo(GameTooltip, strtrim(gsub(gsub(gsub(text, "|T.-|t", ""), "|cff%x%x%x%x%x%x", ""), "|r", "")))
 	elseif text ~= currentText then
 		local i = 0
 		for text in gmatch(text, "[^\n]+") do
-			local petString = C_PetJournal.GetOwnedBattlePetString(strtrim(gsub(text, "|T.-|t", "")))
+			local petString = C_PetJournal.GetOwnedBattlePetString(strtrim(gsub(gsub(gsub(text, "|T.-|t", ""), "|cff%x%x%x%x%x%x", ""), "|r", "")))
 			if petString then
 				i = i + 1
 				multiparts[i] = text

@@ -76,6 +76,7 @@ private.speciesFromItem = {
 	[11474] = 87,  -- Sprite Darter Egg -> Sprite Darter Hatchling
 	[33816] = 163, -- Toothy's Bucket -> Toothy
 	[23002] = 125, -- Turtle Box -> Speedy
+	[95621] = 227, -- Warbot Ignition Key -> Warbot
 	[32233] = 153, -- Wolpertinger's Tankard -> Wolpertinger
 	[12264] = 89,  -- Worg Carrier -> Worg Pup
 }
