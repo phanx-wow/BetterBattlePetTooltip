@@ -226,9 +226,9 @@ local function SetTooltipPetInfo(self, species, guid)
 
 	for i = 2, self:NumLines() do
 		local line = _G[tooltip.."TextLeft"..i]
-		local text = line:GetText()
+		local text = strtrim(line:GetText() or "")
 		--print("Checking line", i, text)
-		if text == UNIT_CAPTURABLE or text == NOT_COLLECTED or strfind(text or "", COLLECTED) then -- wat
+		if text == UNIT_CAPTURABLE or text == NOT_COLLECTED or strfind(text, COLLECTED) then -- wat
 			--print("Modifying existing line")
 			addString = false
 			local petString = C_PetJournal.GetOwnedBattlePetString(species)
