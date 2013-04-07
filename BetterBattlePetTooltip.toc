@@ -6,7 +6,7 @@
 ## Notes-deDE: Zeigt im Tooltips für Kampfhaustieren die höchste Stufe und Qualität, die Ihr habt gefangen.
 ## Notes-esES: Mostrar en las descripciones de las mascotas de combate el mayor nivel y calidad que se ha capturado.
 ## Notes-esMX: Mostrar en las descripciones de las mascotas de combate el mayor nivel y calidad que se ha capturado.
-## Notes-frFR: Afficher le plus haut niveau et qualité qui a capturé dans les bulles d'mascottes de combat.
+## Notes-frFR: Afficher le plus haut niveau et qualité des mascottes de combat capturées dans les infobulles.
 ## Notes-itIT: Mostrare il più alto livello e qualità che hai catturato nelle descrizioni dei mascotti da combattimento.
 ## Notes-ptBR: Mostrar em descrições de mascotes de batalha o mais alto nível e qualidade que tem capturado.
 ## Notes-ruRU: Отображать высокий уровень и качество, которое вы поймали, во всплывающих подсказках для боевых питомцев.

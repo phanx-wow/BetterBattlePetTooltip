@@ -23,6 +23,11 @@ local colorblindMode
 local seenWildPetQualities = {}
 local speciesFromItem = Addon.speciesFromItem
 
+L.PetString           = "%s" .. L.PetString .. "%s|r"
+L.PetStringCount      = "%s" .. L.PetStringCount .. "%s|r"
+L.PetStringCountLevel = "%s" .. L.PetStringCountLevel .. "%s|r"
+L.PetStringLevel      = "%s" .. L.PetStringLevel .. "%s|r"
+
 ------------------------------------------------------------------------
 
 BBPT_COUNT = false
@@ -91,7 +96,7 @@ do
 			if BBPT_COUNT and BBPT_LEVEL then
 				petString = format(L.PetStringCountLevel, color, numCollected, isUnique and 1 or 3, COLLECTED, bestLevel, qText)
 			elseif BBPT_COUNT then
-				petString = format(L.PetStringCount, color, count, isUnique and 1 or 3, COLLECTED, COLLECTED, qText)
+				petString = format(L.PetStringCount, color, numCollected, isUnique and 1 or 3, COLLECTED, COLLECTED, qText)
 			elseif BBPT_LEVEL then
 				petString = format(L.PetStringLevel, color, COLLECTED, bestLevel, qText)
 			else
