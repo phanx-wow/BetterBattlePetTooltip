@@ -219,6 +219,8 @@ hooksecurefunc("FloatingBattlePet_Show", function() BattlePetTooltip_OnShow(Floa
 --	Add info to GameTooltip and derivatives
 ------------------------------------------------------------------------
 
+local ITEM_PET_KNOWN = strmatch(ITEM_PET_KNOWN, "[^%(]+")
+
 local function SetTooltipPetInfo(self, species, guid)
 	local tooltip = self:GetName()
 	--print("SetTooltipPetInfo:", tooltip, species, guid)
@@ -228,7 +230,7 @@ local function SetTooltipPetInfo(self, species, guid)
 		local line = _G[tooltip.."TextLeft"..i]
 		local text = strtrim(line:GetText() or "")
 		--print("Checking line", i, text)
-		if text == UNIT_CAPTURABLE or text == NOT_COLLECTED or strfind(text, COLLECTED) then -- wat
+		if text == UNIT_CAPTURABLE or text == NOT_COLLECTED or strfind(text, ITEM_PET_KNOWN) then
 			--print("Modifying existing line")
 			addString = false
 			local petString = C_PetJournal.GetOwnedBattlePetString(species)

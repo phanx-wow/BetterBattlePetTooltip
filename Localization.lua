@@ -56,8 +56,8 @@ elseif LOCALE:match("^es") then
 	--L.PetStringCount = "%s/%s %s"
 	L.PetStringCountLevel = "%s/%s %s (Nivel %d)"
 	L.PetStringLevel = "%s (Nivel %d)"
-	L.ShowCount = "Mostrar la cantidad que ha capturado"
-	L.ShowLevel = "Mostrar el mayor nivel que ha capturado"
+	L.ShowCount = "Mostrar la cantidad capturado"
+	L.ShowLevel = "Mostrar el mayor nivel capturado"
 	L.ShowWildQuality = "Mostrar la calidad de las mascotas salvajes cuando posible"
 	L.ShowWildQuality_Tooltip = "Esto sólo es posible si ya ha entrado en y abandonó un duelo con la mascota exacta, y sólo para las descripciones de las unidades, no para las descripciones de seguimiento en el minimapa."
 
@@ -66,17 +66,17 @@ elseif LOCALE:match("^es") then
 --	Contributors: oXid_FoX
 ------------------------------------------------------------------------
 elseif LOCALE == "frFR" then
-	L.AlreadyBattled = "Déjà battu%s%s"
+	L.AlreadyBattled = "Déjà combattu%s%s"
 	L.NotCapturable = "Capture impossible"
 	--L.Parentheses = " (%s)"
 	--L.PetString = "%s"
 	--L.PetStringCount = "%s/%s %s"
 	L.PetStringCountLevel = "%s/%s %s (Niveau %d)"
 	L.PetStringLevel = "%s (Niveau %d)"
-	L.ShowCount = "Afficher le montant qui a capturé"
-	L.ShowLevel = "Afficher le plus haut niveau qui a capturé"
-	L.ShowWildQuality = "Afficer la qualité des mascottes sauvages si possible"
-	--L.ShowWildQuality_Tooltip = ""
+	L.ShowCount = "Afficher le nombre capturé"
+	L.ShowLevel = "Afficher le plus haut niveau capturé"
+	L.ShowWildQuality = "Afficher la qualité des mascottes sauvages si possible"
+	L.ShowWildQuality_Tooltip = "Ce n'est possible que si vous avez déjà abandonné un combat avec la mascotte, et ne fonctionne que pour les infobulles des unités, pas les infobulles sur la minicarte."
 
 ------------------------------------------------------------------------
 --	Italian
@@ -89,8 +89,8 @@ elseif LOCALE == "itIT" then
 	--L.PetStringCount = "%s/%s %s"
 	L.PetStringCountLevel = "%s/%s %s (Livello %d)"
 	L.PetStringLevel = "%s (Livello %d)"
-	L.ShowCount = "Mostrare la quantità che ha catturato"
-	L.ShowLevel = "Mostrare il livello più alto che hai catturato"
+	L.ShowCount = "Mostrare la quantità catturato"
+	L.ShowLevel = "Mostrare il livello più alto catturato"
 	L.ShowWildQuality = "Mostrare la qualità della mascotte selvatici quando possibile"
 	--L.ShowWildQuality_Tooltip = ""
 
@@ -105,8 +105,8 @@ elseif LOCALE:match("^pt") then
 	--L.PetStringCount = "%s/%s %s"
 	L.PetStringCountLevel = "%s/%s %s (Nível %d)"
 	L.PetStringLevel = "%s (Nível %d)"
-	L.ShowCount = "Mostrar a quantidade que tem capturado"
-	L.ShowLevel = "Mostrar a mais alto nível que tem capturado"
+	L.ShowCount = "Mostrar a quantidade capturado"
+	L.ShowLevel = "Mostrar a mais alto nível capturado"
 	L.ShowWildQuality = "Mostrar a qualidade de mascotes selvagens quando possível"
 	--L.ShowWildQuality_Tooltip = ""
 
