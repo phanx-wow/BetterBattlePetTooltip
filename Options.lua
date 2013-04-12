@@ -69,6 +69,10 @@ Options.refresh = function()
 	ShowCount:SetChecked(BBPT_COUNT)
 	ShowLevel:SetChecked(BBPT_LEVEL)
 	ShowWildQuality:SetChecked(BBPT_WILD_QUALITY)
+
+	ShowCount:SetHitRectInsets(0, -16 - ShowCount.Text:GetWidth(), 0, 0)
+	ShowLevel:SetHitRectInsets(0, -16 - ShowLevel.Text:GetWidth(), 0, 0)
+	ShowWildQuality:SetHitRectInsets(0, -16 - ShowWildQuality.Text:GetWidth(), 0, 0)
 end
 
 if LibStub and LibStub("LibAboutPanel", true) then
