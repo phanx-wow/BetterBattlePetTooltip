@@ -59,7 +59,7 @@ elseif LOCALE:match("^es") then
 	L.ShowCount = "Mostrar la cantidad capturado"
 	L.ShowLevel = "Mostrar el mayor nivel capturado"
 	L.ShowWildQuality = "Mostrar la calidad de las mascotas salvajes cuando posible"
-	L.ShowWildQuality_Tooltip = "Esto sólo es posible si ya ha entrado en y abandonó un duelo con la mascota exacta, y sólo para las descripciones de las unidades, no para las descripciones de seguimiento en el minimapa."
+	L.ShowWildQuality_Tooltip = "Esto sólo es posible si ya abandonó un duelo con la mascota exacta, y sólo para las descripciones de las unidades, no para las descripciones de seguimiento en el minimapa."
 
 ------------------------------------------------------------------------
 --	French
