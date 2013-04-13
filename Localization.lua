@@ -31,19 +31,20 @@ if strmatch(LOCALE, "^en") then return end
 
 ------------------------------------------------------------------------
 --	German
+--	Contributors: CanRanBan
 ------------------------------------------------------------------------
 if LOCALE == "deDE" then
-	L.AlreadyBattled = "Bereits kämpften%s%s"
-	L.NotCapturable = "Nicht abfangbar"
+	L.AlreadyBattled = "Bereits bekämpft%s%s"
+	L.NotCapturable = "Nicht einfangbar"
 	--L.Parentheses = " (%s)"
 	--L.PetString = "%s"
 	--L.PetStringCount = "%s/%s %s"
 	L.PetStringCountLevel = "%s/%s %s (Stufe %d)"
 	L.PetStringLevel = "%s (Stufe %d)"
-	L.ShowCount = "Zeigt die Menge, die Ihr habt gefangen"
-	L.ShowLevel = "Zeigt die höchste Stufe, die Ihr habt gefangen"
-	L.ShowWildQuality = "Qualität der wilden Kampftieren anzeigen, wenn möglich ist"
-	--L.ShowWildQuality_Tooltip = ""
+	L.ShowCount = "Zeige eingefangene Anzahl"
+	L.ShowLevel = "Zeige höchste eingefangene Stufe"
+	L.ShowWildQuality = "Zeige Qualität des wilden Haustiers, wenn möglich"
+	L.ShowWildQuality_Tooltip = "Dies ist nur möglich, wenn du das Haustier bereits bekämpft und aufgegeben hast, und funktioniert nur für Einheiten-Tooltips, nicht für Minimap-Tooltips."
 
 ------------------------------------------------------------------------
 --	Spanish
