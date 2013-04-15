@@ -221,6 +221,8 @@ hooksecurefunc("FloatingBattlePet_Show", function() BattlePetTooltip_OnShow(Floa
 
 local ITEM_PET_KNOWN = strmatch(ITEM_PET_KNOWN, "[^%(]+")
 
+local warned = {}
+
 local function SetTooltipPetInfo(self, species, guid)
 	local tooltip = self:GetName()
 	--print("SetTooltipPetInfo:", tooltip, species, guid)
@@ -245,9 +247,10 @@ local function SetTooltipPetInfo(self, species, guid)
 						end
 					end
 				end
-			else
+			elseif not warned[species] then
 				-- Missing itemID -> speciesID mapping
-				print("Missing pet string for species:", species)
+				print("|cffff7f7fBetterBattlePetTooltip:|r Missing pet string for", species)
+				warned[species] = true
 				return
 			end
 			break
