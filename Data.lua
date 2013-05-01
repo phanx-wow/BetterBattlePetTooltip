@@ -80,6 +80,7 @@ private.speciesFromItem = {
 	[23015] = 127,  -- Rat Cage -> Whiskers the Rat
 	[34955] = 172,  -- Scorched Stone -> Searing Scorchling
 	[68673] = 90,   -- Smolderweb Egg -> Smolderweb Hatchling
+	[66073] = 289,  -- Snail Shell => Scooter the Snail
 	[35349] = 173,  -- Snarly's Bucket -> Snarly
 	[11474] = 87,   -- Sprite Darter Egg -> Sprite Darter Hatchling
 	[33816] = 163,  -- Toothy's Bucket -> Toothy
