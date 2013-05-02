@@ -113,19 +113,20 @@ elseif LOCALE:match("^pt") then
 
 ------------------------------------------------------------------------
 --	Russian
+--	Contributors: Wetxius
 ------------------------------------------------------------------------
 elseif LOCALE == "ruRU" then
 	L.AlreadyBattled = "Уже сражался%s%s"
-	L.NotCapturable = "Не может приручить"
-	--L.Parentheses = " (%s)"
-	--L.PetString = "%s"
-	--L.PetStringCount = "%s/%s %s"
+	L.NotCapturable = "Не приручается"
+	-- L.Parentheses = " (%s)"
+	-- L.PetString = "%s"
+	-- L.PetStringCount = "%s/%s %s"
 	L.PetStringCountLevel = "%s/%s %s (%d-й уровень)"
 	L.PetStringLevel = "%s (%d-й уровень)"
 	L.ShowCount = "Отображать количество, которое вы поймали"
-	L.ShowLevel = "Отображать высшее уровень, которое вы поймали"
-	L.ShowWildQuality = "Отображать качество дикий боевой питомца, щхен возможно"
-	--L.ShowWildQuality_Tooltip = ""
+	L.ShowLevel = "Отображать наивысший уровень для пойманных"
+	L.ShowWildQuality = "Отображать качество дикого питомца, если возможно"
+	L.ShowWildQuality_Tooltip = "Это возможно, если вы уже вступали в бой с питомцем и отступили. Работает только для подсказки цели, на миникарте не работает."
 
 ------------------------------------------------------------------------
 --	Korean

@@ -9,7 +9,7 @@
 ## Notes-frFR: Afficher le plus haut niveau et qualité des mascottes de combat capturées dans les infobulles.
 ## Notes-itIT: Mostrare il più alto livello e qualità dei mascotti da combattimento catturati nelle descrizioni.
 ## Notes-ptBR: Mostrar o mais alto nível e qualidade dos mascotes de batalha capturados nas dicas.
-## Notes-ruRU: Отображать высокий уровень и качество, которое вы поймали, во всплывающих подсказках для боевых питомцев.
+## Notes-ruRU: Отображать наивысший уровень и качество боевых питомцев во всплывающих подсказках.
 
 ## Author: Phanx
 ## X-Email: addons@phanx.net
