@@ -80,6 +80,7 @@ private.speciesFromItem = {
 	[23007] = 126,  -- Piglet's Collar -> Mr. Wiggles
 	[23015] = 127,  -- Rat Cage -> Whiskers the Rat
 	[34955] = 172,  -- Scorched Stone -> Searing Scorchling
+	[11828] = 85,   -- Schematic: Pet Bombling
 	[68673] = 90,   -- Smolderweb Egg -> Smolderweb Hatchling
 	[66073] = 289,  -- Snail Shell => Scooter the Snail
 	[35349] = 173,  -- Snarly's Bucket -> Snarly
@@ -91,4 +92,20 @@ private.speciesFromItem = {
 	[93038] = 1152, -- Whistle of Chromatic Bone -> Chrominius
 	[32233] = 153,  -- Wolpertinger's Tankard -> Wolpertinger
 	[12264] = 89,   -- Worg Carrier -> Worg Pup
+	-- Added in 5.3
+	[97557] = 1235, -- Brilliant Phoenix Hawk Feather -> Phoenix Hawk Hatchling
+	[97556] = 1234, -- Crystal of the Void -> Lesser Voidcaller
+	[97560] = 1244, -- Dark Quivering Blob -> Viscous Horror
+	[97554] = 1232, -- Dripping Strider Egg -> Coilfang Stalker
+	[97821] = 1237, -- Gahz'rooki's Summoning Stone -> Gahz'rooki
+	[97961] = 1245, -- Half-Empty Food Container -> Filthling
+	[97549] = 1227, -- Instant Arcane Sanctum Security Kit -> Menagerie Custodian
+	[97550] = 1228, -- Netherspace Portal Stone -> Netherspace Abyssal
+	[97959] = 1243, -- Quivering Blob -> Living Fluid
+	[97551] = 1229, -- Satyr Charm -> Fiendish Imp
+	[97552] = 1230, -- Shell of Tide-Calling -> Tideskipper
+	[97548] = 1226, -- Spiky Collar -> Lil' Bad Wolf
+	[97553] = 1231, -- Tainted Core -> Tainted Waveling
+	[97555] = 1233, -- Tiny Fel Engine Key -> Pocket Reaver
+	[97558] = 1236, -- Tito's Basket -> Tito
 }
