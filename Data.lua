@@ -92,7 +92,9 @@ private.speciesFromItem = {
 	[93038] = 1152, -- Whistle of Chromatic Bone -> Chrominius
 	[32233] = 153,  -- Wolpertinger's Tankard -> Wolpertinger
 	[12264] = 89,   -- Worg Carrier -> Worg Pup
+	-----------------
 	-- Added in 5.3
+	-----------------
 	[97557] = 1235, -- Brilliant Phoenix Hawk Feather -> Phoenix Hawk Hatchling
 	[97556] = 1234, -- Crystal of the Void -> Lesser Voidcaller
 	[97560] = 1244, -- Dark Quivering Blob -> Viscous Horror
@@ -108,4 +110,8 @@ private.speciesFromItem = {
 	[97553] = 1231, -- Tainted Core -> Tainted Waveling
 	[97555] = 1233, -- Tiny Fel Engine Key -> Pocket Reaver
 	[97558] = 1236, -- Tito's Basket -> Tito
+	-----------------
+	-- Added in 5.4
+	-----------------
+	[104317] = 0, -- Rotten Helper Box -> Rotten Little Helper
 }
