@@ -134,9 +134,9 @@ elseif LOCALE == "ruRU" then
 elseif LOCALE == "koKR" then
 	--L.AlreadyBattled = ""
 	--L.NotCapturable = ""
-	L.Parentheses = " (%s)"
+	--L.Parentheses = " (%s)"
 	--L.PetString = "%s"
-	L.PetStringCount = "%s/%s %s"
+	--L.PetStringCount = "%s/%s %s"
 	L.PetStringCountLevel = "%s/%s %s (%d 레벨)"
 	L.PetStringLevel = "%s (%d 레벨)"
 	--L.ShowCount = ""

@@ -113,5 +113,7 @@ private.speciesFromItem = {
 	-----------------
 	-- Added in 5.4
 	-----------------
-	[104317] = 0, -- Rotten Helper Box -> Rotten Little Helper
+	[106240] = 1363, -- Alterac Brandy -> Alterac Brew-Pup
+	[106244] = 1364, -- Murkalot's Flail -> Murkalot
+	[104317] = 1349, -- Rotten Helper Box -> Rotten Little Helper
 }
