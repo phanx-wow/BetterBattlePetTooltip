@@ -65,6 +65,7 @@ private.speciesFromItem = {
 	[66067] = 291,  -- Brazie's Sunflower Seeds -> Singing Sunflower
 	[35350] = 174,  -- Chuck's Bucket -> Chuck
 	[93035] = 1150, -- Core of Hardened Ash -> Ashstone Core
+	[13584] = 93,   -- Diablo Stone
 	[93030] = 1143, -- Dusty Clutch of Eggs -> Giant Bone Spider
 	[32616] = 158,  -- Egbert's Egg -> Egbert
 	[32622] = 159,  -- Elekk Training Collar -> Peanut
@@ -76,7 +77,9 @@ private.speciesFromItem = {
 	[27445] = 132,  -- Magical Crawdad Box -> Magical Crawdad
 	[93033] = 1147, -- Mark of Flame -> Harbinger of Flame
 	[33818] = 164,  -- Muckbreath's Bucket -> Muckbreath
+	[71726] = 329,  -- Murky's Little Soulstone
 	[44723] = 198,  -- Nurtured Penguin Egg -> Pengu
+	[13583] = 92,   -- Panda Collar
 	[23007] = 126,  -- Piglet's Collar -> Mr. Wiggles
 	[23015] = 127,  -- Rat Cage -> Whiskers the Rat
 	[34955] = 172,  -- Scorched Stone -> Searing Scorchling
@@ -87,11 +90,13 @@ private.speciesFromItem = {
 	[11474] = 87,   -- Sprite Darter Egg -> Sprite Darter Hatchling
 	[33816] = 163,  -- Toothy's Bucket -> Toothy
 	[23002] = 125,  -- Turtle Box -> Speedy
+	[39656] = 189,  -- Tyrael's Hilt
 	[93036] = 1151, -- Unscathed Egg -> Untamed Hatchling
 	[95621] = 227,  -- Warbot Ignition Key -> Warbot
 	[93038] = 1152, -- Whistle of Chromatic Bone -> Chrominius
 	[32233] = 153,  -- Wolpertinger's Tankard -> Wolpertinger
 	[12264] = 89,   -- Worg Carrier -> Worg Pup
+	[13582] = 94,   -- Zergling Leash
 	-----------------
 	-- Added in 5.3
 	-----------------
