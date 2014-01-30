@@ -311,7 +311,7 @@ ItemRefTooltip:HookScript("OnShow", OnTooltipSetItem) -- hyperlinks don't trigge
 ------------------------------------------------------------------------
 
 local function OnTooltipSetSpell(self)
-	local spell = GameTooltip:GetSpell()
+	local spell = self:GetSpell()
 	--print("OnTooltipSetSpell:", spell)
 	if spell then
 		SetTooltipPetInfo(self, spell)
@@ -326,7 +326,7 @@ ItemRefTooltip:HookScript("OnTooltipSetSpell", OnTooltipSetSpell)
 ------------------------------------------------------------------------
 
 local function OnTooltipSetUnit(self)
-	local _, unit = GameTooltip:GetUnit()
+	local _, unit = self:GetUnit()
 	--print("OnTooltipSetUnit:", unit)
 	if unit and UnitIsWildBattlePet(unit) then
 		--print("UnitIsWildBattlePet")

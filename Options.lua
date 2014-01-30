@@ -13,7 +13,7 @@
 local ADDON, Addon = ...
 local L = Addon.L
 
-local Options = CreateFrame("Frame", "BBPTOptions", InterfaceOptionsFramePanelContainer)
+local Options = CreateFrame("Frame", ADDON.."Options", InterfaceOptionsFramePanelContainer)
 Options.name = GetAddOnMetadata(ADDON, "Title") or ADDON
 InterfaceOptions_AddCategory(Options)
 Addon.OptionsPanel = Options
