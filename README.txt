@@ -2,7 +2,7 @@
 BetterBattlePetTooltip
 ==========================
 * A World of Warcraft user interface addon
-* Copyright (c) 2012-2013 A. Kinley (Phanx)
+* Copyright (c) 2012-2014 A. Kinley (Phanx)
 * http://www.wowinterface.com/downloads/info21978-BetterBattlePetTooltip.html
 * http://www.curse.com/addons/wow/betterbattlepettooltip
 
