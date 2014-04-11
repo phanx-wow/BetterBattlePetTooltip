@@ -30,9 +30,12 @@ L.PetStringLevel      = "%s" .. L.PetStringLevel .. "%s|r"
 
 ------------------------------------------------------------------------
 
-BBPT_COUNT = false
-BBPT_LEVEL = true
-BBPT_WILD_QUALITY = true
+BBPTDB = {
+	count = false,
+	level = true,
+	wildQuality = true,
+	tooltipColor = true,
+}
 
 ------------------------------------------------------------------------
 
@@ -93,11 +96,11 @@ do
 			local color = colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[bestQuality].hex
 			local qText = colorblindMode and PetQualityStrings[bestQuality] or ""
 
-			if BBPT_COUNT and BBPT_LEVEL then
+			if BBPTDB.count and BBPTDB.level then
 				petString = format(L.PetStringCountLevel, color, numCollected, isUnique and 1 or 3, COLLECTED, bestLevel, qText)
-			elseif BBPT_COUNT then
+			elseif BBPTDB.count then
 				petString = format(L.PetStringCount, color, numCollected, isUnique and 1 or 3, COLLECTED, qText)
-			elseif BBPT_LEVEL then
+			elseif BBPTDB.level then
 				petString = format(L.PetStringLevel, color, COLLECTED, bestLevel, qText)
 			else
 				petString = format(L.PetString, color, COLLECTED, qText)
@@ -146,6 +149,9 @@ do
 		"BorderLeft"
 	}
 	function ColorBorderByQuality(self, r, g, b)
+		if not BBPTDB.tooltipColor then
+			return
+		end
 		if colorblindMode then
 			local color = DEFAULT_TOOLTIP_COLOR
 			r, g, b = color.r, color.g, color.b
@@ -205,8 +211,7 @@ local function BattlePetTooltip_OnShow(self)
 		local hex = strmatch(petString, "|cff%x%x%x%x%x%x")
 		for quality, color in pairs(PetQualityColors) do
 			if color.hex == hex then
-				ColorBorderByQuality(self, quality)
-				break
+				return ColorBorderByQuality(self, quality)
 			end
 		end
 	end
@@ -274,7 +279,7 @@ local function SetTooltipPetInfo(self, species, guid)
 		end
 	end
 
-	if guid and BBPT_WILD_QUALITY then
+	if guid and BBPTDB.wildQuality then
 		local quality = seenWildPetQualities[guid]
 		if quality then
 			--print("Already seen:", quality)
@@ -310,10 +315,14 @@ ItemRefTooltip:HookScript("OnShow", OnTooltipSetItem) -- hyperlinks don't trigge
 --	Add info to spell tooltips
 ------------------------------------------------------------------------
 
+local ignoreSpells = {
+	[77799] = true, -- Fel Flame
+}
+
 local function OnTooltipSetSpell(self)
-	local spell = self:GetSpell()
+	local spell, _, spellID = self:GetSpell()
 	--print("OnTooltipSetSpell:", spell)
-	if spell then
+	if spell and not ignoreSpells[spellID] then
 		SetTooltipPetInfo(self, spell)
 	end
 end

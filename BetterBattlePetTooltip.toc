@@ -1,5 +1,5 @@
 ## Interface: 50400
-## Version: 5.4.1.wowi:revision
+## Version: 5.4.7.wowi:revision
 
 ## Title: BetterBattlePetTooltip
 ## Notes: Adds your highest collected level and quality to battle pet tooltips.
@@ -22,7 +22,7 @@
 ## X-WoWI-ID: 21978
 
 ## OptionalDependencies: LibPetJournal-2.0
-## SavedVariables: BBPT_COUNT, BBPT_LEVEL, BBPT_WILD_QUALITY
+## SavedVariables: BBPTDB
 
 Libs\LibStub\LibStub.lua
 Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
