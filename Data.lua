@@ -84,6 +84,7 @@ private.speciesFromItem = {
 	[23015] = 127,  -- Rat Cage -> Whiskers the Rat
 	[34955] = 172,  -- Scorched Stone -> Searing Scorchling
 	[11828] = 85,   -- Schematic: Pet Bombling
+	[32617] = 157,  -- Sleepy Willy -> Willy
 	[68673] = 90,   -- Smolderweb Egg -> Smolderweb Hatchling
 	[66073] = 289,  -- Snail Shell => Scooter the Snail
 	[35349] = 173,  -- Snarly's Bucket -> Snarly
