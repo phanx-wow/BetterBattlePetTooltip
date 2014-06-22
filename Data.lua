@@ -374,4 +374,13 @@ private.speciesFromItem = {
 	[102146] = 1305, -- Zao, Calfling of Niuzao
 	[13582] = 94, -- Zergling Leash -> Zergling
 	[49664] = 247, -- Enchanted Purple Jade -> Zipao Tiger
+-- Also include the patterns for making items that grant pets:
+	[90470] = 845, -- Design: Jade Owl
+	[90471] = 846, -- Design: Sapphire Cub
+	[67308] = 267, -- Formula: Enchanted Lantern
+	[67312] = 292, -- Formula: Magic Lamp
+	[16044] = 95, -- Schematic: Lifelike Mechanical Toad
+	[11827] = 86, -- Schematic: Lil' Smoky
+	[4408] = 39, -- Schematic: Mechanical Squirrel Box
+	[11828] = 85, -- Schematic: Pet Bombling
 }
