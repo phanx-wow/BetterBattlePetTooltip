@@ -3,7 +3,7 @@
 
 ## Title: BetterBattlePetTooltip
 ## Notes: Adds your highest collected level and quality to battle pet tooltips.
-## Notes-deDE: Zeigt im Kampfhaustieren-Tooltips die höchste Stufe und Qualität, die Ihr habt gefangen.
+## Notes-deDE: Zeigt in den Kampfhaustieren-Tooltips die höchste gefangene Stufe und Qualität.
 ## Notes-esES: Mostrar el mayor nivel y calidad de las mascotas de combate capturados en las descripciones.
 ## Notes-esMX: Mostrar el mayor nivel y calidad de las mascotas de combate capturados en las descripciones.
 ## Notes-frFR: Afficher le plus haut niveau et qualité des mascottes de combat capturées dans les infobulles.
