@@ -19,6 +19,13 @@ on the minimap) and only works for the exact pet you battled (not for
 other pets of the same type).
 
 
+Download
+-----------
+
+* [WoWInterface](http://www.wowinterface.com/downloads/info21978-BetterBattlePetTooltip.html)
+* [Curse](http://www.curse.com/addons/wow/betterbattlepettooltip)
+
+
 Options
 ----------
 
@@ -29,23 +36,14 @@ You can toggle the display of quantities, levels, or previously seen
 wild pet qualities.
 
 
-Download
------------
-
-* [WoWInterface](http://www.wowinterface.com/downloads/info21978-BetterBattlePetTooltip.html)
-* [Curse](http://www.curse.com/addons/wow/betterbattlepettooltip)
-
-
 Localization
 ---------------
 
-Compatible with all game localizations.
+Works in all languages. Translated into English, Deutsch, Español,
+Français, Italiano, Português, and Русский.
 
-The options are translated into English, German, Spanish, French,
-Italian, Portuguese, and Russian.
-
-If you have translations for another language, post a comment on
-the WoWInterface download page.
+If you can add or update translations for any language, post a comment
+on the WoWInterface download page.
 
 
 Credits
@@ -61,7 +59,7 @@ Post a ticket on either download site, or a comment on WoWInterface.
 
 If you are reporting a bug, please include directions I can follow to
 reproduce the bug, whether it still happens when all other addons are
-disabled, and the exact text of the related error message (if any) from 
+disabled, and the exact text of the related error message (if any) from
 [BugSack](http://www.wowinterface.com/downloads/info5995-BugSack.html).
 
 If you need to contact me privately, you can send me a private message
@@ -71,6 +69,6 @@ on either download site, or email me at <addons@phanx.net>.
 License
 ----------
 
-Copyright (c) 2012-2014 Phanx <addons@phanx.net>. All rights reserved.
+Copyright (c) 2012-2014 Phanx. All rights reserved.
 See the accompanying LICENSE file for information about the conditions
 under which redistribution and modification may be allowed.

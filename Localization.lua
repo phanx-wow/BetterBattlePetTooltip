@@ -1,13 +1,9 @@
 --[[--------------------------------------------------------------------
 	BetterBattlePetTooltip
-	A World of Warcraft user interface addon
-	Copyright (c) 2012-2014 A. Kinley (Phanx)
-
-	This addon is freely available, and its source code freely viewable,
-	but it is not "open source software" and you may not distribute it,
-	with or without modifications, without permission from its author.
-
-	See the included README and LICENSE files for more information!
+	Copyright (c) 2012-2014 Phanx. All rights reserved.
+	See the included README and LICENSE files for more information.
+	http://www.wowinterface.com/downloads/info21978-BetterBattlePetTooltip.html
+	http://www.curse.com/addons/wow/betterbattlepettooltip
 ----------------------------------------------------------------------]]
 
 local ADDON, private = ...
@@ -38,9 +34,6 @@ if strmatch(LOCALE, "^en") then return end
 if LOCALE == "deDE" then
 	L.AlreadyBattled = "Bereits bekämpft%s%s"
 	L.NotCapturable = "Nicht einfangbar"
-	--L.Parentheses = " (%s)"
-	--L.PetString = "%s"
-	--L.PetStringCount = "%s/%s %s"
 	L.PetStringCountLevel = "%s/%s %s (Stufe %d)"
 	L.PetStringLevel = "%s (Stufe %d)"
 	L.ShowCount = "Zeige eingefangene Anzahl"
@@ -56,9 +49,6 @@ if LOCALE == "deDE" then
 elseif LOCALE:match("^es") then
 	L.AlreadyBattled = "Ya luchado%s%s"
 	L.NotCapturable = "No se puede capturar"
-	--L.Parentheses = " (%s)"
-	--L.PetString = "%s"
-	--L.PetStringCount = "%s/%s %s"
 	L.PetStringCountLevel = "%s/%s %s (Nivel %d)"
 	L.PetStringLevel = "%s (Nivel %d)"
 	L.ShowCount = "Mostrar la cantidad capturado"
@@ -75,9 +65,6 @@ elseif LOCALE:match("^es") then
 elseif LOCALE == "frFR" then
 	L.AlreadyBattled = "Déjà combattu%s%s"
 	L.NotCapturable = "Capture impossible"
-	--L.Parentheses = " (%s)"
-	--L.PetString = "%s"
-	--L.PetStringCount = "%s/%s %s"
 	L.PetStringCountLevel = "%s/%s %s (Niveau %d)"
 	L.PetStringLevel = "%s (Niveau %d)"
 	L.ShowCount = "Afficher le nombre capturé"
@@ -93,17 +80,15 @@ elseif LOCALE == "frFR" then
 elseif LOCALE == "itIT" then
 	L.AlreadyBattled = "Già combattuto%s%s"
 	L.NotCapturable = "Non catturabile"
-	--L.Parentheses = " (%s)"
-	--L.PetString = "%s"
-	--L.PetStringCount = "%s/%s %s"
 	L.PetStringCountLevel = "%s/%s %s (Livello %d)"
 	L.PetStringLevel = "%s (Livello %d)"
 	L.ShowCount = "Mostrare la quantità catturato"
 	L.ShowLevel = "Mostrare il livello più alto catturato"
-	L.ShowWildQuality = "Mostrare la qualità della mascotte selvatici quando possibile"
-	--L.ShowWildQuality_Tooltip = ""
-	--L.ColorTooltipBorder = ""
-	--L.ColorTooltipBorder_Tooltip = ""
+	L.ShowWildQuality = "Mostrare la qualità della mascotte selvatici, quando possibile"
+	L.ShowWildQuality_Tooltip = "Questo è possibile solo se si è già arreso in un duello contro la mascotte specifico, e solo per le informazioni delle unità, non per le informazioni del tracciamento sulla minimappa."
+	L.ColorTooltipBorder = "Colorare i bordi di informazioni"
+	L.ColorTooltipBorder_Tooltip = "Potete desiderare attivare questa opzione se si utilizza un altro addon per lo stile dei bordi di informazioni."
+
 
 ------------------------------------------------------------------------
 --	Portuguese
@@ -111,36 +96,30 @@ elseif LOCALE == "itIT" then
 elseif LOCALE:match("^pt") then
 	L.AlreadyBattled = "Já luto%s%s"
 	L.NotCapturable = "Não capturável"
-	--L.Parentheses = " (%s)"
-	--L.PetString = "%s"
-	--L.PetStringCount = "%s/%s %s"
 	L.PetStringCountLevel = "%s/%s %s (Nível %d)"
 	L.PetStringLevel = "%s (Nível %d)"
 	L.ShowCount = "Mostrar a quantidade capturado"
 	L.ShowLevel = "Mostrar a mais alto nível capturado"
 	L.ShowWildQuality = "Mostrar a qualidade de mascotes selvagens quando possível"
-	--L.ShowWildQuality_Tooltip = ""
-	--L.ColorTooltipBorder = ""
-	--L.ColorTooltipBorder_Tooltip = ""
+	L.ShowWildQuality_Tooltip = "Isso só é possível se você já desistiu em um duelo contra o mascote individual, e só funciona para as dicas das unidades, e não para as dicas de rastreamento no minimapa."
+	L.ColorTooltipBorder = "Colorir as bordas das dicas"
+	L.ColorTooltipBorder_Tooltip = "Você pode desabilitar esta opção se você usar outro addon para estilizar as bordas das dicas."
 
 ------------------------------------------------------------------------
 --	Russian
---	Contributors: Wetxius
+--	Contributors: Wetxius, Yafis
 ------------------------------------------------------------------------
 elseif LOCALE == "ruRU" then
 	L.AlreadyBattled = "Уже сражался%s%s"
 	L.NotCapturable = "Не приручается"
-	-- L.Parentheses = " (%s)"
-	-- L.PetString = "%s"
-	-- L.PetStringCount = "%s/%s %s"
 	L.PetStringCountLevel = "%s/%s %s (%d-й уровень)"
 	L.PetStringLevel = "%s (%d-й уровень)"
 	L.ShowCount = "Отображать количество, которое вы поймали"
 	L.ShowLevel = "Отображать наивысший уровень для пойманных"
 	L.ShowWildQuality = "Отображать качество дикого питомца, если возможно"
 	L.ShowWildQuality_Tooltip = "Это возможно, если вы уже вступали в бой с питомцем и отступили. Работает только для подсказки цели, на миникарте не работает."
-	--L.ColorTooltipBorder = ""
-	--L.ColorTooltipBorder_Tooltip = ""
+	L.ColorTooltipBorder = "Цвет границ подсказки"
+	L.ColorTooltipBorder_Tooltip = "Вы можете отключить это если используете другой аддон на Tooltip"
 
 ------------------------------------------------------------------------
 --	Korean

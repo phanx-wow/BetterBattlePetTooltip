@@ -1,13 +1,9 @@
 --[[--------------------------------------------------------------------
 	BetterBattlePetTooltip
-	A World of Warcraft user interface addon
-	Copyright (c) 2012-2014 A. Kinley (Phanx)
-
-	This addon is freely available, and its source code freely viewable,
-	but it is not "open source software" and you may not distribute it,
-	with or without modifications, without permission from its author.
-
-	See the included README and LICENSE files for more information!
+	Copyright (c) 2012-2014 Phanx. All rights reserved.
+	See the included README and LICENSE files for more information.
+	http://www.wowinterface.com/downloads/info21978-BetterBattlePetTooltip.html
+	http://www.curse.com/addons/wow/betterbattlepettooltip
 ----------------------------------------------------------------------]]
 
 local ADDON, Addon = ...
