@@ -89,9 +89,9 @@ elseif LOCALE == "itIT" then
 	L.ColorTooltipBorder = "Colorare i bordi di informazioni"
 	L.ColorTooltipBorder_Tooltip = "Potete desiderare attivare questa opzione se si utilizza un altro addon per lo stile dei bordi di informazioni."
 
-
 ------------------------------------------------------------------------
 --	Portuguese
+-- Contributors: Tericoo
 ------------------------------------------------------------------------
 elseif LOCALE:match("^pt") then
 	L.AlreadyBattled = "Já luto%s%s"
@@ -101,9 +101,9 @@ elseif LOCALE:match("^pt") then
 	L.ShowCount = "Mostrar a quantidade capturado"
 	L.ShowLevel = "Mostrar a mais alto nível capturado"
 	L.ShowWildQuality = "Mostrar a qualidade de mascotes selvagens quando possível"
-	L.ShowWildQuality_Tooltip = "Isso só é possível se você já desistiu em um duelo contra o mascote individual, e só funciona para as dicas das unidades, e não para as dicas de rastreamento no minimapa."
-	L.ColorTooltipBorder = "Colorir as bordas das dicas"
-	L.ColorTooltipBorder_Tooltip = "Você pode desabilitar esta opção se você usar outro addon para estilizar as bordas das dicas."
+	L.ShowWildQuality_Tooltip = "Apenas é possível se você já entrou em uma batalha com este mascote e perdeu, e, apenas funciona para tooltips de unidades não nos ícones do mini mapa."
+	L.ColorTooltipBorder = "Cor da borda do tooltip"
+	L.ColorTooltipBorder_Tooltip = "Talvez você deseje desativar caso use outro addon para mudar a aparência do tooltip."
 
 ------------------------------------------------------------------------
 --	Russian
