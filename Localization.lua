@@ -1,9 +1,9 @@
 --[[--------------------------------------------------------------------
 	BetterBattlePetTooltip
-	Copyright (c) 2012-2014 Phanx. All rights reserved.
-	See the included README and LICENSE files for more information.
+	Copyright (c) 2012-2014 Phanx <addons@phanx.net>. All rights reserved.
 	http://www.wowinterface.com/downloads/info21978-BetterBattlePetTooltip.html
 	http://www.curse.com/addons/wow/betterbattlepettooltip
+	https://github.com/Phanx/BetterBattlePetTooltip
 ----------------------------------------------------------------------]]
 
 local ADDON, private = ...

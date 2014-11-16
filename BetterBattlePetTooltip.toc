@@ -1,5 +1,5 @@
 ## Interface: 60000
-## Version: 6.0.2.wowi:revision
+## Version: 6.0.2.66
 
 ## Title: BetterBattlePetTooltip
 ## Notes: Adds your highest collected level and quality to battle pet tooltips.
@@ -14,12 +14,7 @@
 ## Author: Phanx
 ## X-Email: addons@phanx.net
 ## X-Copyright: Copyright (c) 2012-2014 Phanx. All rights reserved.
-## X-License: See the accompanying LICENSE file.
-## X-CompatibleLocales: deDE, enUS, esES, esMX, frFR, itIT, ptBR, koKR, ruRU, zhCN, zhTW
-## X-Localizations: enUS, deDE, esES, esMX, frFR, itIT, ruRU
-## X-Website: http://www.wowinterface.com/downloads/info21978-BetterBattlePetTooltip.html
-## X-Curse-Project-Name: betterbattlepettooltip
-## X-WoWI-ID: 21978
+## X-Website: https://github.com/Phanx/BetterBattlePetTooltip
 
 ## OptionalDependencies: LibPetJournal-2.0
 ## SavedVariables: BBPTDB
