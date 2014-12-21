@@ -222,7 +222,7 @@ hooksecurefunc("FloatingBattlePet_Show", function() BattlePetTooltip_OnShow(Floa
 
 local S_COLLECTED = "^" .. COLLECTED
 local S_NOT_COLLECTED = "^" .. NOT_COLLECTED
-local S_ITEM_PET_KNOWN = strmatch(ITEM_PET_KNOWN, "[^%(]+")
+local S_ITEM_PET_KNOWN = "^" .. strmatch(ITEM_PET_KNOWN, "[^%(]+")
 
 local warned = {}
 
@@ -235,7 +235,7 @@ local function SetTooltipPetInfo(self, species, guid)
 		local line = _G[tooltip.."TextLeft"..i]
 		local text = strtrim(line:GetText() or "")
 		--print("Checking line", i, text)
-		if text == UNIT_CAPTURABLE or strfind(text, S_COLLECTED) or strfind(text, S_NOT_COLLECTED) or strfind(text, S_ITEM_PET_KNOWN) then
+		if text == UNIT_CAPTURABLE or strmatch(text, S_COLLECTED) or strmatch(text, S_NOT_COLLECTED) or strmatch(text, S_ITEM_PET_KNOWN) then
 			--print("Modifying existing line")
 			addString = false
 			local petString = C_PetJournal.GetOwnedBattlePetString(species)
@@ -353,7 +353,7 @@ local multiparts = {}
 EventFrame:Hide()
 EventFrame:SetScript("OnUpdate", function()
 	local text = GameTooltipTextLeft1:GetText()
-	if not strfind(text, "\n") then
+	if not strmatch(text, "\n") then
 		SetTooltipPetInfo(GameTooltip, strtrim(gsub(gsub(gsub(text, "|T.-|t", ""), "|cff%x%x%x%x%x%x", ""), "|r", "")))
 	elseif text ~= currentText then
 		local i = 0
