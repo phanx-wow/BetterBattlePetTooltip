@@ -1,3 +1,7 @@
+### Version 6.0.3.18
+
+* Fixed some garrison items incorrectly triggering a "missing pet string" notification
+
 ### Version 6.0.2.66
 
 * Updated for WoW 6.0
