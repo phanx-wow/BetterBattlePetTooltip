@@ -1,3 +1,7 @@
+### Version 6.0.3.19
+
+* Fixed minimap tracking icon tooltips
+
 ### Version 6.0.3.18
 
 * Fixed some garrison items incorrectly triggering a "missing pet string" notification

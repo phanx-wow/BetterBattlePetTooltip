@@ -16,6 +16,7 @@ local PetQualityStrings = {}
 for i = 1, 6 do PetQualityStrings[i] = format(L.Parentheses, _G["BATTLE_PET_BREED_QUALITY"..i]) end
 
 local colorblindMode
+local nameToSpeciesID = {}
 local seenWildPetQualities = {}
 local speciesFromItem = Addon.speciesFromItem
 
@@ -56,7 +57,7 @@ do
 	function C_PetJournal.GetOwnedBattlePetString(speciesID)
 		--print("GetOwnedBattlePetString:", speciesID)
 		if type(speciesID) == "string" then
-			speciesID = C_PetJournal.FindPetIDByName(speciesID)
+			speciesID = nameToSpeciesID[speciesID]
 		end
 		if type(speciesID) ~= "number" or speciesID < 1 then
 			--print("Invalid species.")
@@ -115,6 +116,11 @@ do
 	function EventFrame:PET_JOURNAL_LIST_UPDATE(event)
 		--print(event)
 		wipe(petStringCache)
+		wipe(nameToSpeciesID)
+		for _, petID in LibStub("LibPetJournal-2.0"):IteratePetIDs() do
+			local speciesID, _, _, _, _, _, _, name = C_PetJournal.GetPetInfoByPetID(petID)
+			nameToSpeciesID[name] = speciesID
+		end
 	end
 
 	hooksecurefunc("SetCVar", function(cvar, value)
@@ -220,13 +226,14 @@ hooksecurefunc("FloatingBattlePet_Show", function() BattlePetTooltip_OnShow(Floa
 --	Add info to GameTooltip and derivatives
 ------------------------------------------------------------------------
 
-local S_COLLECTED = "^" .. COLLECTED
-local S_NOT_COLLECTED = "^" .. NOT_COLLECTED
-local S_ITEM_PET_KNOWN = "^" .. strmatch(ITEM_PET_KNOWN, "[^%(]+")
+local S_COLLECTED      = "^|?c?f?f?%x?%x?%x?%x?%x?%x?" .. COLLECTED
+local S_NOT_COLLECTED  = "^|?c?f?f?%x?%x?%x?%x?%x?%x?" .. NOT_COLLECTED
+local S_ITEM_PET_KNOWN = "^|?c?f?f?%x?%x?%x?%x?%x?%x?" .. strmatch(ITEM_PET_KNOWN, "[^%(]+")
 
 local warned = {}
 
 local function SetTooltipPetInfo(self, species, guid)
+	if type(species) == "string" and not nameToSpeciesID[species] then return end
 	local tooltip = self:GetName()
 	--print("SetTooltipPetInfo:", tooltip, species, guid)
 	local addString = true
@@ -236,7 +243,7 @@ local function SetTooltipPetInfo(self, species, guid)
 		local text = strtrim(line:GetText() or "")
 		--print("Checking line", i, text)
 		if text == UNIT_CAPTURABLE or strmatch(text, S_COLLECTED) or strmatch(text, S_NOT_COLLECTED) or strmatch(text, S_ITEM_PET_KNOWN) then
-			--print("Modifying existing line")
+			--print("Modifying existing line:", text)
 			addString = false
 			local petString = C_PetJournal.GetOwnedBattlePetString(species)
 			if petString then
@@ -261,9 +268,9 @@ local function SetTooltipPetInfo(self, species, guid)
 	end
 
 	if addString then
-		--print("Adding new line.")
 		local petString = C_PetJournal.GetOwnedBattlePetString(species or _G[tooltip.."TextLeft1"]:GetText())
 		if petString then
+			--print("Adding new line.")
 			self:AddLine(petString)
 			if not colorblindMode then
 				local hex = strmatch(petString, "|cff%x%x%x%x%x%x")
@@ -354,11 +361,13 @@ EventFrame:Hide()
 EventFrame:SetScript("OnUpdate", function()
 	local text = GameTooltipTextLeft1:GetText()
 	if not strmatch(text, "\n") then
-		SetTooltipPetInfo(GameTooltip, strtrim(gsub(gsub(gsub(text, "|T.-|t", ""), "|cff%x%x%x%x%x%x", ""), "|r", "")))
+		local name = strtrim(gsub(gsub(gsub(text, "|T.-|t", ""), "|cff%x%x%x%x%x%x", ""), "|r", ""))
+		SetTooltipPetInfo(GameTooltip, name)
 	elseif text ~= currentText then
 		local i = 0
 		for text in gmatch(text, "[^\n]+") do
-			local petString = C_PetJournal.GetOwnedBattlePetString(strtrim(gsub(gsub(gsub(text, "|T.-|t", ""), "|cff%x%x%x%x%x%x", ""), "|r", "")))
+			local name = strtrim(gsub(gsub(gsub(text, "|T.-|t", ""), "|cff%x%x%x%x%x%x", ""), "|r", ""))
+			local petString = C_PetJournal.GetOwnedBattlePetString(name)
 			if petString then
 				i = i + 1
 				multiparts[i] = text
