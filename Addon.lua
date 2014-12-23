@@ -15,10 +15,18 @@ for i = 1, 6 do PetQualityColors[i] = ITEM_QUALITY_COLORS[i-1] end
 local PetQualityStrings = {}
 for i = 1, 6 do PetQualityStrings[i] = format(L.Parentheses, _G["BATTLE_PET_BREED_QUALITY"..i]) end
 
+local PetQualityFromHex = {}
+for i = 1, 6 do PetQualityFromHex[PetQualityColors[i].hex] = i end
+
 local colorblindMode
-local nameToSpeciesID = {}
 local seenWildPetQualities = {}
+
 local speciesFromItem = Addon.speciesFromItem
+local speciesFromName = setmetatable({}, { __index = function(t, name)
+	local speciesID = C_PetJournal.FindPetIDByName(name)
+	t[name] = speciesID
+	return speciesID
+end })
 
 L.PetString           = "%s" .. L.PetString .. "%s|r"
 L.PetStringCount      = "%s" .. L.PetStringCount .. "%s|r"
@@ -57,7 +65,7 @@ do
 	function C_PetJournal.GetOwnedBattlePetString(speciesID)
 		--print("GetOwnedBattlePetString:", speciesID)
 		if type(speciesID) == "string" then
-			speciesID = nameToSpeciesID[speciesID]
+			speciesID = speciesFromName[speciesID]
 		end
 		if type(speciesID) ~= "number" or speciesID < 1 then
 			--print("Invalid species.")
@@ -116,11 +124,6 @@ do
 	function EventFrame:PET_JOURNAL_LIST_UPDATE(event)
 		--print(event)
 		wipe(petStringCache)
-		wipe(nameToSpeciesID)
-		for _, petID in LibStub("LibPetJournal-2.0"):IteratePetIDs() do
-			local speciesID, _, _, _, _, _, _, name = C_PetJournal.GetPetInfoByPetID(petID)
-			nameToSpeciesID[name] = speciesID
-		end
 	end
 
 	hooksecurefunc("SetCVar", function(cvar, value)
@@ -208,13 +211,11 @@ end
 local function BattlePetTooltip_OnShow(self)
 	--print("BattlePetTooltip_OnShow")
 	if not colorblindMode then
-		local speciesName = C_PetJournal.GetPetInfoBySpeciesID(self.speciesID)
-		local petString = C_PetJournal.GetOwnedBattlePetString(speciesName)
+		local petString = self.Owned:GetText() -- C_PetJournal.GetOwnedBattlePetString(self.speciesID)
 		local hex = strmatch(petString, "|cff%x%x%x%x%x%x")
-		for quality, color in pairs(PetQualityColors) do
-			if color.hex == hex then
-				return ColorBorderByQuality(self, quality)
-			end
+		local quality = hex and PetQualityFromHex[hex]
+		if quality then
+			return ColorBorderByQuality(self, quality)
 		end
 	end
 end
@@ -233,7 +234,7 @@ local S_ITEM_PET_KNOWN = "^|?c?f?f?%x?%x?%x?%x?%x?%x?" .. strmatch(ITEM_PET_KNOW
 local warned = {}
 
 local function SetTooltipPetInfo(self, species, guid)
-	if type(species) == "string" and not nameToSpeciesID[species] then return end
+	if type(species) == "string" and not speciesFromName[species] then return end
 	local tooltip = self:GetName()
 	--print("SetTooltipPetInfo:", tooltip, species, guid)
 	local addString = true
@@ -250,16 +251,14 @@ local function SetTooltipPetInfo(self, species, guid)
 				line:SetText(petString)
 				if not colorblindMode then
 					local hex = strmatch(petString, "|cff%x%x%x%x%x%x")
-					for quality, color in pairs(PetQualityColors) do
-						if color.hex == hex then
-							ColorBorderByQuality(self, quality)
-							break
-						end
+					local quality = hex and PetQualityFromHex[hex]
+					if quality then
+						ColorBorderByQuality(self, quality)
 					end
 				end
 			elseif not warned[species] then
 				-- Missing itemID -> speciesID mapping
-				print("|cffff7f7fBetterBattlePetTooltip:|r Missing pet string for", species)
+				DEFAULT_CHAT_FRAME:AddMessage("|cffff7f7fBetterBattlePetTooltip:|r Missing pet string for " .. species)
 				warned[species] = true
 				return
 			end
@@ -274,11 +273,9 @@ local function SetTooltipPetInfo(self, species, guid)
 			self:AddLine(petString)
 			if not colorblindMode then
 				local hex = strmatch(petString, "|cff%x%x%x%x%x%x")
-				for quality, color in pairs(PetQualityColors) do
-					if color.hex == hex then
-						ColorBorderByQuality(self, quality)
-						break
-					end
+				local quality = hex and PetQualityFromHex[hex]
+				if quality then
+					ColorBorderByQuality(self, quality)
 				end
 			end
 		end

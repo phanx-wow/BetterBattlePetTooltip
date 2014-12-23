@@ -1,3 +1,7 @@
+### Version 6.0.3.20
+
+* Fixed an issue with tooltips in the auction house
+
 ### Version 6.0.3.19
 
 * Fixed minimap tracking icon tooltips
