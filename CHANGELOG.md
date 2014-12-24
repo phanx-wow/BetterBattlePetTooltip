@@ -1,3 +1,7 @@
+### Version 6.0.3.21
+
+* Better solution for the garrison item problem
+
 ### Version 6.0.3.20
 
 * Fixed an issue with tooltips in the auction house
