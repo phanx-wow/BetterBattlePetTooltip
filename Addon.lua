@@ -227,9 +227,9 @@ hooksecurefunc("FloatingBattlePet_Show", function() BattlePetTooltip_OnShow(Floa
 --	Add info to GameTooltip and derivatives
 ------------------------------------------------------------------------
 
-local S_COLLECTED      = "^|?c?f?f?%x?%x?%x?%x?%x?%x?" .. COLLECTED
-local S_NOT_COLLECTED  = "^|?c?f?f?%x?%x?%x?%x?%x?%x?" .. NOT_COLLECTED
-local S_ITEM_PET_KNOWN = "^|?c?f?f?%x?%x?%x?%x?%x?%x?" .. strmatch(ITEM_PET_KNOWN, "[^%(]+")
+local S_COLLECTED      = COLLECTED
+local S_NOT_COLLECTED  = NOT_COLLECTED
+local S_ITEM_PET_KNOWN = strmatch(ITEM_PET_KNOWN, "[^%(]+")
 
 local warned = {}
 
@@ -243,7 +243,7 @@ local function SetTooltipPetInfo(self, species, guid)
 		local line = _G[tooltip.."TextLeft"..i]
 		local text = strtrim(line:GetText() or "")
 		--print("Checking line", i, text)
-		if text == UNIT_CAPTURABLE or strmatch(text, S_COLLECTED) or strmatch(text, S_NOT_COLLECTED) or strmatch(text, S_ITEM_PET_KNOWN) then
+		if text == UNIT_CAPTURABLE or ((strmatch(text, S_COLLECTED) or strmatch(text, S_NOT_COLLECTED) or strmatch(text, S_ITEM_PET_KNOWN)) and not strmatch(text, '"')) then -- flavor text gtfo
 			--print("Modifying existing line:", text)
 			addString = false
 			local petString = C_PetJournal.GetOwnedBattlePetString(species)
