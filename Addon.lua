@@ -9,6 +9,24 @@
 local ADDON, Addon = ...
 local L = Addon.L
 
+if GetLocale():match("^zh") then
+	L.Colon = "："
+	L.Comma = "、"
+	L.Parentheses = "（%s）"
+else
+	L.Colon = ": "
+	L.Comma = ", "
+	L.Parentheses = " (%s)"
+end
+
+L.Collected = COLLECTED
+L.CollectedCount = "%d/3"
+L.CollectedLevel = UNIT_LEVEL_TEMPLATE
+L.CollectedLevelBreed = UNIT_TYPE_LEVEL_TEMPLATE
+L.NotCollected = NOT_COLLECTED
+
+------------------------------------------------------------------------
+
 local PetQualityColors = {}
 for i = 1, 6 do PetQualityColors[i] = ITEM_QUALITY_COLORS[i-1] end
 
@@ -17,6 +35,24 @@ for i = 1, 6 do PetQualityStrings[i] = format(L.Parentheses, _G["BATTLE_PET_BREE
 
 local PetQualityFromHex = {}
 for i = 1, 6 do PetQualityFromHex[PetQualityColors[i].hex] = i end
+
+local PetBreedIcons = {
+	--[[ BB ]] [3]  = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:0:16|t",
+	--[[ PP ]] [4]  = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t", -- "|TInterface\\WorldStateFrame\\CombatSwords:0:0:-2:0:64:64:0:32:0:32|t",
+	--[[ SS ]] [5]  = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t",
+	--[[ HH ]] [6]  = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t",
+	--[[ HP ]] [7]  = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t",
+	--[[ PS ]] [8]  = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t",
+	--[[ HS ]] [9]  = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t",
+	--[[ PB ]] [10] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t",
+	--[[ SB ]] [11] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t",
+	--[[ HB ]] [12] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t",
+}
+
+------------------------------------------------------------------------
+
+local LibPetJournal = LibStub("LibPetJournal-2.0")
+local LibPetBreedInfo -- not embedded, checked for in PLAYER_LOGIN
 
 local colorblindMode
 local seenWildPetQualities = {}
@@ -27,11 +63,6 @@ local speciesFromName = setmetatable({}, { __index = function(t, name)
 	t[name] = speciesID
 	return speciesID
 end })
-
-L.PetString           = "%s" .. L.PetString .. "%s|r"
-L.PetStringCount      = "%s" .. L.PetStringCount .. "%s|r"
-L.PetStringCountLevel = "%s" .. L.PetStringCountLevel .. "%s|r"
-L.PetStringLevel      = "%s" .. L.PetStringLevel .. "%s|r"
 
 ------------------------------------------------------------------------
 
@@ -44,13 +75,17 @@ BBPTDB = {
 
 ------------------------------------------------------------------------
 
+local db = BBPTDB
+
 local EventFrame = CreateFrame("Frame", ADDON)
 EventFrame:SetScript("OnEvent", function(self, event, ...) return self[event] and self[event](self, event, ...) end)
 Addon.EventFrame = EventFrame
 
 EventFrame:RegisterEvent("PLAYER_LOGIN")
 function EventFrame:PLAYER_LOGIN(event)
+	db = BBPTDB
 	colorblindMode = tonumber(GetCVar("colorblindMode")) > 0
+	LibPetBreedInfo = LibStub("LibPetBreedInfo-1.0", true)
 end
 
 ------------------------------------------------------------------------
@@ -59,8 +94,6 @@ end
 
 do
 	local petStringCache = {}
-
-	local __GetOwnedBattlePetString = C_PetJournal.GetOwnedBattlePetString
 
 	function C_PetJournal.GetOwnedBattlePetString(speciesID)
 		--print("GetOwnedBattlePetString:", speciesID)
@@ -76,19 +109,6 @@ do
 			return petStringCache[speciesID]
 		end
 
-		local numCollected, bestLevel, bestQuality = 0, 0, 0
-		for _, petID in LibStub("LibPetJournal-2.0"):IteratePetIDs() do
-			local petSpecies, _, petLevel, _, _, _, _, petName = C_PetJournal.GetPetInfoByPetID(petID)
-			if petSpecies == speciesID then
-				numCollected = numCollected + 1
-				local _, _, _, _, petQuality = C_PetJournal.GetPetStats(petID)
-				if petQuality >= bestQuality then
-					bestQuality = petQuality
-					bestLevel = max(bestLevel, petLevel)
-				end
-			end
-		end
-
 		local _, _, _, _, _, _, _, _, _, isUnique, obtainable = C_PetJournal.GetPetInfoBySpeciesID(speciesID)
 		if not obtainable then
 			--print("Not obtainable.")
@@ -96,24 +116,79 @@ do
 		end
 
 		local petString
-		if numCollected > 0 then
-			--print("Collected.")
-			local color = colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[bestQuality].hex
-			local qText = colorblindMode and PetQualityStrings[bestQuality] or ""
 
-			if BBPTDB.count and BBPTDB.level then
-				petString = format(L.PetStringCountLevel, color, numCollected, isUnique and 1 or 3, COLLECTED, bestLevel, qText)
-			elseif BBPTDB.count then
-				petString = format(L.PetStringCount, color, numCollected, isUnique and 1 or 3, COLLECTED, qText)
-			elseif BBPTDB.level then
-				petString = format(L.PetStringLevel, color, COLLECTED, bestLevel, qText)
-			else
-				petString = format(L.PetString, color, COLLECTED, qText)
+		if PetTracker then
+			petString = PetTracker.Journal:GetOwnedText(speciesID)
+			if petString and colorblindMode then
+				petString = gsub(petString, "|cff%x%x%x%x%x%x", HIGHLIGHT_FONT_COLOR_CODE)
 			end
-			--print("String:", petString)
-		else
-			--print("Not collected.")
-			petString = format(L.PetString, colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[6].hex, NOT_COLLECTED, "")
+			--print("PetTracker:", petString)
+		end
+
+		if not petString then
+			local showBreed  = db.breed and LibPetBreedInfo
+			local baseString = db.all and (showBreed or db.level) and (NORMAL_FONT_COLOR_CODE .. L.Collected .. "|r")
+			local numCollected, bestLevel, bestQuality, bestBreed = 0, 0, 0
+			for _, petID in LibPetJournal:IteratePetIDs() do
+				local species, _, level, _, _, _, _, name, _, _, _, _, _, _, _, _, unique = C_PetJournal.GetPetInfoByPetID(petID)
+				if species == speciesID then
+					numCollected = numCollected + 1
+					local _, _, _, _, quality = C_PetJournal.GetPetStats(petID)
+					if baseString then
+						-- Show all, append
+						local breed = showBreed and LibPetBreedInfo:GetBreedName(LibPetBreedInfo:GetBreedByPetID(petID))
+						local color = colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[quality].hex
+						local qText = colorblindMode and PetQualityStrings[quality] or ""
+						if breed then
+							breed = breed and gsub(breed, "/", "")
+							petString = (numCollected > 1 and (petString .. L.Comma) or (baseString .. L.Colon)) .. color .. (db.level and format(L.CollectedLevelBreed, level, breed) or breed) .. qText
+						else
+							petString = (numCollected > 1 and (petString .. L.Comma) or (baseString .. L.Colon)) .. (numCollected > 1 and L.Comma or L.Colon) .. color .. format(L.CollectedLevel, level) .. qText
+						end
+					elseif quality >= bestQuality then
+						-- Show highest level of best quality only
+						bestQuality = quality
+						bestLevel = max(bestLevel, level)
+						bestBreed = showBreed and gsub(LibPetBreedInfo:GetBreedName(LibPetBreedInfo:GetBreedByPetID(petID)), "/", "")
+					end
+				end
+			end
+
+			if petString then
+				--print("All:", petString)
+			elseif numCollected > 0 then
+				if bestBreed and db.level then
+					petString = format(L.CollectedLevelBreed, bestLevel, bestBreed)
+				elseif bestBreed then
+					petString = bestBreed
+				elseif db.level then
+					petString = format(L.CollectedLevel, bestLevel)
+				end
+
+				if db.count and not isUnique then
+					if petString then
+						petString = L.Collected .. L.Colon .. format(L.CollectedCount, numCollected) .. " - " .. petString
+					else
+						petString = L.Collected .. L.Colon .. format(L.CollectedCount, numCollected)
+					end
+				elseif petString then
+					petString = L.Collected .. L.Colon .. petString
+				else
+					petString = L.Collected
+				end
+
+				if colorblindMode then
+					petString = HIGHLIGHT_FONT_COLOR_CODE .. petString .. PetQualityStrings[bestQuality]
+				else
+					petString = PetQualityColors[bestQuality].hex .. petString
+				end
+				--print("Best:", petString)
+			end
+		end
+
+		if not petString then
+			--print("Not collected")
+			petString = (colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[6].hex) .. L.NotCollected
 		end
 
 		petStringCache[speciesID] = petString
@@ -154,7 +229,7 @@ do
 		"BorderLeft"
 	}
 	function ColorBorderByQuality(self, r, g, b)
-		if not BBPTDB.tooltipColor then
+		if not db.tooltipColor then
 			return
 		end
 		if colorblindMode then
@@ -281,7 +356,7 @@ local function SetTooltipPetInfo(self, species, guid)
 		end
 	end
 
-	if guid and BBPTDB.wildQuality then
+	if guid and db.wildQuality then
 		local quality = seenWildPetQualities[guid]
 		if quality then
 			--print("Already seen:", quality)

@@ -16,7 +16,7 @@
 ## X-Copyright: Copyright (c) 2012-2014 Phanx. All rights reserved.
 ## X-Website: https://github.com/Phanx/BetterBattlePetTooltip
 
-## OptionalDependencies: LibPetJournal-2.0
+## OptionalDependencies: LibPetBreedInfo-1.0, LibPetJournal-2.0
 ## SavedVariables: BBPTDB
 
 Libs\LibStub\LibStub.lua

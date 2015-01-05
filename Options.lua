@@ -17,7 +17,6 @@ Addon.OptionsPanel = Options
 local Title = Options:CreateFontString("$parentTitle", "ARTWORK", "GameFontNormalLarge")
 Title:SetPoint("TOPLEFT", 16, -16)
 Title:SetText(Options.name)
-Options.Title = Title
 
 local SubText = Options:CreateFontString("$parentSubText", "ARTWORK", "GameFontHighlightSmall")
 SubText:SetPoint("TOPLEFT", Title, "BOTTOMLEFT", 0, -8)
@@ -26,62 +25,67 @@ SubText:SetHeight(32)
 SubText:SetJustifyH("LEFT")
 SubText:SetJustifyV("TOP")
 SubText:SetText(GetAddOnMetadata(ADDON, "Notes"))
-Options.SubText = SubText
+
+local options = {}
+local function SetOption(self)
+	local checked = self:GetChecked()
+	BBPTDB[options[self]] = checked
+	Addon.EventFrame:PET_JOURNAL_LIST_UPDATE()
+	PlaySound(checked and "igMainMenuOptionCheckBoxOn" or "igMainmenuOptionCheckBoxOff")
+end
 
 local ShowCount = CreateFrame("CheckButton", "$parentCount", Options, "InterfaceOptionsCheckButtonTemplate")
 ShowCount:SetPoint("TOPLEFT", SubText, "BOTTOMLEFT", -2, -8)
+ShowCount:SetScript("OnClick", SetOption)
 ShowCount.Text:SetText(L.ShowCount)
-ShowCount:SetScript("OnClick", function(this)
-	local checked = not not this:GetChecked()
-	PlaySound(checked and "igMainMenuOptionCheckBoxOn" or "igMainmenuOptionCheckBoxOff")
-	BBPTDB.count = checked
-	Addon.EventFrame:PET_JOURNAL_LIST_UPDATE()
-end)
-Options.ShowCount = ShowCount
+options[ShowCount] = "count"
 
 local ShowLevel = CreateFrame("CheckButton", "$parentLevel", Options, "InterfaceOptionsCheckButtonTemplate")
 ShowLevel:SetPoint("TOPLEFT", ShowCount, "BOTTOMLEFT", 0, -8)
+ShowCount:SetScript("OnClick", SetOption)
 ShowLevel.Text:SetText(L.ShowLevel)
-ShowLevel:SetScript("OnClick", function(this)
-	local checked = not not this:GetChecked()
-	PlaySound(checked and "igMainMenuOptionCheckBoxOn" or "igMainmenuOptionCheckBoxOff")
-	BBPTDB.showLevel = checked
-	Addon.EventFrame:PET_JOURNAL_LIST_UPDATE()
-end)
-Options.ShowLevel = ShowLevel
+options[ShowLevel] = "level"
+
+local ShowBreed = CreateFrame("CheckButton", "$parentBreeds", Options, "InterfaceOptionsCheckButtonTemplate")
+ShowBreed:SetPoint("TOPLEFT", ShowLevel, "BOTTOMLEFT", 0, -8)
+ShowCount:SetScript("OnClick", SetOption)
+ShowBreed:SetMotionScriptsWhileDisabled(true)
+ShowBreed.Text:SetText(L.ShowBreed)
+options[ShowBreed] = "breed"
+
+local ShowAll = CreateFrame("CheckButton", "$parentAll", Options, "InterfaceOptionsCheckButtonTemplate")
+ShowAll:SetPoint("TOPLEFT", ShowBreed, "BOTTOMLEFT", 0, -8)
+ShowAll:SetScript("OnClick", SetOption)
+ShowAll.Text:SetText(L.ShowAll)
+ShowAll.tooltipText = L.ShowAll_Tooltip
+options[ShowAll] = "all"
 
 local ShowWildQuality = CreateFrame("CheckButton", "$parentWildQuality", Options, "InterfaceOptionsCheckButtonTemplate")
-ShowWildQuality:SetPoint("TOPLEFT", ShowLevel, "BOTTOMLEFT", 0, -8)
+ShowWildQuality:SetPoint("TOPLEFT", ShowAll, "BOTTOMLEFT", 0, -8)
+ShowWildQuality:SetScript("OnClick", SetOption)
 ShowWildQuality.Text:SetText(L.ShowWildQuality)
 ShowWildQuality.tooltipText = L.ShowWildQuality_Tooltip
-ShowWildQuality:SetScript("OnClick", function(this)
-	local checked = not not this:GetChecked()
-	PlaySound(checked and "igMainMenuOptionCheckBoxOn" or "igMainmenuOptionCheckBoxOff")
-	BBPTDB.wildQuality = checked
-end)
-Options.ShowWildQuality = ShowWildQuality
+options[ShowWildQuality] = "wildQuality"
 
 local ColorTooltipBorder = CreateFrame("CheckButton", "$parentTooltipColor", Options, "InterfaceOptionsCheckButtonTemplate")
 ColorTooltipBorder:SetPoint("TOPLEFT", ShowWildQuality, "BOTTOMLEFT", 0, -8)
+ColorTooltipBorder:SetScript("OnClick", SetOption)
 ColorTooltipBorder.Text:SetText(L.ColorTooltipBorder)
 ColorTooltipBorder.tooltipText = L.ColorTooltipBorder_Tooltip
-ColorTooltipBorder:SetScript("OnClick", function(this)
-	local checked = not not this:GetChecked()
-	PlaySound(checked and "igMainMenuOptionCheckBoxOn" or "igMainmenuOptionCheckBoxOff")
-	BBPTDB.tooltipColor = checked
-end)
-Options.ColorTooltipBorder = ColorTooltipBorder
+options[ColorTooltipBorder] = "tooltipColor"
 
 Options.refresh = function()
-	ShowCount:SetChecked(BBPTDB.count)
-	ShowLevel:SetChecked(BBPTDB.level)
-	ShowWildQuality:SetChecked(BBPTDB.wildQuality)
-	ColorTooltipBorder:SetChecked(BBPTDB.tooltipColor)
-
-	ShowCount:SetHitRectInsets(0, -16 - ShowCount.Text:GetWidth(), 0, 0)
-	ShowLevel:SetHitRectInsets(0, -16 - ShowLevel.Text:GetWidth(), 0, 0)
-	ShowWildQuality:SetHitRectInsets(0, -16 - ShowWildQuality.Text:GetWidth(), 0, 0)
-	ColorTooltipBorder:SetHitRectInsets(0, -16 - ColorTooltipBorder.Text:GetWidth(), 0, 0)
+	for checkbox, key in pairs(options) do
+		checkbox:SetChecked(BBPTDB[key])
+		checkbox:SetHitRectInsets(0, -16 - checkbox.Text:GetWidth(), 0, 0)
+	end
+	if LibStub("LibPetBreedInfo-1.0", true) then
+		ShowBreed:SetEnabled(true)
+		ShowBreed.tooltipText = nil
+	else
+		ShowBreed:SetEnabled(false)
+		ShowBreed.tooltipText = RED_FONT_COLOR_CODE .. L.ShowBreed_TooltipDisabled
+	end
 end
 
 if LibStub and LibStub("LibAboutPanel", true) then
