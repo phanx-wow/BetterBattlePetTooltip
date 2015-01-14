@@ -1,6 +1,6 @@
 --[[--------------------------------------------------------------------
 	BetterBattlePetTooltip
-	Copyright (c) 2012-2014 Phanx <addons@phanx.net>. All rights reserved.
+	Copyright (c) 2012-2015 Phanx <addons@phanx.net>. All rights reserved.
 	http://www.wowinterface.com/downloads/info21978-BetterBattlePetTooltip.html
 	http://www.curse.com/addons/wow/betterbattlepettooltip
 	https://github.com/Phanx/BetterBattlePetTooltip
@@ -8,22 +8,6 @@
 
 local ADDON, Addon = ...
 local L = Addon.L
-
-if GetLocale():match("^zh") then
-	L.Colon = "："
-	L.Comma = "、"
-	L.Parentheses = "（%s）"
-else
-	L.Colon = ": "
-	L.Comma = ", "
-	L.Parentheses = " (%s)"
-end
-
-L.Collected = COLLECTED
-L.CollectedCount = "%d/3"
-L.CollectedLevel = UNIT_LEVEL_TEMPLATE
-L.CollectedLevelBreed = UNIT_TYPE_LEVEL_TEMPLATE
-L.NotCollected = NOT_COLLECTED
 
 ------------------------------------------------------------------------
 
@@ -143,7 +127,7 @@ do
 							breed = breed and gsub(breed, "/", "")
 							petString = (numCollected > 1 and (petString .. L.Comma) or (baseString .. L.Colon)) .. color .. (db.level and format(L.CollectedLevelBreed, level, breed) or breed) .. qText
 						else
-							petString = (numCollected > 1 and (petString .. L.Comma) or (baseString .. L.Colon)) .. (numCollected > 1 and L.Comma or L.Colon) .. color .. format(L.CollectedLevel, level) .. qText
+							petString = (numCollected > 1 and (petString .. L.Comma) or (baseString .. L.Colon)) .. color .. format(L.CollectedLevel, level) .. qText
 						end
 					elseif quality >= bestQuality then
 						-- Show highest level of best quality only

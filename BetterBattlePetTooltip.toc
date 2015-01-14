@@ -13,7 +13,7 @@
 
 ## Author: Phanx
 ## X-Email: addons@phanx.net
-## X-Copyright: Copyright (c) 2012-2014 Phanx. All rights reserved.
+## X-Copyright: Copyright (c) 2012-2015 Phanx. All rights reserved.
 ## X-Website: https://github.com/Phanx/BetterBattlePetTooltip
 
 ## OptionalDependencies: LibPetBreedInfo-1.0, LibPetJournal-2.0
@@ -25,5 +25,5 @@ Libs\LibPetJournal-2.0\LibPetJournal-2.0.lua
 
 Localization.lua
 Data.lua
-Addon.lua
+Core.lua
 Options.lua
