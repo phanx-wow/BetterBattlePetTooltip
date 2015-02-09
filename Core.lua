@@ -11,15 +11,6 @@ local L = Addon.L
 
 ------------------------------------------------------------------------
 
-local PetQualityColors = {}
-for i = 1, 6 do PetQualityColors[i] = ITEM_QUALITY_COLORS[i-1] end
-
-local PetQualityStrings = {}
-for i = 1, 6 do PetQualityStrings[i] = format(L.Parentheses, _G["BATTLE_PET_BREED_QUALITY"..i]) end
-
-local PetQualityFromHex = {}
-for i = 1, 6 do PetQualityFromHex[PetQualityColors[i].hex] = i end
-
 local PetBreedIcons = {
 	--[[ BB ]] [3]  = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:0:16|t",
 	--[[ PP ]] [4]  = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t", -- "|TInterface\\WorldStateFrame\\CombatSwords:0:0:-2:0:64:64:0:32:0:32|t",
@@ -33,6 +24,15 @@ local PetBreedIcons = {
 	--[[ HB ]] [12] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t",
 }
 
+local PetQualityColors = {}
+for i = 1, 6 do PetQualityColors[i] = ITEM_QUALITY_COLORS[i-1] end
+
+local PetQualityStrings = {}
+for i = 1, 6 do PetQualityStrings[i] = format(L.Parentheses, _G["BATTLE_PET_BREED_QUALITY"..i]) end
+
+local HexToPetQuality = {}
+for i = 1, 6 do HexToPetQuality[PetQualityColors[i].hex] = i end
+
 ------------------------------------------------------------------------
 
 local LibPetJournal = LibStub("LibPetJournal-2.0")
@@ -41,8 +41,8 @@ local LibPetBreedInfo -- not embedded, checked for in PLAYER_LOGIN
 local colorblindMode
 local seenWildPetQualities = {}
 
-local speciesFromItem = Addon.speciesFromItem
-local speciesFromName = setmetatable({}, { __index = function(t, name)
+local PetItemToSpecies = Addon.PetItemToSpecies
+local PetNameToSpecies = setmetatable({}, { __index = function(t, name)
 	local speciesID = C_PetJournal.FindPetIDByName(name)
 	t[name] = speciesID
 	return speciesID
@@ -59,7 +59,7 @@ BBPTDB = {
 
 ------------------------------------------------------------------------
 
-local db = BBPTDB
+local db = BBPTDB -- reassigned in PLAYER_LOGIN
 
 local EventFrame = CreateFrame("Frame", ADDON)
 EventFrame:SetScript("OnEvent", function(self, event, ...) return self[event] and self[event](self, event, ...) end)
@@ -82,7 +82,7 @@ do
 	function C_PetJournal.GetOwnedBattlePetString(speciesID)
 		--print("GetOwnedBattlePetString:", speciesID)
 		if type(speciesID) == "string" then
-			speciesID = speciesFromName[speciesID]
+			speciesID = PetNameToSpecies[speciesID]
 		end
 		if type(speciesID) ~= "number" or speciesID < 1 then
 			--print("Invalid species.")
@@ -272,7 +272,7 @@ local function BattlePetTooltip_OnShow(self)
 	if not colorblindMode then
 		local petString = self.Owned:GetText() -- C_PetJournal.GetOwnedBattlePetString(self.speciesID)
 		local hex = strmatch(petString, "|cff%x%x%x%x%x%x")
-		local quality = hex and PetQualityFromHex[hex]
+		local quality = hex and HexToPetQuality[hex]
 		if quality then
 			return ColorBorderByQuality(self, quality)
 		end
@@ -293,7 +293,7 @@ local S_ITEM_PET_KNOWN = strmatch(ITEM_PET_KNOWN, "[^%(]+")
 local warned = {}
 
 local function SetTooltipPetInfo(self, species, guid)
-	if type(species) == "string" and not speciesFromName[species] then return end
+	if type(species) == "string" and not PetNameToSpecies[species] then return end
 	local tooltip = self:GetName()
 	--print("SetTooltipPetInfo:", tooltip, species, guid)
 	local addString = true
@@ -310,7 +310,7 @@ local function SetTooltipPetInfo(self, species, guid)
 				line:SetText(petString)
 				if not colorblindMode then
 					local hex = strmatch(petString, "|cff%x%x%x%x%x%x")
-					local quality = hex and PetQualityFromHex[hex]
+					local quality = hex and HexToPetQuality[hex]
 					if quality then
 						ColorBorderByQuality(self, quality)
 					end
@@ -332,7 +332,7 @@ local function SetTooltipPetInfo(self, species, guid)
 			self:AddLine(petString)
 			if not colorblindMode then
 				local hex = strmatch(petString, "|cff%x%x%x%x%x%x")
-				local quality = hex and PetQualityFromHex[hex]
+				local quality = hex and HexToPetQuality[hex]
 				if quality then
 					ColorBorderByQuality(self, quality)
 				end
@@ -363,7 +363,7 @@ local function OnTooltipSetItem(self)
 	local item, link = self:GetItem()
 	if link then
 		--print("OnTooltipSetItem:", link)
-		local species = speciesFromItem[tonumber(strmatch(link, "item:(%d+)"))]
+		local species = PetItemToSpecies[tonumber(strmatch(link, "item:(%d+)"))]
 		SetTooltipPetInfo(self, species or item)
 	end
 end
