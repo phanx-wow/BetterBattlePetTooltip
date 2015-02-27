@@ -10,6 +10,7 @@ local _, private = ...
 -- Data compiled by Phanx. Credits appreciated but not required.
 
 private.PetItemToSpecies = {
+	[122106] = 1624, -- Abyssius <= Shard of Supremus
 	[119434] = 1385, -- Albino Chimaeraling
 	[119148] = 1571, -- Albino River Calf <= Indentured Albino River Calf
 	[ 44822] =   74, -- Albino Snake
@@ -41,6 +42,7 @@ private.PetItemToSpecies = {
 	[ 65661] =  259, -- Blue Mini Jouster
 	[ 29901] =  138, -- Blue Moth <= Blue Moth Egg
 	[  8485] =   40, -- Bombay Cat <= Cat Carrier (Bombay)
+	[122532] = 1600, -- Bone Serpent <= Bone Sliver
 	[119146] = 1458, -- Bone Wasp
 	[104202] = 1343, -- Bonkers
 	[ 71387] =  325, -- Brilliant Kaliri
@@ -53,6 +55,7 @@ private.PetItemToSpecies = {
 	[ 46398] =  224, -- Calico Cat <= Cat Carrier (Calico Cat)
 	[ 54810] =  255, -- Celestial Dragon
 	[ 70099] =  316, -- Cenarion Hatchling
+	[122114] = 1633, -- Chaos Pup <= Void Collar
 	[102145] = 1303, -- Chi-Chi, Hatchling of Chi-Ji
 	[ 11110] =  646, -- Chicken <= Chicken Egg
 	[ 89368] =  849, -- Chi-ji Kite
@@ -132,8 +135,11 @@ private.PetItemToSpecies = {
 	[119149] = 1430, -- Forest Sproutling <= Captured Forest Sproutling
 	[ 60955] =  266, -- Fossilized Hatchling
 	[ 90898] =  278, -- Fox Kit [Alliance]
-	[ 64403] =  278, -- Fox Kit [Drop]
 	[ 90897] =  278, -- Fox Kit [Horde]
+	[ 64403] =  278, -- Fox Kit [Drop]
+	[122107] = 1625, -- Fragment of Anger
+	[122109] = 1627, -- Fragment of Desire
+	[122108] = 1626, -- Fragment of Suffering
 	[ 53641] =  253, -- Frigid Frostling <= Ice Chip
 	[117380] = 1530, -- Frostwolf Ghostpup
 	[119141] = 1542, -- Frostwolf Pup
@@ -154,10 +160,11 @@ private.PetItemToSpecies = {
 	[ 72134] =  333, -- Gregarious Grell <= Grell Moss
 	[ 86564] =  834, -- Grinder <= Imbued Jade Fragment
 	[118517] = 1602, -- Grommloc
+	[122105] = 1622, -- Grotesque <= Grotesque Statue
 	[ 46802] =  228, -- Grunty <= Heavy Murloc Egg
 	[ 49662] =  245, -- Gryphon Hatchling
-	[ 72068] =  311, -- Guardian Cub [BoE]
 	[ 69847] =  311, -- Guardian Cub [BoP]
+	[ 72068] =  311, -- Guardian Cub [BoE]
 	[104291] = 1345, -- Gu'chi Swarmling <= Swarmling of Gu'chi
 	[ 65364] =  282, -- Guild Herald [Alliance]
 	[ 65363] =  283, -- Guild Herald [Horde]
@@ -177,6 +184,7 @@ private.PetItemToSpecies = {
 	[  8494] =   49, -- Hyacinth Macaw <= Parrot Cage (Hyacinth Macaw)
 	[118207] = 1541, -- Hydraling
 	[ 70140] =  317, -- Hyjal Bear Cub
+	[122112] = 1631, -- Hyjal Wisp
 	[ 90900] = 1039, -- Imperial Moth
 	[ 90902] = 1040, -- Imperial Silkworm
 	[111660] = 1387, -- Iron Starlette
@@ -191,6 +199,7 @@ private.PetItemToSpecies = {
 	[120051] = 1597, -- Kaliri Hatchling
 	[ 44738] =  199, -- Kirin Tor Familiar
 	[104165] = 1334, -- Kovok
+	[122116] = 1635, -- K’ute <= Holy Chime
 	[117404] =  115, -- Land Shark
 	[ 68840] =  302, -- Landro's Lichling
 	[ 67128] =  285, -- Landro's Lil' XT
@@ -199,6 +208,7 @@ private.PetItemToSpecies = {
 	[ 48118] =  235, -- Leaping Hatchling
 	[ 69648] =  308, -- Legs
 	[ 97556] = 1234, -- Lesser Voidcaller <= Crystal of the Void
+	[122104] = 1623, -- Leviathan Hatchling <= Leviathan Egg
 	[112057] = 1412, -- Lifelike Mechanical Frostboar
 	[118485] = 1412, -- Lifelike Mechanical Frostboar <= Schematic: Lifelike Mechanical Frostboar
 	[ 15996] =   95, -- Lifelike Toad <= Lifelike Mechanical Toad
@@ -246,10 +256,10 @@ private.PetItemToSpecies = {
 	[ 33993] =  165, -- Mojo
 	[115301] = 1451, -- Molten Corgi
 	[101570] = 1276, -- Moon Moon
-	[108438] =  296, -- Moonkin Hatchling [Alliance]
 	[ 68618] =  296, -- Moonkin Hatchling [Alliance]
-	[108438] =  298, -- Moonkin Hatchling [Horde]
+	[108438] =  296, -- Moonkin Hatchling [Alliance]
 	[ 68619] =  298, -- Moonkin Hatchling [Horde]
+	[108438] =  298, -- Moonkin Hatchling [Horde]
 	[ 94210] = 1198, -- Mountain Panda
 	[ 93031] = 1145, -- Mr. Bigglesworth
 	[ 41133] =  192, -- Mr. Chilly <= Unhatched Mr. Chilly
@@ -261,7 +271,7 @@ private.PetItemToSpecies = {
 	[106244] = 1364, -- Murkalot <= Murkalot's Flail
 	[ 20651] = 1168, -- Murki <= Orange Murloc Egg
 	[ 45180] =  217, -- Murkimus the Gladiator <= Murkimus' Little Spear
-	[ 46892] =  217, -- Murkimus the Gladiator <= Murkimus' Tiny Spear
+	[ 46892] =  217, -- Murkimus the Gladiator <= Murkimus' Little Spear
 	[ 20371] =  107, -- Murky <= Blue Murloc Egg
 	[116258] = 1514, -- Mystical Spring Bouquet
 	[ 38628] =  186, -- Nether Ray Fry
@@ -306,6 +316,7 @@ private.PetItemToSpecies = {
 	[ 71624] =  328, -- Purple Puffer
 	[120309] = 1543, -- Pygmy Cow <= Glass of Warm Milk
 	[ 94574] = 1200, -- Pygmy Direhorn
+	[122125] = 1636, -- Race MiniZep <= Race MiniZep Controller
 	[100905] = 1256, -- Rascal-Bot
 	[ 48122] =  237, -- Ravasaur Hatchling
 	[ 48124] =  238, -- Razormaw Hatchling
@@ -341,17 +352,18 @@ private.PetItemToSpecies = {
 	[ 88147] =  820, -- Singing Cricket <= Singing Cricket Cage
 	[ 66067] =  291, -- Singing Sunflower <= Brazie's Sunflower Seeds
 	[ 33154] =  162, -- Sinister Squashling
+	[122100] = 1628, -- Sister of Temptation <= Sultry Grimoire
 	[104167] = 1336, -- Skunky Alemental
+	[115483] = 1467, -- Sky-Bo
 	[119150] = 1575, -- Sky Fry
 	[104332] = 1350, -- Sky Lantern
-	[115483] = 1467, -- Sky-Bo
 	[ 12529] =   90, -- Smolderweb Hatchling <= Smolderweb Carrier
 	[ 68673] =   90, -- Smolderweb Hatchling <= Smolderweb Egg
 	[ 35349] =  173, -- Snarly <= Snarly's Bucket
 	[  8497] =   72, -- Snowshoe Rabbit <= Rabbit Crate (Snowshoe)
 	[ 94209] = 1197, -- Snowy Panda
 	[ 94152] = 1183, -- Son of Animus
-	[119143] = 1574, -- Son of Sethe <= the
+	[119143] = 1574, -- Son of Sethe
 	[ 78916] =  347, -- Soul of the Aspects
 	[119328] = 1569, -- Soul of the Forge
 	[119329] = 1569, -- Soul of the Forge <= Recipe: Soul of the Forge
@@ -366,6 +378,7 @@ private.PetItemToSpecies = {
 	[ 44794] =  200, -- Spring Rabbit <= Spring Rabbit's Foot
 	[ 11474] =   87, -- Sprite Darter Hatchling <= Sprite Darter Egg
 	[ 40653] =  160, -- Stinker <= Reeking Pet Carrier
+	[122111] = 1629, -- Stinkrot <= Smelly Gravestone
 	[ 93029] = 1146, -- Stitched Pup <= Gluth's Bone
 	[116402] = 1515, -- Stonegrinder
 	[118577] = 1546, -- Stormwing
@@ -373,6 +386,7 @@ private.PetItemToSpecies = {
 	[ 44983] =  211, -- Strand Crawler
 	[ 94191] = 1184, -- Stunted Direhorn
 	[118598] = 1434, -- Sun Sproutling
+	[122113] = 1632, -- Sunblade Micro-Defender <= Sunblade Rune of Activation
 	[119468] = 1570, -- Sunfire Kaliri
 	[ 94208] = 1196, -- Sunfur Panda
 	[ 94124] = 1178, -- Sunreaver Micro-Sentry
@@ -433,8 +447,10 @@ private.PetItemToSpecies = {
 	[ 32233] =  153, -- Wolpertinger <= Wolpertinger's Tankard
 	[ 11027] =   64, -- Wood Frog <= Wood Frog Box
 	[ 12264] =   89, -- Worg Pup <= Worg Carrier
+	[122115] = 1634, -- Wretched Servant <= Servant’s Bell
 	[101771] = 1266, -- Xu-Fu, Cub of Xuen
 	[ 29903] =  140, -- Yellow Moth <= Yellow Moth Egg
+	[122533] = 1656, -- Young Talbuk
 	[102147] = 1304, -- Yu'la, Broodling of Yu'lon
 	[ 89367] =  850, -- Yu'lon Kite
 	[ 95422] = 1211, -- Zandalari Anklerender
