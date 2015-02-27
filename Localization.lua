@@ -151,7 +151,7 @@ return end
 if CURRENT_LOCALE == "ptBR" then
 
 L.AlreadyBattled = "Já luto%s%s"
-L.ColorTooltipBorder = "Cor da borda do tooltip" -- Needs review
+L.ColorTooltipBorder = "Cor da borda do tooltip"
 L.ColorTooltipBorder_Tooltip = "Talvez você deseje desativar caso use outro addon para mudar a aparência do tooltip."
 L.NotCapturable = "Não capturável"
 L.ShowCount = "Mostrar a quantidade capturado"
@@ -179,18 +179,38 @@ L.ShowWildQuality_Tooltip = "Это возможно, если вы уже вс�
 return end
 
 ------------------------------------------------------------------------
+-- Korean
+------------------------------------------------------------------------
+
+if CURRENT_LOCALE == "koKR" then
+
+return end
+
+------------------------------------------------------------------------
+-- Simplified Chinese
+------------------------------------------------------------------------
+
+if CURRENT_LOCALE == "zhCN" then
+
+return end
+
+------------------------------------------------------------------------
 -- Traditional Chinese
 ------------------------------------------------------------------------
 
 if CURRENT_LOCALE == "zhTW" then
 
-L.AlreadyBattled = "已經戰鬥%s%s"
-L.ColorTooltipBorder = "著色工具提示邊框"
-L.ColorTooltipBorder_Tooltip = "你可能想要禁用此功能，如果您使用另一個插件來為你的工具提示邊框造型。 "
-L.NotCapturable = "不可捕捉"
-L.ShowCount = "顯示收集計數"
-L.ShowLevel = "顯示已收集的最高等級"
-L.ShowWildQuality = "可能的情況下顯示野生稀有寵物"
-L.ShowWildQuality_Tooltip = "這是唯一的可能如果您已經與此寵物戰鬥過並且放棄，並且僅適用於單位的工具提示，沒有小地圖追踪工具提示。"
+L.AlreadyBattled = "已經戰鬥過%s%s"
+L.ColorTooltipBorder = "著色提示邊框"
+L.ColorTooltipBorder_Tooltip = "如果你使用其它插件來變換你的邊框，你可能會想要禁用這選項。"
+L.NotCapturable = "無法捕獲"
+L.ShowAll = "顯示所有已收集寵物"
+L.ShowAll_Tooltip = "顯示全部已收集相同種類的寵物，不是最好的。"
+L.ShowBreed = "顯示已收集品種"
+L.ShowBreed_Tooltip = "這設定需要安裝LibPetBreedInfo-1.0。"
+L.ShowCount = "顯示已收集數量"
+L.ShowLevel = "顯示最高收集等級"
+L.ShowWildQuality = "顯示野外寵物品質"
+L.ShowWildQuality_Tooltip = "這只有在已經進入一場戰鬥並放棄，而且只有單位提示，沒有小地圖追蹤提示。"
 
 return end
