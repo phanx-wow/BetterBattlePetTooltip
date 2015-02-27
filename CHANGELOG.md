@@ -1,3 +1,10 @@
+### Version 6.1.0.22
+
+* Updated for WoW 6.1
+* Added new item data for pets added in Patch 6.1
+* Added an option to show all collected pets of the same species, instead of only the best one
+* Added an option to show collected pet breeds
+
 ### Version 6.0.3.21
 
 * Better solution for the garrison item problem
