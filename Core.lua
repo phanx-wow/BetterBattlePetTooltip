@@ -416,10 +416,12 @@ local multiparts = {}
 EventFrame:Hide()
 EventFrame:SetScript("OnUpdate", function()
 	local text = GameTooltipTextLeft1:GetText()
-	if not strmatch(text, "\n") then
+	if not text or text == currentText then
+		return
+	elseif not strmatch(text, "\n") then
 		local name = strtrim(gsub(gsub(gsub(text, "|T.-|t", ""), "|cff%x%x%x%x%x%x", ""), "|r", ""))
 		SetTooltipPetInfo(GameTooltip, name)
-	elseif text ~= currentText then
+	else
 		local i = 0
 		for text in gmatch(text, "[^\n]+") do
 			local name = strtrim(gsub(gsub(gsub(text, "|T.-|t", ""), "|cff%x%x%x%x%x%x", ""), "|r", ""))
