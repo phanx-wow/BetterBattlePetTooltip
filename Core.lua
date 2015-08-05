@@ -293,9 +293,9 @@ local S_ITEM_PET_KNOWN = strmatch(ITEM_PET_KNOWN, "[^%(]+")
 local warned = {}
 
 local function SetTooltipPetInfo(self, species, guid)
-	if type(species) == "string" and not PetNameToSpecies[species] then return end
+	if species == "" or type(species) == "string" and not PetNameToSpecies[species] then return end
 	local tooltip = self:GetName()
-	--print("SetTooltipPetInfo:", tooltip, species, guid)
+	--print("SetTooltipPetInfo:", tooltip, "["..(species or "nil").."]", guid)
 	local addString = true
 
 	for i = 2, self:NumLines() do
@@ -362,8 +362,8 @@ end
 local function OnTooltipSetItem(self)
 	local item, link = self:GetItem()
 	if link then
-		--print("OnTooltipSetItem:", link)
 		local species = PetItemToSpecies[tonumber(strmatch(link, "item:(%d+)"))]
+		--print("OnTooltipSetItem:", link, species)
 		SetTooltipPetInfo(self, species or item)
 	end
 end
