@@ -42,13 +42,13 @@ options[ShowCount] = "count"
 
 local ShowLevel = CreateFrame("CheckButton", "$parentLevel", Options, "InterfaceOptionsCheckButtonTemplate")
 ShowLevel:SetPoint("TOPLEFT", ShowCount, "BOTTOMLEFT", 0, -8)
-ShowCount:SetScript("OnClick", SetOption)
+ShowLevel:SetScript("OnClick", SetOption)
 ShowLevel.Text:SetText(L.ShowLevel)
 options[ShowLevel] = "level"
 
 local ShowBreed = CreateFrame("CheckButton", "$parentBreeds", Options, "InterfaceOptionsCheckButtonTemplate")
 ShowBreed:SetPoint("TOPLEFT", ShowLevel, "BOTTOMLEFT", 0, -8)
-ShowCount:SetScript("OnClick", SetOption)
+ShowBreed:SetScript("OnClick", SetOption)
 ShowBreed:SetMotionScriptsWhileDisabled(true)
 ShowBreed.Text:SetText(L.ShowBreed)
 options[ShowBreed] = "breed"
@@ -84,7 +84,7 @@ Options.refresh = function()
 		ShowBreed.tooltipText = nil
 	else
 		ShowBreed:SetEnabled(false)
-		ShowBreed.tooltipText = RED_FONT_COLOR_CODE .. L.ShowBreed_TooltipDisabled
+		ShowBreed.tooltipText = RED_FONT_COLOR_CODE .. L.ShowBreed_Tooltip
 	end
 end
 
