@@ -56,8 +56,8 @@ if CURRENT_LOCALE == "enUS" then return end
 if CURRENT_LOCALE == "deDE" then
 
 L.AlreadyBattled = "Bereits bekämpft%s%s"
-L.ColorTooltipBorder = "Tooltipsränder einfärben"
-L.ColorTooltipBorder_Tooltip = "Vielleicht möchtet Ihr diese Option deaktivieren, wenn Ihr ein weiteres Addon verwendet, die Tooltipsränder zu stilisieren."
+L.ColorTooltipBorder = "Rand des Tooltips einfärben"
+L.ColorTooltipBorder_Tooltip = "Deaktivieren, wenn Ihr ein weiteres Addon verwendet um den Rand des Tooltips zu einzufärben. "
 L.NotCapturable = "Nicht einfangbar"
 L.ShowAll = "Zeige alle eingefangenen Haustiere"
 L.ShowAll_Tooltip = "Mit dieser Option werden alle eingefangenen Haustiere der gleichen Art gezeigt, anstatt nur des besten."
@@ -65,8 +65,8 @@ L.ShowBreed = "Zeige die eingefangene Rasse"
 L.ShowBreed_Tooltip = "Für dieser Option muss LibPetBreedInfo-1.0 installiert sein."
 L.ShowCount = "Zeige die eingefangene Anzahl"
 L.ShowLevel = "Zeige die höchste eingefangene Stufe"
-L.ShowWildQuality = "Zeige wenn möglich die Qualität des wilden Haustiers"
-L.ShowWildQuality_Tooltip = "Dies ist nur möglich, wenn du das Haustier bereits bekämpft und aufgegeben in dieser Sitzung hast, und funktioniert nur für Einheiten-Tooltips, nicht für Minimap-Tooltips."
+L.ShowWildQuality = "Zeige die Qualität des wilden Haustiers - wenn möglich"
+L.ShowWildQuality_Tooltip = "Dies ist nur möglich, wenn du das Haustier in dieser Sitzung bereits bekämpft und aufgegeben hast, und funktioniert nur für Einheiten-Tooltips, nicht für Minimap-Tooltips."
 
 return end
 

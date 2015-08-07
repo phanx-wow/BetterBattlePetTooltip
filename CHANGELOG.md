@@ -1,3 +1,10 @@
+### Version 6.2.0.23
+
+* Updated for WoW 6.2
+* Added new item data for pets added in Patch 6.2
+* Fixed an issue where tooltips for items on cooldown displayed random "Collected" text
+* Fixed option toggles
+
 ### Version 6.1.0.22
 
 * Updated for WoW 6.1
