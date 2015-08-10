@@ -1,3 +1,7 @@
+### Version 6.2.0.24
+
+* Added breed (if enabled) in "Already Battled" text
+
 ### Version 6.2.0.23
 
 * Updated for WoW 6.2

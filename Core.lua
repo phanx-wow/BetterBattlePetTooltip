@@ -9,7 +9,20 @@
 local ADDON, Addon = ...
 local L = Addon.L
 
+local LibPetJournal = LibStub("LibPetJournal-2.0")
+local LibPetBreedInfo -- not embedded, checked for in PLAYER_LOGIN
+
 ------------------------------------------------------------------------
+
+local PetQualityColors = {}
+for i = 1, 6 do PetQualityColors[i] = ITEM_QUALITY_COLORS[i-1] end
+
+local PetQualityStrings = {}
+for i = 1, 6 do PetQualityStrings[i] = _G["BATTLE_PET_BREED_QUALITY"..i] end
+--for i = 1, 6 do PetQualityStrings[i] = format(L.Parentheses, _G["BATTLE_PET_BREED_QUALITY"..i]) end
+
+local HexToPetQuality = {}
+for i = 1, 6 do HexToPetQuality[PetQualityColors[i].hex] = i end
 
 local PetBreedIcons = {
 	--[[ BB ]] [3]  = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:0:16|t",
@@ -24,22 +37,21 @@ local PetBreedIcons = {
 	--[[ HB ]] [12] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t",
 }
 
-local PetQualityColors = {}
-for i = 1, 6 do PetQualityColors[i] = ITEM_QUALITY_COLORS[i-1] end
-
-local PetQualityStrings = {}
-for i = 1, 6 do PetQualityStrings[i] = format(L.Parentheses, _G["BATTLE_PET_BREED_QUALITY"..i]) end
-
-local HexToPetQuality = {}
-for i = 1, 6 do HexToPetQuality[PetQualityColors[i].hex] = i end
+local PetBreedNames = setmetatable({}, { __index = function(self, breed)
+	local name = LibPetBreedInfo and LibPetBreedInfo:GetBreedName(breed)
+	--print("PetBreedNames", breed, name, not not LibPetBreedInfo)
+	if name then
+		name = gsub(name, "/", "")
+		self[breed] = name
+	end
+	return name or ""
+end })
 
 ------------------------------------------------------------------------
 
-local LibPetJournal = LibStub("LibPetJournal-2.0")
-local LibPetBreedInfo -- not embedded, checked for in PLAYER_LOGIN
-
 local colorblindMode
 local seenWildPetQualities = {}
+local seenWildPetBreeds = {}
 
 local PetItemToSpecies = Addon.PetItemToSpecies
 local PetNameToSpecies = setmetatable({}, { __index = function(t, name)
@@ -110,7 +122,7 @@ do
 		end
 
 		if not petString then
-			local showBreed  = db.breed and LibPetBreedInfo
+			local showBreed = db.breed and LibPetBreedInfo
 			local baseString = db.all and (showBreed or db.level) and (NORMAL_FONT_COLOR_CODE .. L.Collected .. "|r")
 			local numCollected, bestLevel, bestQuality, bestBreed = 0, 0, 0
 			for _, petID in LibPetJournal:IteratePetIDs() do
@@ -120,11 +132,10 @@ do
 					local _, _, _, _, quality = C_PetJournal.GetPetStats(petID)
 					if baseString then
 						-- Show all, append
-						local breed = showBreed and LibPetBreedInfo:GetBreedName(LibPetBreedInfo:GetBreedByPetID(petID))
+						local breed = showBreed and PetBreedNames[LibPetBreedInfo:GetBreedByPetID(petID)]
 						local color = colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[quality].hex
-						local qText = colorblindMode and PetQualityStrings[quality] or ""
+						local qText = colorblindMode and format(L.Parentheses, PetQualityStrings[quality]) or ""
 						if breed then
-							breed = breed and gsub(breed, "/", "")
 							petString = (numCollected > 1 and (petString .. L.Comma) or (baseString .. L.Colon)) .. color .. (db.level and format(L.CollectedLevelBreed, level, breed) or breed) .. qText
 						else
 							petString = (numCollected > 1 and (petString .. L.Comma) or (baseString .. L.Colon)) .. color .. format(L.CollectedLevel, level) .. qText
@@ -343,12 +354,23 @@ local function SetTooltipPetInfo(self, species, guid)
 	if guid and db.wildQuality then
 		local quality = seenWildPetQualities[guid]
 		if quality then
-			--print("Already seen:", quality)
 			local color = RED_FONT_COLOR
 			local qcolor = not colorblindMode and PetQualityColors[quality]
-			self:AddLine(format(L.AlreadyBattled, qcolor and qcolor.hex or HIGHLIGHT_FONT_COLOR_CODE, PetQualityStrings[quality]), color.r, color.g, color.b)
+			local breed = db.breed and seenWildPetBreeds[guid]
+			-- print("Already battled:", quality, breed)
+			local infoString
+			if PetTracker then -- icon + quality
+				infoString = breed .. PetQualityStrings[quality]
+			elseif breed and qcolor then -- breed only
+				infoString = PetBreedNames[breed]
+			elseif breed then -- quality + breed
+				infoString = PetQualityStrings[quality] .. " " .. PetBreedNames[breed]
+			else -- quality only
+				infoString = PetQualityStrings[quality]
+			end
+			self:AddLine(L.AlreadyBattled .. L.Colon .. (qcolor and qcolor.hex or HIGHLIGHT_FONT_COLOR_CODE) .. infoString, color.r, color.g, color.b)
 		else
-			--print("Not seen.")
+			--print("Not yet battled.")
 		end
 	end
 
@@ -467,12 +489,24 @@ end)
 
 EventFrame:RegisterEvent("PET_BATTLE_OPENING_START")
 function EventFrame:PET_BATTLE_OPENING_START(event)
-	--print(event)
-	if UnitIsWildBattlePet("target") then
+	if UnitIsWildBattlePet("target") and C_PetBattles.IsWildBattle() then
 		local guid = UnitGUID("target")
 		local quality = C_PetBattles.GetBreedQuality(LE_BATTLE_PET_ENEMY, 1)
-		if guid and quality then
+		local _, _, _, _, _, _, _, _, _, _, obtainable = C_PetJournal.GetPetInfoBySpeciesID(C_PetBattles.GetPetSpeciesID(LE_BATTLE_PET_ENEMY, 1))
+		if guid and quality and obtainable then
 			seenWildPetQualities[guid] = quality
+			--print("seen quality:", quality)
+		end
+		if LibPetBreedInfo then
+			local breed, confidence = LibPetBreedInfo:GetBreedByPetBattleSlot(LE_BATTLE_PET_ENEMY, 1)
+			if breed then
+				if PetTracker then
+					seenWildPetBreeds[guid] = PetTracker:GetBreedIcon(breed, 0.8, -2)
+				else
+					seenWildPetBreeds[guid] = breed
+				end
+				--print("seen breed:", seenWildPetBreeds[guid])
+			end
 		end
 	end
 end

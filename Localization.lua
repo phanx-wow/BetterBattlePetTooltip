@@ -33,7 +33,7 @@ L.NotCollected = NOT_COLLECTED
 -- English
 ------------------------------------------------------------------------
 
-L.AlreadyBattled = "Already Battled%s%s"
+L.AlreadyBattled = "Already Battled"
 L.ColorTooltipBorder = "Color tooltip borders"
 L.ColorTooltipBorder_Tooltip = "You may want to disable this if you use another addon to style your tooltip borders."
 L.NotCapturable = "Not Capturable"
@@ -55,7 +55,7 @@ if CURRENT_LOCALE == "enUS" then return end
 
 if CURRENT_LOCALE == "deDE" then
 
-L.AlreadyBattled = "Bereits bekämpft%s%s"
+L.AlreadyBattled = "Bereits bekämpft"
 L.ColorTooltipBorder = "Rand des Tooltips einfärben"
 L.ColorTooltipBorder_Tooltip = "Deaktivieren, wenn Ihr ein weiteres Addon verwendet um den Rand des Tooltips zu einzufärben. "
 L.NotCapturable = "Nicht einfangbar"
@@ -76,7 +76,7 @@ return end
 
 if CURRENT_LOCALE == "esES" then
 
-L.AlreadyBattled = "Ya luchado%s%s"
+L.AlreadyBattled = "Ya luchado"
 L.ColorTooltipBorder = "Colorear los bordes de los descriptiones"
 L.ColorTooltipBorder_Tooltip = "Quizás deseas desactivar esta opción si utilizas otro addon para estilizar los bordes de los descriptiones."
 L.NotCapturable = "No se puede capturar"
@@ -97,7 +97,7 @@ return end
 
 if CURRENT_LOCALE == "esMX" then
 
-L.AlreadyBattled = "Ya luchado%s%s"
+L.AlreadyBattled = "Ya luchado"
 L.ColorTooltipBorder = "Colorear los bordes de los descriptiones"
 L.ColorTooltipBorder_Tooltip = "Quizás deseas desactivar esta opción si utilizas otro addon para estilizar los bordes de los descriptiones."
 L.NotCapturable = "No se puede capturar"
@@ -118,7 +118,7 @@ return end
 
 if CURRENT_LOCALE == "frFR" then
 
-L.AlreadyBattled = "Déjà combattu%s%s"
+L.AlreadyBattled = "Déjà combattu"
 L.NotCapturable = "Capture impossible"
 L.ShowCount = "Afficher le nombre capturé"
 L.ShowLevel = "Afficher le plus haut niveau capturé"
@@ -133,7 +133,7 @@ return end
 
 if CURRENT_LOCALE == "itIT" then
 
-L.AlreadyBattled = "Già combattuto%s%s"
+L.AlreadyBattled = "Già combattuto"
 L.ColorTooltipBorder = "Colorare i bordi di informazioni"
 L.ColorTooltipBorder_Tooltip = "Potete desiderare attivare questa opzione se si utilizza un altro addon per lo stile dei bordi di informazioni."
 L.NotCapturable = "Non catturabile"
@@ -150,7 +150,7 @@ return end
 
 if CURRENT_LOCALE == "ptBR" then
 
-L.AlreadyBattled = "Já luto%s%s"
+L.AlreadyBattled = "Já luto"
 L.ColorTooltipBorder = "Cor da borda do tooltip"
 L.ColorTooltipBorder_Tooltip = "Talvez você deseje desativar caso use outro addon para mudar a aparência do tooltip."
 L.NotCapturable = "Não capturável"
@@ -167,7 +167,7 @@ return end
 
 if CURRENT_LOCALE == "ruRU" then
 
-L.AlreadyBattled = "Уже сражался%s%s"
+L.AlreadyBattled = "Уже сражался"
 L.ColorTooltipBorder = "Цвет границ подсказки"
 L.ColorTooltipBorder_Tooltip = "Вы можете отключить это если используете другой аддон на Tooltip"
 L.NotCapturable = "Не приручается"
@@ -200,7 +200,7 @@ return end
 
 if CURRENT_LOCALE == "zhTW" then
 
-L.AlreadyBattled = "已經戰鬥過%s%s"
+L.AlreadyBattled = "已經戰鬥過"
 L.ColorTooltipBorder = "著色提示邊框"
 L.ColorTooltipBorder_Tooltip = "如果你使用其它插件來變換你的邊框，你可能會想要禁用這選項。"
 L.NotCapturable = "無法捕獲"
