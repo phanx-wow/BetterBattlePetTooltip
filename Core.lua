@@ -47,13 +47,8 @@ local PetBreedNames = setmetatable({}, { __index = function(self, breed)
 	return name or ""
 end })
 
-------------------------------------------------------------------------
-
-local colorblindMode
-local seenWildPetQualities = {}
-local seenWildPetBreeds = {}
-
 local PetItemToSpecies = Addon.PetItemToSpecies
+
 local PetNameToSpecies = setmetatable({}, { __index = function(t, name)
 	local speciesID = C_PetJournal.FindPetIDByName(name)
 	t[name] = speciesID
@@ -62,9 +57,19 @@ end })
 
 ------------------------------------------------------------------------
 
+local colorblindMode
+local seenWildPetQualities = {}
+local seenWildPetBreeds = {}
+
+local LEVEL_REMOVE = gsub(UNIT_LEVEL_TEMPLATE, "%%d", "")
+local GRAY_R, GRAY_G, GRAY_B = GRAY_FONT_COLOR.r, GRAY_FONT_COLOR.g, GRAY_FONT_COLOR.b
+
+------------------------------------------------------------------------
+
 BBPTDB = {
 	count = false,
 	level = true,
+	compact = false,
 	wildQuality = true,
 	tooltipColor = true,
 }
@@ -123,7 +128,7 @@ do
 
 		if not petString then
 			local showBreed = db.breed and LibPetBreedInfo
-			local baseString = db.all and (showBreed or db.level) and (NORMAL_FONT_COLOR_CODE .. L.Collected .. "|r")
+			local baseString = db.all and (showBreed or db.level) and (NORMAL_FONT_COLOR_CODE .. L.Collected .. L.Colon .. "|r")
 			local numCollected, bestLevel, bestQuality, bestBreed = 0, 0, 0
 			for _, petID in LibPetJournal:IteratePetIDs() do
 				local species, _, level, _, _, _, _, name, _, _, _, _, _, _, _, _, unique = C_PetJournal.GetPetInfoByPetID(petID)
@@ -136,9 +141,9 @@ do
 						local color = colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[quality].hex
 						local qText = colorblindMode and format(L.Parentheses, PetQualityStrings[quality]) or ""
 						if breed then
-							petString = (numCollected > 1 and (petString .. L.Comma) or (baseString .. L.Colon)) .. color .. (db.level and format(L.CollectedLevelBreed, level, breed) or breed) .. qText
+							petString = (numCollected > 1 and (petString .. L.Comma) or baseString) .. color .. (db.level and format(L.CollectedLevelBreed, level, breed) or breed) .. qText .. "|r"
 						else
-							petString = (numCollected > 1 and (petString .. L.Comma) or (baseString .. L.Colon)) .. color .. format(L.CollectedLevel, level) .. qText
+							petString = (numCollected > 1 and (petString .. L.Comma) or baseString) .. color .. format(L.CollectedLevel, level) .. qText .. "|r"
 						end
 					elseif quality >= bestQuality then
 						-- Show highest level of best quality only
@@ -160,22 +165,22 @@ do
 					petString = format(L.CollectedLevel, bestLevel)
 				end
 
+				local color = colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[quality].hex
+				local qText = colorblindMode and format(L.Parentheses, PetQualityStrings[quality]) or ""
 				if db.count and not isUnique then
 					if petString then
-						petString = L.Collected .. L.Colon .. format(L.CollectedCount, numCollected) .. " - " .. petString
+						petString = L.Collected .. L.Colon .. color .. format(L.CollectedCount, numCollected) .. qText .. " - " .. petString .. "|r"
 					else
-						petString = L.Collected .. L.Colon .. format(L.CollectedCount, numCollected)
+						petString = L.Collected .. L.Colon .. color .. format(L.CollectedCount, numCollected) .. qText .. "|r"
 					end
 				elseif petString then
-					petString = L.Collected .. L.Colon .. petString
+					petString = L.Collected .. L.Colon .. color .. petString .. qText .. "|r"
 				else
 					petString = L.Collected
 				end
 
 				if colorblindMode then
-					petString = HIGHLIGHT_FONT_COLOR_CODE .. petString .. PetQualityStrings[bestQuality]
-				else
-					petString = PetQualityColors[bestQuality].hex .. petString
+					petString = petString .. PetQualityStrings[bestQuality]
 				end
 				--print("Best:", petString)
 			end
@@ -184,6 +189,8 @@ do
 		if not petString then
 			--print("Not collected")
 			petString = (colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[6].hex) .. L.NotCollected
+		elseif db.compact then
+			petString = gsub(petString, LEVEL_REMOVE, "") -- TODO: check in various languages
 		end
 
 		petStringCache[speciesID] = petString
@@ -256,6 +263,7 @@ do
 			if owner == LE_BATTLE_PET_ENEMY and C_PetBattles.IsWildBattle() then
 				local _, speciesName = C_PetBattles.GetName(owner, index)
 				self.CollectedText:SetText(C_PetJournal.GetOwnedBattlePetString(speciesName))
+				self.CollectedText:SetTextColor(GRAY_R, GRAY_G, GRAY_B)
 				ColorBorderByQuality(self, C_PetBattles.GetBreedQuality(owner, index))
 			end
 		end)
@@ -319,6 +327,7 @@ local function SetTooltipPetInfo(self, species, guid)
 			local petString = C_PetJournal.GetOwnedBattlePetString(species)
 			if petString then
 				line:SetText(petString)
+				line:SetTextColor(GRAY_R, GRAY_G, GRAY_B)
 				if not colorblindMode then
 					local hex = strmatch(petString, "|cff%x%x%x%x%x%x")
 					local quality = hex and HexToPetQuality[hex]
@@ -340,7 +349,7 @@ local function SetTooltipPetInfo(self, species, guid)
 		local petString = C_PetJournal.GetOwnedBattlePetString(species or _G[tooltip.."TextLeft1"]:GetText())
 		if petString then
 			--print("Adding new line.")
-			self:AddLine(petString)
+			self:AddLine(petString, GRAY_R, GRAY_G, GRAY_B)
 			if not colorblindMode then
 				local hex = strmatch(petString, "|cff%x%x%x%x%x%x")
 				local quality = hex and HexToPetQuality[hex]

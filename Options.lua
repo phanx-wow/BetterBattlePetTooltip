@@ -30,7 +30,7 @@ local options = {}
 local function SetOption(self)
 	local checked = self:GetChecked()
 	BBPTDB[options[self]] = checked
-	Addon.EventFrame:PET_JOURNAL_LIST_UPDATE()
+	Addon.EventFrame:PET_JOURNAL_LIST_UPDATE() -- wipe text cache
 	PlaySound(checked and "igMainMenuOptionCheckBoxOn" or "igMainmenuOptionCheckBoxOff")
 end
 
@@ -46,8 +46,14 @@ ShowLevel:SetScript("OnClick", SetOption)
 ShowLevel.Text:SetText(L.ShowLevel)
 options[ShowLevel] = "level"
 
+local CompactLevel = CreateFrame("CheckButton", "$parentLevel", Options, "InterfaceOptionsCheckButtonTemplate")
+CompactLevel:SetPoint("TOPLEFT", ShowLevel, "BOTTOMLEFT", 24, -8)
+CompactLevel:SetScript("OnClick", SetOption)
+CompactLevel.Text:SetText(L.CompactLevel)
+options[CompactLevel] = "compact"
+
 local ShowBreed = CreateFrame("CheckButton", "$parentBreeds", Options, "InterfaceOptionsCheckButtonTemplate")
-ShowBreed:SetPoint("TOPLEFT", ShowLevel, "BOTTOMLEFT", 0, -8)
+ShowBreed:SetPoint("TOPLEFT", CompactLevel, "BOTTOMLEFT", -24, -8)
 ShowBreed:SetScript("OnClick", SetOption)
 ShowBreed:SetMotionScriptsWhileDisabled(true)
 ShowBreed.Text:SetText(L.ShowBreed)

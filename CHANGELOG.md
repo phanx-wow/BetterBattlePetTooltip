@@ -1,3 +1,7 @@
+### Version 6.2.0.25
+
+* Added a "Compact Display" option to remove the "Level" text label
+
 ### Version 6.2.0.24
 
 * Added breed (if enabled) in "Already Battled" text

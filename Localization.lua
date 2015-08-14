@@ -36,6 +36,7 @@ L.NotCollected = NOT_COLLECTED
 L.AlreadyBattled = "Already Battled"
 L.ColorTooltipBorder = "Color tooltip borders"
 L.ColorTooltipBorder_Tooltip = "You may want to disable this if you use another addon to style your tooltip borders."
+L.CompactLevel = "Compact display"
 L.NotCapturable = "Not Capturable"
 L.ShowAll = "Show all collected pets"
 L.ShowAll_Tooltip = "This will show all your collected pets of the same species, not just the best one."
@@ -58,6 +59,7 @@ if CURRENT_LOCALE == "deDE" then
 L.AlreadyBattled = "Bereits bekämpft"
 L.ColorTooltipBorder = "Rand des Tooltips einfärben"
 L.ColorTooltipBorder_Tooltip = "Deaktivieren, wenn Ihr ein weiteres Addon verwendet um den Rand des Tooltips zu einzufärben. "
+L.CompactLevel = "Kompaktes Anzeigeformat"
 L.NotCapturable = "Nicht einfangbar"
 L.ShowAll = "Zeige alle eingefangenen Haustiere"
 L.ShowAll_Tooltip = "Mit dieser Option werden alle eingefangenen Haustiere der gleichen Art gezeigt, anstatt nur des besten."
@@ -79,6 +81,7 @@ if CURRENT_LOCALE == "esES" then
 L.AlreadyBattled = "Ya luchado"
 L.ColorTooltipBorder = "Colorear los bordes de los descriptiones"
 L.ColorTooltipBorder_Tooltip = "Quizás deseas desactivar esta opción si utilizas otro addon para estilizar los bordes de los descriptiones."
+L.CompactLevel = "Formato compacto"
 L.NotCapturable = "No se puede capturar"
 L.ShowAll = "Mostrar todas mascotas capturadas"
 L.ShowAll_Tooltip = "Con esta opción se muestran todas las mascotas capturadas de la misma raza, en vez de solamente la mejor."
@@ -100,6 +103,7 @@ if CURRENT_LOCALE == "esMX" then
 L.AlreadyBattled = "Ya luchado"
 L.ColorTooltipBorder = "Colorear los bordes de los descriptiones"
 L.ColorTooltipBorder_Tooltip = "Quizás deseas desactivar esta opción si utilizas otro addon para estilizar los bordes de los descriptiones."
+L.CompactLevel = "Formato compacto"
 L.NotCapturable = "No se puede capturar"
 L.ShowAll = "Mostrar todas mascotas capturadas"
 L.ShowAll_Tooltip = "Con esta opción se muestran todas las mascotas capturadas de la misma raza, en vez de solamente la mejor."
@@ -153,6 +157,7 @@ if CURRENT_LOCALE == "ptBR" then
 L.AlreadyBattled = "Já luto"
 L.ColorTooltipBorder = "Cor da borda do tooltip"
 L.ColorTooltipBorder_Tooltip = "Talvez você deseje desativar caso use outro addon para mudar a aparência do tooltip."
+L.CompactLevel = "Formato compacto"
 L.NotCapturable = "Não capturável"
 L.ShowCount = "Mostrar a quantidade capturado"
 L.ShowLevel = "Mostrar a mais alto nível capturado"
@@ -200,7 +205,7 @@ return end
 
 if CURRENT_LOCALE == "zhTW" then
 
-L.AlreadyBattled = "已經戰鬥過"
+L.AlreadyBattled = "已經戰鬥"
 L.ColorTooltipBorder = "著色提示邊框"
 L.ColorTooltipBorder_Tooltip = "如果你使用其它插件來變換你的邊框，你可能會想要禁用這選項。"
 L.NotCapturable = "無法捕獲"
