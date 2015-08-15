@@ -165,8 +165,8 @@ do
 					petString = format(L.CollectedLevel, bestLevel)
 				end
 
-				local color = colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[quality].hex
-				local qText = colorblindMode and format(L.Parentheses, PetQualityStrings[quality]) or ""
+				local color = colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[bestQuality].hex
+				local qText = colorblindMode and format(L.Parentheses, PetQualityStrings[bestQuality]) or ""
 				if db.count and not isUnique then
 					if petString then
 						petString = L.Collected .. L.Colon .. color .. format(L.CollectedCount, numCollected) .. qText .. " - " .. petString .. "|r"

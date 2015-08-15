@@ -1,3 +1,7 @@
+### Version 6.2.0.26
+
+* Fixed an error when showing only the best collected pet
+
 ### Version 6.2.0.25
 
 * Added a "Compact Display" option to remove the "Level" text label
