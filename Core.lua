@@ -501,21 +501,25 @@ function EventFrame:PET_BATTLE_OPENING_START(event)
 	if UnitIsWildBattlePet("target") and C_PetBattles.IsWildBattle() then
 		local guid = UnitGUID("target")
 		local quality = C_PetBattles.GetBreedQuality(LE_BATTLE_PET_ENEMY, 1)
-		local _, _, _, _, _, _, _, _, _, _, obtainable = C_PetJournal.GetPetInfoBySpeciesID(C_PetBattles.GetPetSpeciesID(LE_BATTLE_PET_ENEMY, 1))
-		if guid and quality and obtainable then
-			seenWildPetQualities[guid] = quality
-			--print("seen quality:", quality)
+		local species = C_PetBattles.GetPetSpeciesID(LE_BATTLE_PET_ENEMY, 1)
+		local _, _, _, _, _, _, _, _, _, _, obtainable = C_PetJournal.GetPetInfoBySpeciesID(species)
+		if not guid or not quality or not obtainable then
+			return
 		end
+		--print("seen quality:", quality)
+		seenWildPetQualities[guid] = quality
+		local breed, confidence
 		if LibPetBreedInfo then
-			local breed, confidence = LibPetBreedInfo:GetBreedByPetBattleSlot(LE_BATTLE_PET_ENEMY, 1)
-			if breed then
-				if PetTracker then
-					seenWildPetBreeds[guid] = PetTracker:GetBreedIcon(breed, 0.8, -2)
-				else
-					seenWildPetBreeds[guid] = breed
-				end
-				--print("seen breed:", seenWildPetBreeds[guid])
+			breed, confidence = LibPetBreedInfo:GetBreedByPetBattleSlot(LE_BATTLE_PET_ENEMY, 1)
+			--print("LibPetBreedInfo sees breed:", breed, PetBreedNames[breed], confidence)
+			seenWildPetBreeds[guid] = breed
+		end
+		if PetTracker then
+			if not confidence or confidence < 2.5 then
+				breed = PetTracker.Battle:Get(LE_BATTLE_PET_ENEMY, 1):GetBreed()
+				print("PetTracker sees breed:", breed, PetBreedNames[breed])
 			end
+			seenWildPetBreeds[guid] = PetTracker:GetBreedIcon(breed, 0.8, -2)
 		end
 	end
 end
