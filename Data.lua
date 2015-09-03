@@ -48,6 +48,7 @@ private.PetItemToSpecies = {
 	[122532] = 1600, -- Bone Serpent <= Bone Sliver
 	[119146] = 1458, -- Bone Wasp
 	[104202] = 1343, -- Bonkers
+	[128424] = 1466, -- Brightpaw
 	[ 71387] =  325, -- Brilliant Kaliri
 	[118107] = 1540, -- Brilliant Spore
 	[118675] = 1563, -- Bronze Whelpling <= Time-Locked Box
@@ -122,15 +123,19 @@ private.PetItemToSpecies = {
 	[ 67282] =  293, -- Elementium Geode
 	[ 44974] =  209, -- Elwynn Lamb
 	[  8498] =   59, -- Emerald Whelpling <= Tiny Emerald Whelpling
+	[129217] = 1766, -- Empowered Manafiend <= Warm Arcane Crystal
+	[129218] = 1765, -- Empyreal Manafiend <= Glittering Arcane Crystal
 	[ 44982] =  213, -- Enchanted Broom
 	[ 67274] =  267, -- Enchanted Lantern
 	[ 67308] =  267, -- Enchanted Lantern <= Formula: Enchanted Lantern
+	[129216] = 1764, -- Energized Manafiend <= Vibrating Arcane Crystal
 	[ 37298] =  180, -- Essence of Competition <= Competitor's Souvenir
 	[ 38050] =  183, -- Ethereal Soul-Trader <= Soul-Trader Beacon
 	[118921] = 1566, -- Everbloom Peachick
 	[119170] = 1576, -- Eye of Observation
 	[ 79744] =  348, -- Eye of the Legion
 	[ 21301] =  119, -- Father Winter's Helper <= Green Helper Box
+	[129205] = 1660, -- Fel Pup <= A Tiny Infernal Collar
 	[ 70908] =  319, -- Feline Familiar
 	[ 85578] =  821, -- Feral Vermling
 	[ 74611] =  342, -- Festival Lantern
@@ -170,6 +175,7 @@ private.PetItemToSpecies = {
 	[ 86564] =  834, -- Grinder <= Imbued Jade Fragment
 	[118517] = 1602, -- Grommloc
 	[122105] = 1622, -- Grotesque <= Grotesque Statue
+	[128770] = 1725, -- Grumpling
 	[ 46802] =  228, -- Grunty <= Heavy Murloc Egg
 	[ 49662] =  245, -- Gryphon Hatchling
 	[ 69847] =  311, -- Guardian Cub [BoP]
@@ -282,6 +288,7 @@ private.PetItemToSpecies = {
 	[ 71726] =  329, -- Murkablo <= Murky's Little Soulstone
 	[106244] = 1364, -- Murkalot <= Murkalot's Flail
 	[ 20651] = 1168, -- Murki <= Orange Murloc Egg
+	[128427] = 1454, -- Murkidan
 	[ 45180] =  217, -- Murkimus the Gladiator <= Murkimus' Little Spear
 	[ 46892] =  217, -- Murkimus the Gladiator <= Murkimus' Little Spear
 	[ 20371] =  107, -- Murky <= Blue Murloc Egg
@@ -290,6 +297,7 @@ private.PetItemToSpecies = {
 	[ 97550] = 1228, -- Netherspace Abyssal <= Netherspace Portal-Stone
 	[116815] = 1524, -- Netherspawn, Spawn of Netherspawn
 	[ 25535] =  131, -- Netherwhelp <= Netherwhelp's Collar
+	[128426] = 1691, -- Nibbles
 	[127753] = 1664, -- Nightmare Bell
 	[ 68841] =  303, -- Nightsaber Cub
 	[118595] = 1432, -- Nightshade Sproutling
@@ -348,6 +356,7 @@ private.PetItemToSpecies = {
 	[ 72153] =  665, -- Sand Scarab
 	[ 82775] =  846, -- Sapphire Cub
 	[ 90471] =  846, -- Sapphire Cub <= Design: Sapphire Cub
+	[128477] = 1692, -- Savage Cub
 	[ 66073] =  289, -- Scooter the Snail <= Snail Shell
 	[114919] = 1448, -- Sea Calf
 	[ 73953] =  340, -- Sea Pony
@@ -476,6 +485,7 @@ private.PetItemToSpecies = {
 	[ 95424] = 1213, -- Zandalari Toenibbler
 	[118101] = 1536, -- Zangar Spore
 	[102146] = 1305, -- Zao, Calfling of Niuzao
+	[128423] = 1255, -- Zeradar
 	[ 13582] =   94, -- Zergling <= Zergling Leash
 	[ 49664] =  247, -- Zipao Tiger <= Enchanted Purple Jade
 	[113554] = 1428, -- Zomstrok
