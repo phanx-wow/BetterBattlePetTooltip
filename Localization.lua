@@ -43,7 +43,10 @@ L.ShowAll_Tooltip = "This will show all your collected pets of the same species,
 L.ShowBreed = "Show collected breed"
 L.ShowBreed_Tooltip = "This option requires LibPetBreedInfo-1.0 to be installed."
 L.ShowCount = "Show collected count"
+L.ShowCount_Tooltip = "This option has no effect when all pets are shown."
 L.ShowLevel = "Show collected level"
+L.ShowSource = "Show pet source info"
+L.ShowSourceOnlyMissing = "Only on missing pets"
 L.ShowWildQuality = "Show wild pet rarity when possible"
 L.ShowWildQuality_Tooltip = "This is only possible if you already entered a battle with the pet and forfeited, and only works for unit tooltips, not minimap tracking tooltips."
 
@@ -66,7 +69,10 @@ L.ShowAll_Tooltip = "Mit dieser Option werden alle eingefangenen Haustiere der g
 L.ShowBreed = "Zeige die eingefangene Rasse"
 L.ShowBreed_Tooltip = "Für dieser Option muss LibPetBreedInfo-1.0 installiert sein."
 L.ShowCount = "Zeige die eingefangene Anzahl"
+L.ShowCount_Tooltip = "Diese Option wirkt sich nicht aus, wenn alle Haustiere angezeigt sind."
 L.ShowLevel = "Zeige die höchste eingefangene Stufe"
+L.ShowSource = "Zeige Haustierquellen"
+L.ShowSourceOnlyMissing = "Nur auf nicht eingefangenen Haustiere"
 L.ShowWildQuality = "Zeige die Qualität des wilden Haustiers - wenn möglich"
 L.ShowWildQuality_Tooltip = "Dies ist nur möglich, wenn du das Haustier in dieser Sitzung bereits bekämpft und aufgegeben hast, und funktioniert nur für Einheiten-Tooltips, nicht für Minimap-Tooltips."
 
@@ -88,7 +94,10 @@ L.ShowAll_Tooltip = "Con esta opción se muestran todas las mascotas capturadas 
 L.ShowBreed = "Mostrar la raza capturada"
 L.ShowBreed_Tooltip = "Esta opción require que está instalado LibPetBreedInfo-1.0."
 L.ShowCount = "Mostrar la cantidad capturada"
+L.ShowCount_Tooltip = "Esta opción no tiene efecto cuando se muestran todas las mascotas."
 L.ShowLevel = "Mostrar el mayor nivel capturado"
+L.ShowSource = "Mostrar las fuentes de mascotas"
+L.ShowSourceOnlyMissing = "Sólo en las mascotas no capturadas"
 L.ShowWildQuality = "Mostrar la calidad de las mascotas salvajes cuando posible"
 L.ShowWildQuality_Tooltip = "Esto sólo es posible si ya abandonó un duelo con la mascota exacta, y sólo para las descripciones de las unidades, no para las descripciones de seguimiento en el minimapa."
 
@@ -110,7 +119,10 @@ L.ShowAll_Tooltip = "Con esta opción se muestran todas las mascotas capturadas 
 L.ShowBreed = "Mostrar la raza capturada"
 L.ShowBreed_Tooltip = "Esta opción require que está instalado LibPetBreedInfo-1.0."
 L.ShowCount = "Mostrar la cantidad capturada"
+L.ShowCount_Tooltip = "Esta opción no tiene efecto cuando se muestran todas las mascotas."
 L.ShowLevel = "Mostrar el mayor nivel capturado"
+L.ShowSource = "Mostrar las fuentes de mascotas"
+L.ShowSourceOnlyMissing = "Sólo en las mascotas no capturadas"
 L.ShowWildQuality = "Mostrar la calidad de las mascotas salvajes cuando posible"
 L.ShowWildQuality_Tooltip = "Esto sólo es posible si ya abandonó un duelo con la mascota exacta, y sólo para las descripciones de las unidades, no para las descripciones de seguimiento en el minimapa."
 

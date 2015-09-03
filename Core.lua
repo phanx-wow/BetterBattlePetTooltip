@@ -24,28 +24,31 @@ for i = 1, 6 do PetQualityStrings[i] = _G["BATTLE_PET_BREED_QUALITY"..i] end
 local HexToPetQuality = {}
 for i = 1, 6 do HexToPetQuality[PetQualityColors[i].hex] = i end
 
-local PetBreedIcons = {
-	--[[ BB ]] [3]  = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:0:16|t",
-	--[[ PP ]] [4]  = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t", -- "|TInterface\\WorldStateFrame\\CombatSwords:0:0:-2:0:64:64:0:32:0:32|t",
-	--[[ SS ]] [5]  = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t",
-	--[[ HH ]] [6]  = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t",
-	--[[ HP ]] [7]  = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t",
-	--[[ PS ]] [8]  = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t",
-	--[[ HS ]] [9]  = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t",
-	--[[ PB ]] [10] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t",
-	--[[ SB ]] [11] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t",
-	--[[ HB ]] [12] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t",
+local PetBreedNames = {
+	[ 3] = "B/B",
+	[ 4] = "P/P",
+	[ 5] = "S/S",
+	[ 6] = "H/H",
+	[ 7] = "H/P",
+	[ 8] = "P/S",
+	[ 9] = "H/S",
+	[10] = "P/B",
+	[11] = "S/B",
+	[12] = "H/B",
 }
 
-local PetBreedNames = setmetatable({}, { __index = function(self, breed)
-	local name = LibPetBreedInfo and LibPetBreedInfo:GetBreedName(breed)
-	--print("PetBreedNames", breed, name, not not LibPetBreedInfo)
-	if name then
-		name = gsub(name, "/", "")
-		self[breed] = name
-	end
-	return name or ""
-end })
+local PetBreedIcons = {
+	[ 3] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:0:16|t",
+	[ 4] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t", -- "|TInterface\\WorldStateFrame\\CombatSwords:0:0:-2:0:64:64:0:32:0:32|t",
+	[ 5] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t",
+	[ 6] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t",
+	[ 7] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t",
+	[ 8] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t",
+	[ 9] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t",
+	[10] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t",
+	[11] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t",
+	[12] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t",
+}
 
 local PetItemToSpecies = Addon.PetItemToSpecies
 
@@ -55,9 +58,31 @@ local PetNameToSpecies = setmetatable({}, { __index = function(t, name)
 	return speciesID
 end })
 
+-- Used to match hyperlinked recipe items to the pet taught by the item created by the recipe
+local ItemNameToSpecies = setmetatable({ __cached = false }, { __index = function(t, name)
+	local done, found = true
+	if not t.__cached then
+		for itemID, speciesID in pairs(PetItemToSpecies) do
+			local item = GetItemInfo(itemID)
+			if item then
+				t[item] = speciesID
+				found = name == item and speciesID
+			else
+				done = false
+			end
+		end
+		t.__cached = done
+	end
+	if done and not found then
+		t[name] = false
+	end
+	return found
+end })
+
 ------------------------------------------------------------------------
 
 local colorblindMode
+local petSourceText = {}
 local seenWildPetQualities = {}
 local seenWildPetBreeds = {}
 
@@ -66,17 +91,30 @@ local GRAY_R, GRAY_G, GRAY_B = GRAY_FONT_COLOR.r, GRAY_FONT_COLOR.g, GRAY_FONT_C
 
 ------------------------------------------------------------------------
 
-BBPTDB = {
-	count = false,
-	level = true,
-	compact = false,
-	wildQuality = true,
-	tooltipColor = true,
+local defaults = {
+	showAll               = false,
+	showCount             = false,
+	showLevel             = true,
+	compactLevel          = false,
+	showBreed             = false,
+	showSource            = true,  -- DEBUG: default false for release
+	showSourceOnlyMissing = false, -- DEBUG: default true for release
+	showWildQuality       = true,
+	colorTooltipBorder    = true,
+}
+local dbremap = {
+	all          = "showAll",
+	breed        = "showBreed",
+	count        = "showCount",
+	level        = "showLevel",
+	compact      = "compactLevel",
+	wildQuality  = "showWildQuality",
+	tooltipColor = "colorTooltipBorder",
 }
 
 ------------------------------------------------------------------------
 
-local db = BBPTDB -- reassigned in PLAYER_LOGIN
+local db = defaults -- reassigned in PLAYER_LOGIN
 
 local EventFrame = CreateFrame("Frame", ADDON)
 EventFrame:SetScript("OnEvent", function(self, event, ...) return self[event] and self[event](self, event, ...) end)
@@ -85,6 +123,18 @@ Addon.EventFrame = EventFrame
 EventFrame:RegisterEvent("PLAYER_LOGIN")
 function EventFrame:PLAYER_LOGIN(event)
 	db = BBPTDB
+	for oldk, newk in pairs(dbremap) do
+		local v = db[oldk]
+		if type(v) ~= "nil" then
+			db[newk] = v
+			db[oldk] = nil
+		end
+	end
+	for k, v in pairs(defaults) do
+		if type(db[k]) == "nil" then
+			db[k] = v
+		end
+	end
 	colorblindMode = tonumber(GetCVar("colorblindMode")) > 0
 	LibPetBreedInfo = LibStub("LibPetBreedInfo-1.0", true)
 end
@@ -95,6 +145,7 @@ end
 
 do
 	local petStringCache = {}
+	local speciesIsOwned = {}
 
 	function C_PetJournal.GetOwnedBattlePetString(speciesID)
 		--print("GetOwnedBattlePetString:", speciesID)
@@ -116,6 +167,13 @@ do
 			return
 		end
 
+		if not speciesIsOwned[speciesID] then
+			--print("Not collected")
+			petString = (colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[6].hex) .. L.NotCollected
+			petStringCache[speciesID] = petString
+			return petString
+		end
+
 		local petString
 
 		if PetTracker then
@@ -127,8 +185,8 @@ do
 		end
 
 		if not petString then
-			local showBreed = db.breed and LibPetBreedInfo
-			local baseString = db.all and (showBreed or db.level) and (NORMAL_FONT_COLOR_CODE .. L.Collected .. L.Colon .. "|r")
+			local showBreed = db.showBreed and LibPetBreedInfo
+			local baseString = db.showAll and (showBreed or db.showLevel) and (NORMAL_FONT_COLOR_CODE .. L.Collected .. L.Colon .. "|r")
 			local numCollected, bestLevel, bestQuality, bestBreed = 0, 0, 0
 			for _, petID in LibPetJournal:IteratePetIDs() do
 				local species, _, level, _, _, _, _, name, _, _, _, _, _, _, _, _, unique = C_PetJournal.GetPetInfoByPetID(petID)
@@ -141,7 +199,7 @@ do
 						local color = colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[quality].hex
 						local qText = colorblindMode and format(L.Parentheses, PetQualityStrings[quality]) or ""
 						if breed then
-							petString = (numCollected > 1 and (petString .. L.Comma) or baseString) .. color .. (db.level and format(L.CollectedLevelBreed, level, breed) or breed) .. qText .. "|r"
+							petString = (numCollected > 1 and (petString .. L.Comma) or baseString) .. color .. (db.showLevel and format(L.CollectedLevelBreed, level, breed) or breed) .. qText .. "|r"
 						else
 							petString = (numCollected > 1 and (petString .. L.Comma) or baseString) .. color .. format(L.CollectedLevel, level) .. qText .. "|r"
 						end
@@ -149,7 +207,7 @@ do
 						-- Show highest level of best quality only
 						bestQuality = quality
 						bestLevel = max(bestLevel, level)
-						bestBreed = showBreed and gsub(LibPetBreedInfo:GetBreedName(LibPetBreedInfo:GetBreedByPetID(petID)), "/", "")
+						bestBreed = showBreed and PetBreedNames[LibPetBreedInfo:GetBreedByPetID(petID)]
 					end
 				end
 			end
@@ -157,17 +215,17 @@ do
 			if petString then
 				--print("All:", petString)
 			elseif numCollected > 0 then
-				if bestBreed and db.level then
+				if bestBreed and db.showLevel then
 					petString = format(L.CollectedLevelBreed, bestLevel, bestBreed)
 				elseif bestBreed then
 					petString = bestBreed
-				elseif db.level then
+				elseif db.showLevel then
 					petString = format(L.CollectedLevel, bestLevel)
 				end
 
 				local color = colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[bestQuality].hex
 				local qText = colorblindMode and format(L.Parentheses, PetQualityStrings[bestQuality]) or ""
-				if db.count and not isUnique then
+				if db.showCount and not isUnique then
 					if petString then
 						petString = L.Collected .. L.Colon .. color .. format(L.CollectedCount, numCollected) .. qText .. " - " .. petString .. "|r"
 					else
@@ -186,10 +244,7 @@ do
 			end
 		end
 
-		if not petString then
-			--print("Not collected")
-			petString = (colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[6].hex) .. L.NotCollected
-		elseif db.compact then
+		if db.compactLevel then
 			petString = gsub(petString, LEVEL_REMOVE, "") -- TODO: check in various languages
 		end
 
@@ -197,11 +252,23 @@ do
 		return petString
 	end
 
-	EventFrame:RegisterEvent("PET_JOURNAL_LIST_UPDATE")
-	function EventFrame:PET_JOURNAL_LIST_UPDATE(event)
-		--print(event)
+--	EventFrame:RegisterEvent("PET_JOURNAL_LIST_UPDATE")
+	function EventFrame:PET_JOURNAL_LIST_UPDATE()
+		wipe(speciesIsOwned)
+		for _, petID in LibPetJournal:IteratePetIDs() do
+			speciesIsOwned[C_PetJournal.GetPetInfoByPetID(petID)] = true
+		end
+		for _, speciesID in LibPetJournal:IterateSpeciesIDs() do
+			if speciesIsOwned[speciesID] and db.showSourceOnlyMissing then
+				petSourceText[speciesID] = nil
+			else
+				local _, _, _, _, source = C_PetJournal.GetPetInfoBySpeciesID(speciesID)
+				petSourceText[speciesID] = source:gsub("|n$", ""):gsub("|r", "|cffffffff") .. "|r"
+			end
+		end
 		wipe(petStringCache)
 	end
+	LibPetJournal.RegisterCallback(EventFrame, "PetListUpdated", EventFrame.PET_JOURNAL_LIST_UPDATE)
 
 	hooksecurefunc("SetCVar", function(cvar, value)
 		if cvar == "colorblindMode" then
@@ -231,7 +298,7 @@ do
 		"BorderLeft"
 	}
 	function ColorBorderByQuality(self, r, g, b)
-		if not db.tooltipColor then
+		if not db.colorTooltipBorder then
 			return
 		end
 		if colorblindMode then
@@ -283,23 +350,42 @@ do
 end
 
 ------------------------------------------------------------------------
---	Add border color to BattlePetTooltip
+--	Add border color and source info to BattlePetTooltip
 ------------------------------------------------------------------------
 
-local function BattlePetTooltip_OnShow(self)
-	--print("BattlePetTooltip_OnShow")
+local function BattlePetTooltip_OnShow(self, species)
+	--print("BattlePetTooltip_OnShow", species)
+	local ownedText = self.Owned:GetText() -- C_PetJournal.GetOwnedBattlePetString(species)
 	if not colorblindMode then
-		local petString = self.Owned:GetText() -- C_PetJournal.GetOwnedBattlePetString(self.speciesID)
-		local hex = strmatch(petString, "|cff%x%x%x%x%x%x")
+		local hex = strmatch(ownedText, "|cff%x%x%x%x%x%x")
 		local quality = hex and HexToPetQuality[hex]
 		if quality then
 			return ColorBorderByQuality(self, quality)
 		end
 	end
+	local source = db.showSource and petSourceText[species]
+	if source then
+		local origHeight = self.Owned:GetHeight()
+		self.Owned:SetWordWrap(true)
+		self.Owned:SetText(ownedText .."|n" .. source)
+		self:SetHeight(self:GetHeight() + self.Owned:GetHeight() - origHeight + 2)
+		if self == FloatingBattlePetTooltip then
+			self.Delimiter:SetPoint("TOPLEFT", self.Owned, "BOTTOMLEFT", -6, -2)
+		end
+	else
+		self.Owned:SetWordWrap(false)
+		if self == FloatingBattlePetTooltip then
+			self.Delimiter:SetPoint("TOPLEFT", self.SpeedTexture, "BOTTOMLEFT", -6, -5)
+		end
+	end
 end
 
-hooksecurefunc("BattlePetToolTip_Show", function() BattlePetTooltip_OnShow(BattlePetTooltip) end)
-hooksecurefunc("FloatingBattlePet_Show", function() BattlePetTooltip_OnShow(FloatingBattlePetTooltip) end)
+hooksecurefunc("BattlePetToolTip_Show", function(species, level, quality, health, power, speed, customName)
+	BattlePetTooltip_OnShow(BattlePetTooltip, species)
+end)
+hooksecurefunc("FloatingBattlePet_Show", function(species, level, quality, health, power, speed, customName, petID)
+	BattlePetTooltip_OnShow(FloatingBattlePetTooltip, species)
+end)
 
 ------------------------------------------------------------------------
 --	Add info to GameTooltip and derivatives
@@ -360,12 +446,12 @@ local function SetTooltipPetInfo(self, species, guid)
 		end
 	end
 
-	if guid and db.wildQuality then
+	if guid and db.showWildQuality then
 		local quality = seenWildPetQualities[guid]
 		if quality then
 			local color = RED_FONT_COLOR
 			local qcolor = not colorblindMode and PetQualityColors[quality]
-			local breed = db.breed and seenWildPetBreeds[guid]
+			local breed = db.showBreed and seenWildPetBreeds[guid]
 			-- print("Already battled:", quality, breed)
 			local infoString
 			if PetTracker then -- icon + quality
@@ -392,10 +478,21 @@ end
 
 local function OnTooltipSetItem(self)
 	local item, link = self:GetItem()
-	if link then
-		local species = PetItemToSpecies[tonumber(strmatch(link, "item:(%d+)"))]
-		--print("OnTooltipSetItem:", link, species)
-		SetTooltipPetInfo(self, species or item)
+	if not item then return end
+
+	local species
+	if item == "" then
+		species = ItemNameToSpecies[_G[self:GetName().."TextLeft1"]:GetText()]
+	else
+		species = PetItemToSpecies[tonumber(strmatch(link, "item:(%d+)"))] or PetNameToSpecies[item]
+	end
+	if not species then return end
+	--print("OnTooltipSetItem:", link, species)
+	SetTooltipPetInfo(self, species)
+
+	local source = db.showSource and petSourceText[species]
+	if source then
+		self:AddLine(source)
 	end
 end
 
@@ -413,9 +510,14 @@ local ignoreSpells = {
 
 local function OnTooltipSetSpell(self)
 	local spell, _, spellID = self:GetSpell()
+	local species = spell and not ignoreSpells[spellID] and PetNameToSpecies[spell]
+	if not species then return end
 	--print("OnTooltipSetSpell:", spell)
-	if spell and not ignoreSpells[spellID] then
-		SetTooltipPetInfo(self, spell)
+	SetTooltipPetInfo(self, species)
+
+	local source = db.showSource and petSourceText[species]
+	if source then
+		self:AddLine(source)
 	end
 end
 
@@ -429,10 +531,9 @@ ItemRefTooltip:HookScript("OnTooltipSetSpell", OnTooltipSetSpell)
 local function OnTooltipSetUnit(self)
 	local _, unit = self:GetUnit()
 	--print("OnTooltipSetUnit:", unit)
-	if unit and UnitIsWildBattlePet(unit) then
-		--print("UnitIsWildBattlePet")
-		SetTooltipPetInfo(self, UnitBattlePetSpeciesID(unit), UnitGUID(unit))
-	end
+	if not unit or not UnitIsWildBattlePet(unit) then return end
+	--print("UnitIsWildBattlePet")
+	SetTooltipPetInfo(self, UnitBattlePetSpeciesID(unit), UnitGUID(unit))
 end
 
 GameTooltip:HookScript("OnTooltipSetUnit", OnTooltipSetUnit)
@@ -496,6 +597,8 @@ end)
 --	Remember quality of previously battled wild pets
 ------------------------------------------------------------------------
 
+local BattlePetBreedID_EnemyInfo = { petOwner = LE_BATTLE_PET_ENEMY, petIndex = 1 }
+
 EventFrame:RegisterEvent("PET_BATTLE_OPENING_START")
 function EventFrame:PET_BATTLE_OPENING_START(event)
 	if UnitIsWildBattlePet("target") and C_PetBattles.IsWildBattle() then
@@ -508,18 +611,35 @@ function EventFrame:PET_BATTLE_OPENING_START(event)
 		end
 		--print("seen quality:", quality)
 		seenWildPetQualities[guid] = quality
-		local breed, confidence
+		local breed_LPBI, confidence, breed_BPBID, breed_PT
+
+		-- LibPetBreedInfo-1.0
 		if LibPetBreedInfo then
-			breed, confidence = LibPetBreedInfo:GetBreedByPetBattleSlot(LE_BATTLE_PET_ENEMY, 1)
-			--print("LibPetBreedInfo sees breed:", breed, PetBreedNames[breed], confidence)
-			seenWildPetBreeds[guid] = breed
+			breed_LPBI, confidence = LibPetBreedInfo:GetBreedByPetBattleSlot(LE_BATTLE_PET_ENEMY, 1)
+			print("LibPetBreedInfo sees breed:", breed_LPBI, PetBreedNames[breed_LPBI], confidence and confidence >= 2.5 and "|cff33ff33" or "|cff999999", confidence)
+			seenWildPetBreeds[guid] = breed_LPBI
 		end
+
+		-- BattlePetBreedID
+		if GetBreedID_Battle then
+	--		if not confidence or confidence < 2.5 then
+				breed_BPBID = GetBreedID_Battle(BattlePetBreedID_EnemyInfo)
+				if not breed_LPBI or breed_BPBID ~= breed_LPBI then
+					print("BattlePetBreedID sees breed:", breed_BPBID, PetBreedNames[breed_BPBID])
+				end
+				seenWildPetBreeds[guid] = breed_BPBID
+	--		end
+		end
+
+		-- PetTracker
 		if PetTracker then
-			if not confidence or confidence < 2.5 then
-				breed = PetTracker.Battle:Get(LE_BATTLE_PET_ENEMY, 1):GetBreed()
-				print("PetTracker sees breed:", breed, PetBreedNames[breed])
-			end
-			seenWildPetBreeds[guid] = PetTracker:GetBreedIcon(breed, 0.8, -2)
+	--		if not confidence or confidence < 2.5 then
+				breed_PT = PetTracker.Battle:Get(LE_BATTLE_PET_ENEMY, 1):GetBreed()
+				if (breed_LPBI and breed_PT ~= breed_LPBI) or (breed_BPBID and breed_PT ~= breed_BPBID) or (not breed_LPBI and not breed_BPBID) then
+					print("PetTracker sees breed:", breed_PT, PetBreedNames[breed_PT])
+				end
+	--		end
+			seenWildPetBreeds[guid] = PetTracker:GetBreedIcon(breed_PT, 0.8, -2)
 		end
 	end
 end
