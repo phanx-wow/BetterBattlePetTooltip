@@ -41,7 +41,10 @@ L.NotCapturable = "Not Capturable"
 L.ShowAll = "Show all collected pets"
 L.ShowAll_Tooltip = "This will show all your collected pets of the same species, not just the best one."
 L.ShowBreed = "Show collected breed"
-L.ShowBreed_Tooltip = "This option requires LibPetBreedInfo-1.0 to be installed."
+L.ShowBreed_Tooltip = [=[This option requires one of the following to be installed:
+- BattlePetBreedID
+- LibPetBreedInfo-1.0
+- PetTracker]=]
 L.ShowCount = "Show collected count"
 L.ShowCount_Tooltip = "This option has no effect when all pets are shown."
 L.ShowLevel = "Show collected level"
@@ -67,7 +70,10 @@ L.NotCapturable = "Nicht einfangbar"
 L.ShowAll = "Zeige alle eingefangenen Haustiere"
 L.ShowAll_Tooltip = "Mit dieser Option werden alle eingefangenen Haustiere der gleichen Art gezeigt, anstatt nur des besten."
 L.ShowBreed = "Zeige die eingefangene Rasse"
-L.ShowBreed_Tooltip = "Für dieser Option muss LibPetBreedInfo-1.0 installiert sein."
+L.ShowBreed_Tooltip = [=[Für dieser Option muss einer der folgenden installiert sein:
+- BattlePetBreedID
+- LibPetBreedInfo-1.0
+- PetTracker]=]
 L.ShowCount = "Zeige die eingefangene Anzahl"
 L.ShowCount_Tooltip = "Diese Option wirkt sich nicht aus, wenn alle Haustiere angezeigt sind."
 L.ShowLevel = "Zeige die höchste eingefangene Stufe"
@@ -92,7 +98,10 @@ L.NotCapturable = "No se puede capturar"
 L.ShowAll = "Mostrar todas mascotas capturadas"
 L.ShowAll_Tooltip = "Con esta opción se muestran todas las mascotas capturadas de la misma raza, en vez de solamente la mejor."
 L.ShowBreed = "Mostrar la raza capturada"
-L.ShowBreed_Tooltip = "Esta opción require que está instalado LibPetBreedInfo-1.0."
+L.ShowBreed_Tooltip = [=[Esta opción require que está instalado uno de los siguientes addons:
+- BattlePetBreedID
+- LibPetBreedInfo-1.0
+- PetTracker]=]
 L.ShowCount = "Mostrar la cantidad capturada"
 L.ShowCount_Tooltip = "Esta opción no tiene efecto cuando se muestran todas las mascotas."
 L.ShowLevel = "Mostrar el mayor nivel capturado"
@@ -117,7 +126,10 @@ L.NotCapturable = "No se puede capturar"
 L.ShowAll = "Mostrar todas mascotas capturadas"
 L.ShowAll_Tooltip = "Con esta opción se muestran todas las mascotas capturadas de la misma raza, en vez de solamente la mejor."
 L.ShowBreed = "Mostrar la raza capturada"
-L.ShowBreed_Tooltip = "Esta opción require que está instalado LibPetBreedInfo-1.0."
+L.ShowBreed_Tooltip = [=[Esta opción require que está instalado uno de los siguientes addons:
+- BattlePetBreedID
+- LibPetBreedInfo-1.0
+- PetTracker]=]
 L.ShowCount = "Mostrar la cantidad capturada"
 L.ShowCount_Tooltip = "Esta opción no tiene efecto cuando se muestran todas las mascotas."
 L.ShowLevel = "Mostrar el mayor nivel capturado"

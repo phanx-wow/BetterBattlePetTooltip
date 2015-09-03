@@ -103,7 +103,7 @@ do
 			chex.showCount:SetEnabled(true)
 			chex.showCount.tooltipText = nil
 		end
-		if LibStub("LibPetBreedInfo-1.0", true) then
+		if GetBreedID_Battle or PetTracker or LibStub("LibPetBreedInfo-1.0", true) then
 			chex.showBreed:SetEnabled(true)
 			chex.showBreed.tooltipText = nil
 		else
