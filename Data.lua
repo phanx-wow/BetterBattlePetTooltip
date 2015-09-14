@@ -45,7 +45,7 @@ private.PetItemToSpecies = {
 	[ 65661] =  259, -- Blue Mini Jouster
 	[ 29901] =  138, -- Blue Moth <= Blue Moth Egg
 	[  8485] =   40, -- Bombay Cat <= Cat Carrier (Bombay)
-	[122532] = 1600, -- Bone Serpent <= Bone Sliver
+	[122532] = 1600, -- Bone Serpent
 	[119146] = 1458, -- Bone Wasp
 	[104202] = 1343, -- Bonkers
 	[128424] = 1466, -- Brightpaw
@@ -122,7 +122,7 @@ private.PetItemToSpecies = {
 	[113216] = 1426, -- Elekk Plushie
 	[ 67282] =  293, -- Elementium Geode
 	[ 44974] =  209, -- Elwynn Lamb
-	[  8498] =   59, -- Emerald Whelpling <= Tiny Emerald Whelpling
+	[  8498] =   59, -- Emerald Whelpling <= Emerald Whelpling
 	[129217] = 1766, -- Empowered Manafiend <= Warm Arcane Crystal
 	[129218] = 1765, -- Empyreal Manafiend <= Glittering Arcane Crystal
 	[ 44982] =  213, -- Enchanted Broom
@@ -140,6 +140,7 @@ private.PetItemToSpecies = {
 	[ 85578] =  821, -- Feral Vermling
 	[ 74611] =  342, -- Festival Lantern
 	[ 76062] =  346, -- Fetish Shaman <= Fetish Shaman's Spear
+	[ 97551] = 1229, -- Fiendish Imp <= Satyr Charm
 	[ 97961] = 1245, -- Filthling <= Half-Empty Food Container
 	[ 29960] =  146, -- Firefly <= Captured Firefly
 	[118578] = 1545, -- Firewing
@@ -275,9 +276,7 @@ private.PetItemToSpecies = {
 	[115301] = 1451, -- Molten Corgi
 	[101570] = 1276, -- Moon Moon
 	[ 68618] =  296, -- Moonkin Hatchling [Alliance]
-	[108438] =  296, -- Moonkin Hatchling [Alliance]
 	[ 68619] =  298, -- Moonkin Hatchling [Horde]
-	[108438] =  298, -- Moonkin Hatchling [Horde]
 	[ 94210] = 1198, -- Mountain Panda
 	[ 93031] = 1145, -- Mr. Bigglesworth
 	[ 41133] =  192, -- Mr. Chilly <= Unhatched Mr. Chilly
@@ -331,7 +330,6 @@ private.PetItemToSpecies = {
 	[ 97555] = 1233, -- Pocket Reaver <= Tiny Fel Engine Key
 	[ 22781] =  124, -- Poley <= Polar Bear Collar
 	[ 89587] =  381, -- Porcupette
-	[ 10394] =  386, -- Prairie Dog <= Prairie Dog Whistle
 	[ 44721] =  196, -- Proto-Drake Whelp
 	[ 69821] =  309, -- Pterrordax Hatchling
 	[119467] = 1568, -- Puddle Terror
