@@ -38,6 +38,8 @@ local PetBreedNames = {
 }
 
 local PetBreedIcons = {
+	-- TODO: add option to use these when PetTracker is not available
+	-- TODO: combine icons
 	[ 3] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:0:16|t",
 	[ 4] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t", -- "|TInterface\\WorldStateFrame\\CombatSwords:0:0:-2:0:64:64:0:32:0:32|t",
 	[ 5] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t",
@@ -254,6 +256,8 @@ do
 
 --	EventFrame:RegisterEvent("PET_JOURNAL_LIST_UPDATE")
 	function EventFrame:PET_JOURNAL_LIST_UPDATE()
+		--print("PET_JOURNAL_LIST_UPDATE")
+		wipe(petStringCache)
 		wipe(speciesIsOwned)
 		for _, petID in LibPetJournal:IteratePetIDs() do
 			speciesIsOwned[C_PetJournal.GetPetInfoByPetID(petID)] = true
@@ -266,7 +270,6 @@ do
 				petSourceText[speciesID] = source:gsub("|n$", ""):gsub("|r", "|cffffffff") .. "|r"
 			end
 		end
-		wipe(petStringCache)
 	end
 	LibPetJournal.RegisterCallback(EventFrame, "PetListUpdated", EventFrame.PET_JOURNAL_LIST_UPDATE)
 
@@ -353,14 +356,14 @@ end
 --	Add border color and source info to BattlePetTooltip
 ------------------------------------------------------------------------
 
-local function BattlePetTooltip_OnShow(self, species)
-	--print("BattlePetTooltip_OnShow", species)
+local function BattlePetTooltip_Show(self, species)
+	--print("BattlePetTooltip_Show", species)
 	local ownedText = self.Owned:GetText() -- C_PetJournal.GetOwnedBattlePetString(species)
 	if not colorblindMode then
 		local hex = strmatch(ownedText, "|cff%x%x%x%x%x%x")
 		local quality = hex and HexToPetQuality[hex]
 		if quality then
-			return ColorBorderByQuality(self, quality)
+			ColorBorderByQuality(self, quality)
 		end
 	end
 	local source = db.showSource and petSourceText[species]
@@ -381,10 +384,10 @@ local function BattlePetTooltip_OnShow(self, species)
 end
 
 hooksecurefunc("BattlePetToolTip_Show", function(species, level, quality, health, power, speed, customName)
-	BattlePetTooltip_OnShow(BattlePetTooltip, species)
+	BattlePetTooltip_Show(BattlePetTooltip, species)
 end)
 hooksecurefunc("FloatingBattlePet_Show", function(species, level, quality, health, power, speed, customName, petID)
-	BattlePetTooltip_OnShow(FloatingBattlePetTooltip, species)
+	BattlePetTooltip_Show(FloatingBattlePetTooltip, species)
 end)
 
 ------------------------------------------------------------------------
@@ -597,7 +600,7 @@ end)
 --	Remember quality of previously battled wild pets
 ------------------------------------------------------------------------
 
-local BattlePetBreedID_EnemyInfo = { petOwner = LE_BATTLE_PET_ENEMY, petIndex = 1 }
+local BattlePetBreedID_EnemyObject = { petOwner = LE_BATTLE_PET_ENEMY, petIndex = 1 }
 
 EventFrame:RegisterEvent("PET_BATTLE_OPENING_START")
 function EventFrame:PET_BATTLE_OPENING_START(event)
@@ -611,35 +614,28 @@ function EventFrame:PET_BATTLE_OPENING_START(event)
 		end
 		--print("seen quality:", quality)
 		seenWildPetQualities[guid] = quality
-		local breed_LPBI, confidence, breed_BPBID, breed_PT
+		local confidence, breed = 0
 
-		-- LibPetBreedInfo-1.0
 		if LibPetBreedInfo then
-			breed_LPBI, confidence = LibPetBreedInfo:GetBreedByPetBattleSlot(LE_BATTLE_PET_ENEMY, 1)
-			print("LibPetBreedInfo sees breed:", breed_LPBI, PetBreedNames[breed_LPBI], confidence and confidence >= 2.5 and "|cff33ff33" or "|cff999999", confidence)
-			seenWildPetBreeds[guid] = breed_LPBI
+			breed, confidence = LibPetBreedInfo:GetBreedByPetBattleSlot(LE_BATTLE_PET_ENEMY, 1)
+			print("LibPetBreedInfo sees breed:", breed, PetBreedNames[breed], confidence and confidence >= 2.5 and "|cff33ff33" or "|cff999999", confidence)
+			seenWildPetBreeds[guid] = breed
 		end
 
-		-- BattlePetBreedID
-		if GetBreedID_Battle then
-	--		if not confidence or confidence < 2.5 then
-				breed_BPBID = GetBreedID_Battle(BattlePetBreedID_EnemyInfo)
-				if not breed_LPBI or breed_BPBID ~= breed_LPBI then
-					print("BattlePetBreedID sees breed:", breed_BPBID, PetBreedNames[breed_BPBID])
-				end
-				seenWildPetBreeds[guid] = breed_BPBID
-	--		end
+		if GetBreedID_Battle then -- BattlePetBreedID
+			breed = GetBreedID_Battle(BattlePetBreedID_EnemyObject)
+			if confidence < 2.5 or breed ~= seenWildPetBreeds[guid] then
+				print("BattlePetBreedID sees breed:", breed, PetBreedNames[breed])
+				seenWildPetBreeds[guid] = breed
+			end
 		end
 
-		-- PetTracker
 		if PetTracker then
-	--		if not confidence or confidence < 2.5 then
-				breed_PT = PetTracker.Battle:Get(LE_BATTLE_PET_ENEMY, 1):GetBreed()
-				if (breed_LPBI and breed_PT ~= breed_LPBI) or (breed_BPBID and breed_PT ~= breed_BPBID) or (not breed_LPBI and not breed_BPBID) then
-					print("PetTracker sees breed:", breed_PT, PetBreedNames[breed_PT])
-				end
-	--		end
-			seenWildPetBreeds[guid] = PetTracker:GetBreedIcon(breed_PT, 0.8, -2)
+			breed = PetTracker.Battle:Get(LE_BATTLE_PET_ENEMY, 1):GetBreed()
+			if confidence < 2.5 or breed ~= seenWildPetBreeds[guid] then
+				print("PetTracker sees breed:", breed, PetBreedNames[breed])
+			end
+			seenWildPetBreeds[guid] = PetTracker:GetBreedIcon(confidence >= 2.5 and seenWildPetBreeds[guid] or breed, 0.8, -2)
 		end
 	end
 end
