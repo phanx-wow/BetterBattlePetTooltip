@@ -627,15 +627,21 @@ function EventFrame:PET_BATTLE_OPENING_START(event)
 			if confidence < 2.5 or breed ~= seenWildPetBreeds[guid] then
 				print("BattlePetBreedID sees breed:", breed, PetBreedNames[breed])
 				seenWildPetBreeds[guid] = breed
+				confidence = 9000 -- don't let PetTracker override it
 			end
 		end
 
 		if PetTracker then
 			breed = PetTracker.Battle:Get(LE_BATTLE_PET_ENEMY, 1):GetBreed()
-			if confidence < 2.5 or breed ~= seenWildPetBreeds[guid] then
+			if confidence < 2.5 then -- don't override anything else, because
+				-- PetTracker is frequently wrong for */B breeds and new pets,
+				-- but it needs to be last in the chain to get the icon.
 				print("PetTracker sees breed:", breed, PetBreedNames[breed])
+				seenWildPetBreeds[guid] = PetTracker:GetBreedIcon(breed, 0.8, -2)
+			else
+				-- use someone else's breed guess but PetTracker's icon
+				seenWildPetBreeds[guid] = PetTracker:GetBreedIcon(seenWildPetBreeds[guid], 0.8, -2)
 			end
-			seenWildPetBreeds[guid] = PetTracker:GetBreedIcon(confidence >= 2.5 and seenWildPetBreeds[guid] or breed, 0.8, -2)
 		end
 	end
 end
