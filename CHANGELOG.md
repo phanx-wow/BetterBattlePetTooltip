@@ -1,6 +1,10 @@
-### Version 6.2.0.26
+### Version 6.2.2.26
 
 * Fixed an error when showing only the best collected pet
+* Fixed an issue with random pet info being displayed on recipe items
+* Added an option to show pet source info in tooltips -- particularly helpful at the auction house!
+* Added support for BattlePetBreedID for breed display
+* Added item data for pets added in Patch 6.2.2
 
 ### Version 6.2.0.25
 
