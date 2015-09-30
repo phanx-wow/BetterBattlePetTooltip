@@ -457,7 +457,7 @@ local function SetTooltipPetInfo(self, species, guid)
 			local breed = db.showBreed and seenWildPetBreeds[guid]
 			-- print("Already battled:", quality, breed)
 			local infoString
-			if PetTracker then -- icon + quality
+			if breed and PetTracker then -- icon + quality
 				infoString = breed .. PetQualityStrings[quality]
 			elseif breed and qcolor then -- breed only
 				infoString = PetBreedNames[breed]
