@@ -232,13 +232,20 @@ if CURRENT_LOCALE == "zhTW" then
 L.AlreadyBattled = "已經戰鬥"
 L.ColorTooltipBorder = "著色提示邊框"
 L.ColorTooltipBorder_Tooltip = "如果你使用其它插件來變換你的邊框，你可能會想要禁用這選項。"
+L.CompactLevel = "精簡顯示"
 L.NotCapturable = "無法捕獲"
 L.ShowAll = "顯示所有已收集寵物"
 L.ShowAll_Tooltip = "顯示全部已收集相同種類的寵物，不是最好的。"
 L.ShowBreed = "顯示已收集品種"
-L.ShowBreed_Tooltip = "這設定需要安裝LibPetBreedInfo-1.0。"
+L.ShowBreed_Tooltip = [=[這設定需要安裝下面其中一個：
+- BattlePetBreedID
+- LibPetBreedInfo-1.0
+- PetTracker]=]
 L.ShowCount = "顯示已收集數量"
+L.ShowCount_Tooltip = "當所有寵物顯示時此選項無效。"
 L.ShowLevel = "顯示最高收集等級"
+L.ShowSource = "顯示寵物來源資訊"
+L.ShowSourceOnlyMissing = "只有缺少的寵物"
 L.ShowWildQuality = "顯示野外寵物品質"
 L.ShowWildQuality_Tooltip = "這只有在已經進入一場戰鬥並放棄，而且只有單位提示，沒有小地圖追蹤提示。"
 
