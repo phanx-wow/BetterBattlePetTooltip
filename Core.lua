@@ -116,14 +116,17 @@ local dbremap = {
 
 ------------------------------------------------------------------------
 
-local db = defaults -- reassigned in PLAYER_LOGIN
+BBPTDB = defaults
+local db = BBPTDB -- reassigned in ADDON_LOADED
 
 local EventFrame = CreateFrame("Frame", ADDON)
 EventFrame:SetScript("OnEvent", function(self, event, ...) return self[event] and self[event](self, event, ...) end)
 Addon.EventFrame = EventFrame
 
-EventFrame:RegisterEvent("PLAYER_LOGIN")
-function EventFrame:PLAYER_LOGIN(event)
+EventFrame:RegisterEvent("ADDON_LOADED")
+function EventFrame:ADDON_LOADED(event, name)
+	if name ~= ADDON then return end
+
 	db = BBPTDB
 	for oldk, newk in pairs(dbremap) do
 		local v = db[oldk]
@@ -137,8 +140,12 @@ function EventFrame:PLAYER_LOGIN(event)
 			db[k] = v
 		end
 	end
+
 	colorblindMode = tonumber(GetCVar("colorblindMode")) > 0
 	LibPetBreedInfo = LibStub("LibPetBreedInfo-1.0", true)
+
+	self:UnregisterEvent("ADDON_LOADED")
+	self.ADDON_LOADED = nil
 end
 
 ------------------------------------------------------------------------

@@ -1,3 +1,7 @@
+### Version 6.2.2.27
+
+* Fixed an error that occurred when logging in with the addon for the first time
+
 ### Version 6.2.2.26
 
 * Fixed an error when showing only the best collected pet
