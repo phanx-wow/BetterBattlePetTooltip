@@ -1,4 +1,4 @@
-## Interface: 60200
+## Interface: 70000
 ## Version: @project-version@
 
 ## Title: BetterBattlePetTooltip
@@ -13,7 +13,7 @@
 
 ## Author: Phanx
 ## X-Email: addons@phanx.net
-## X-Copyright: Copyright (c) 2012-2015 Phanx. All rights reserved.
+## X-Copyright: Copyright (c) 2012-2016 Phanx. All rights reserved.
 ## X-Website: https://github.com/Phanx/BetterBattlePetTooltip
 
 ## OptionalDependencies: LibPetBreedInfo-1.0, LibPetJournal-2.0
