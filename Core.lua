@@ -1,9 +1,9 @@
 --[[--------------------------------------------------------------------
 	BetterBattlePetTooltip
-	Copyright (c) 2012-2015 Phanx <addons@phanx.net>. All rights reserved.
-	http://www.wowinterface.com/downloads/info21978-BetterBattlePetTooltip.html
-	http://www.curse.com/addons/wow/betterbattlepettooltip
+	Copyright (c) 2012-2016 Phanx <addons@phanx.net>. All rights reserved.
 	https://github.com/Phanx/BetterBattlePetTooltip
+	http://mods.curse.com/addons/wow/betterbattlepettooltip
+	http://www.wowinterface.com/downloads/info21978
 ----------------------------------------------------------------------]]
 
 local ADDON, Addon = ...
@@ -467,9 +467,9 @@ local function SetTooltipPetInfo(self, species, guid)
 			if breed and PetTracker then -- icon + quality
 				infoString = breed .. PetQualityStrings[quality]
 			elseif breed and qcolor then -- breed only
-				infoString = PetBreedNames[breed]
+				infoString = PetBreedNames[breed] or breed
 			elseif breed then -- quality + breed
-				infoString = PetQualityStrings[quality] .. " " .. PetBreedNames[breed]
+				infoString = PetQualityStrings[quality] .. " " .. (PetBreedNames[breed] or breed)
 			else -- quality only
 				infoString = PetQualityStrings[quality]
 			end
@@ -625,14 +625,14 @@ function EventFrame:PET_BATTLE_OPENING_START(event)
 
 		if LibPetBreedInfo then
 			breed, confidence = LibPetBreedInfo:GetBreedByPetBattleSlot(LE_BATTLE_PET_ENEMY, 1)
-			print("LibPetBreedInfo sees breed:", breed, PetBreedNames[breed], confidence and confidence >= 2.5 and "|cff33ff33" or "|cff999999", confidence)
+			-- print("LibPetBreedInfo sees breed:", breed, PetBreedNames[breed], confidence and confidence >= 2.5 and "|cff33ff33" or "|cff999999", confidence)
 			seenWildPetBreeds[guid] = breed
 		end
 
 		if GetBreedID_Battle then -- BattlePetBreedID
 			breed = GetBreedID_Battle(BattlePetBreedID_EnemyObject)
 			if confidence < 2.5 or breed ~= seenWildPetBreeds[guid] then
-				print("BattlePetBreedID sees breed:", breed, PetBreedNames[breed])
+				-- print("BattlePetBreedID sees breed:", breed, PetBreedNames[breed])
 				seenWildPetBreeds[guid] = breed
 				confidence = 9000 -- don't let PetTracker override it
 			end
@@ -643,7 +643,7 @@ function EventFrame:PET_BATTLE_OPENING_START(event)
 			if confidence < 2.5 then -- don't override anything else, because
 				-- PetTracker is frequently wrong for */B breeds and new pets,
 				-- but it needs to be last in the chain to get the icon.
-				print("PetTracker sees breed:", breed, PetBreedNames[breed])
+				-- print("PetTracker sees breed:", breed, PetBreedNames[breed])
 				seenWildPetBreeds[guid] = PetTracker:GetBreedIcon(breed, 0.8, -2)
 			else
 				-- use someone else's breed guess but PetTracker's icon
