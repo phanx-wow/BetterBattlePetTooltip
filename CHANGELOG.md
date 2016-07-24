@@ -1,3 +1,7 @@
+### Version 7.0.3.0
+
+* Added item data for pets added in Patch 7.0.3
+
 ### Version 6.2.2.27
 
 * Fixed an error that occurred when logging in with the addon for the first time
