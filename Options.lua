@@ -1,6 +1,6 @@
 --[[--------------------------------------------------------------------
 	BetterBattlePetTooltip
-	Copyright (c) 2012-2015 Phanx <addons@phanx.net>. All rights reserved.
+	Copyright (c) 2012-2016 Phanx <addons@phanx.net>. All rights reserved.
 	http://www.wowinterface.com/downloads/info21978-BetterBattlePetTooltip.html
 	http://www.curse.com/addons/wow/betterbattlepettooltip
 	https://github.com/Phanx/BetterBattlePetTooltip
@@ -14,15 +14,8 @@ Options.name = GetAddOnMetadata(ADDON, "Title") or ADDON
 InterfaceOptions_AddCategory(Options)
 Addon.OptionsPanel = Options
 
-if LibStub and LibStub("LibAboutPanel", true) then
-	Options.About = LibStub("LibAboutPanel").new(Options.name, ADDON)
-end
-
 SLASH_BBPT1 = "/bbpt"
 SlashCmdList.BBPT = function()
-	if Options.About then
-		InterfaceOptionsFrame_OpenToCategory(Options.About)
-	end
 	InterfaceOptionsFrame_OpenToCategory(Options)
 end
 
