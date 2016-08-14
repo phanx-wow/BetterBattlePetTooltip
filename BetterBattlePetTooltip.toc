@@ -15,6 +15,8 @@
 ## X-Email: addons@phanx.net
 ## X-Copyright: Copyright (c) 2012-2016 Phanx. All rights reserved.
 ## X-Website: https://github.com/Phanx/BetterBattlePetTooltip
+## X-Curse-Project-ID: betterbattlepettooltip
+## X-WoWI-ID: 21978
 
 ## OptionalDependencies: LibPetBreedInfo-1.0, LibPetJournal-2.0
 ## SavedVariables: BBPTDB
