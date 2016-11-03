@@ -183,8 +183,17 @@ L.ColorTooltipBorder = "Cor da borda do tooltip"
 L.ColorTooltipBorder_Tooltip = "Talvez você deseje desativar caso use outro addon para mudar a aparência do tooltip."
 L.CompactLevel = "Formato compacto"
 L.NotCapturable = "Não capturável"
+L.ShowAll = "Mostrar todos os mascotes colectados"
+L.ShowAll_Tooltip = "Mostra todos os mascotes colectados pela sua espécie e não apenas o melhor deles."
+L.ShowBreed_Tooltip = [=[Esta opção requer que seja instalado um dos itens a seguir:
+- BattlePetBreedID
+- LibPetBreedInfo-1.0
+- PetTracker]=]
 L.ShowCount = "Mostrar a quantidade capturado"
+L.ShowCount_Tooltip = "Esta opção não tem efeito quando todos os mascotes estão sendo mostrados."
 L.ShowLevel = "Mostrar a mais alto nível capturado"
+L.ShowSource = "Mostrar origem do mascote"
+L.ShowSourceOnlyMissing = "Apenas dos não coletados"
 L.ShowWildQuality = "Mostrar a qualidade de mascotes selvagens quando possível"
 L.ShowWildQuality_Tooltip = "Apenas é possível se você já entrou em uma batalha com este mascote e perdeu, e, apenas funciona para tooltips de unidades não nos ícones do mini mapa."
 
