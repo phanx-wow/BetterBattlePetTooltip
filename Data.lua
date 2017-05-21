@@ -9,6 +9,8 @@ local _, private = ...
 -- Feel free to use this file, or the data it contains, in your addons!
 -- Data compiled by Phanx. Credits appreciated but not required.
 
+-- Last updated 2017-05-21 for Patch 7.2
+
 private.PetItemToSpecies = {
 	[122106] = 1624, -- Abyssius <= Shard of Supremus
 	[136910] = 1805, -- Alarm-o-Bot
@@ -38,6 +40,7 @@ private.PetItemToSpecies = {
 	[134047] = 1828, -- Baby Winston
 	[ 32588] =  156, -- Bananas <= Banana Charm
 	[ 90177] =  903, -- Baneling
+	[147542] = 2047, -- Ban-Fu, Cub of Ban-Lu
 	[140934] = 1934, -- Benax
 	[ 10360] =   75, -- Black Kingsnake
 	[  8491] =   42, -- Black Tabby Cat <= Cat Carrier (Black Tabby)
@@ -47,6 +50,7 @@ private.PetItemToSpecies = {
 	[129188] = 1753, -- Bleakwater Jelly
 	[142096] = 1965, -- Blightbreath <= Putricide's Alchemy Supplies
 	[142095] = 1964, -- Blood Boil <= Remains of a Blood Beast
+	[147539] = 2035, -- Bloodbrood Whelpling
 	[127704] = 1577, -- Bloodthorn Hatchling
 	[126925] = 1666, -- Blorp <= Blorp's Bubble
 	[ 98550] = 1248, -- Blossoming Ancient
@@ -93,6 +97,7 @@ private.PetItemToSpecies = {
 	[  8486] =   41, -- Cornish Rex Cat <= Cat Carrier (Cornish Rex)
 	[127749] = 1672, -- Corrupted Nest Guardian
 	[140672] = 1931, -- Court Scribe
+	[143679] = 1997, -- Crackers
 	[ 60847] =  264, -- Crawling Claw
 	[110721] = 1396, -- Crazy Carrot
 	[142093] = 1962, -- Creeping Tentacle <= Wriggling Darkness
@@ -161,6 +166,7 @@ private.PetItemToSpecies = {
 	[ 37298] =  180, -- Essence of Competition <= Competitor's Souvenir
 	[ 38050] =  183, -- Ethereal Soul-Trader <= Soul-Trader Beacon
 	[118921] = 1566, -- Everbloom Peachick
+	[143756] = 1998, -- Everliving Spore
 	[136899] = 1717, -- Extinguished Eye
 	[136901] = 1719, -- Eye of Inquisition
 	[119170] = 1576, -- Eye of Observation
@@ -190,6 +196,7 @@ private.PetItemToSpecies = {
 	[122109] = 1627, -- Fragment of Desire
 	[122108] = 1626, -- Fragment of Suffering
 	[ 53641] =  253, -- Frigid Frostling <= Ice Chip
+	[147540] = 2036, -- Frostbrood Whelpling
 	[117380] = 1530, -- Frostwolf Ghostpup
 	[119141] = 1542, -- Frostwolf Pup
 	[ 39286] =  188, -- Frosty <= Frosty's Collar
@@ -244,6 +251,7 @@ private.PetItemToSpecies = {
 	[ 70140] =  317, -- Hyjal Bear Cub
 	[122112] = 1631, -- Hyjal Wisp
 	[141714] = 1949, -- Igneous Flameling
+	[143953] = 2017, -- Infinite Hatchling
 	[ 90900] = 1039, -- Imperial Moth
 	[ 90902] = 1040, -- Imperial Silkworm
 	[111660] = 1387, -- Iron Starlette
@@ -320,6 +328,7 @@ private.PetItemToSpecies = {
 	[ 56806] =  258, -- Mini Thor
 	[ 39656] =  189, -- Mini Tyrael <= Tyrael's Hilt
 	[ 31760] =  149, -- Miniwing
+	[141893] = 1936, -- Mischief
 	[ 33993] =  165, -- Mojo
 	[115301] = 1451, -- Molten Corgi
 	[101570] = 1276, -- Moon Moon
@@ -363,6 +372,7 @@ private.PetItemToSpecies = {
 	[ 49362] =  243, -- Onyxian Whelpling
 	[  8487] =   43, -- Orange Tabby Cat <= Cat Carrier (Orange Tabby)
 	[118919] = 1495, -- Ore Eater <= Red Goren Egg
+	[147841] = 2050, -- Orphaned Felbat
 	[ 13583] =   92, -- Panda Cub <= Panda Collar
 	[ 92799] = 1125, -- Pandaren Air Spirit
 	[ 92800] = 1126, -- Pandaren Earth Spirit
@@ -370,6 +380,7 @@ private.PetItemToSpecies = {
 	[ 49665] =  248, -- Pandaren Monk
 	[ 90173] =  868, -- Pandaren Water Spirit
 	[ 68833] =  301, -- Panther Cub
+	[143954] = 2018, -- Paradox Spirit
 	[ 32622] =  159, -- Peanut <= Elekk Training Collar
 	[ 60869] =  265, -- Pebble
 	[ 22235] =  122, -- Peddlefeet <= Truesilver Shafted Arrow
@@ -420,6 +431,7 @@ private.PetItemToSpecies = {
 	[ 90471] =  846, -- Sapphire Cub <= Design: Sapphire Cub
 	[128477] = 1692, -- Savage Cub
 	[ 66073] =  289, -- Scooter the Snail <= Snail Shell
+	[146953] = 2042, -- Scraps
 	[114919] = 1448, -- Sea Calf
 	[ 73953] =  340, -- Sea Pony
 	[118105] = 1539, -- Seaborne Spore
@@ -518,6 +530,7 @@ private.PetItemToSpecies = {
 	[ 50446] =  251, -- Toxic Wasteling
 	[ 21277] =  116, -- Tranquil Mechanical Yeti
 	[139789] = 1920, -- Transmutant
+	[143842] = 2004, -- Trashy
 	[106256] = 1365, -- Treasure Goblin <= Treasure Goblin's Pack
 	[ 11026] =   65, -- Tree Frog <= Tree Frog Box
 	[132519] = 1886, -- Trigger
@@ -525,6 +538,7 @@ private.PetItemToSpecies = {
 	[120121] = 1605, -- Trunks
 	[ 44810] =  525, -- Turkey <= Turkey Cage
 	[ 49287] =  241, -- Tuskarr Kite
+	[144394] = 2022, -- Tylarr Gronnden
 	[118104] = 1538, -- Umbrafen Spore
 	[ 10393] =   55, -- Undercity Cockroach
 	[ 93036] = 1151, -- Untamed Hatchling <= Unscathed Egg
@@ -533,6 +547,7 @@ private.PetItemToSpecies = {
 	[120050] = 1596, -- Veilwatcher Hatchling
 	[103637] = 1344, -- Vengeful Porcupette
 	[ 89736] =  855, -- Venus
+	[147541] = 2037, -- Vilebrood Whelpling
 	[ 93039] = 1154, -- Viscidus Globule
 	[ 97960] = 1244, -- Viscous Horror <= Dark Quivering Blob
 	[ 69824] =  310, -- Voodoo Figurine
@@ -561,6 +576,7 @@ private.PetItemToSpecies = {
 	[101771] = 1266, -- Xu-Fu, Cub of Xuen
 	[ 29903] =  140, -- Yellow Moth <= Yellow Moth Egg
 	[122533] = 1656, -- Young Talbuk
+	[143755] = 2000, -- Young Venomfang
 	[102147] = 1304, -- Yu'la, Broodling of Yu'lon
 	[ 89367] =  850, -- Yu'lon Kite
 	[ 95422] = 1211, -- Zandalari Anklerender
