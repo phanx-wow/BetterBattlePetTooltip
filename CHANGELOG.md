@@ -1,3 +1,7 @@
+### Version 7.2.0.1
+
+* Added item data for pets added in Patch 7.2
+
 ### Version 7.1.0.1
 
 * Added item data for pets added in Patch 7.1
