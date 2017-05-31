@@ -37,21 +37,6 @@ local PetBreedNames = {
 	[12] = "H/B",
 }
 
-local PetBreedIcons = {
-	-- TODO: add option to use these when PetTracker is not available
-	-- TODO: combine icons
-	[ 3] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:0:16|t",
-	[ 4] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t", -- "|TInterface\\WorldStateFrame\\CombatSwords:0:0:-2:0:64:64:0:32:0:32|t",
-	[ 5] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t",
-	[ 6] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t",
-	[ 7] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t",
-	[ 8] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t",
-	[ 9] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t",
-	[10] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:0:16|t",
-	[11] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:16:32:16:32|t",
-	[12] = "|TInterface\\PetBattles\\PetBattle-StatIcons:0:0:-2:0:32:32:0:16:16:32|t",
-}
-
 local PetItemToSpecies = Addon.PetItemToSpecies
 
 local PetNameToSpecies = setmetatable({}, { __index = function(t, name)
@@ -89,7 +74,6 @@ local seenWildPetQualities = {}
 local seenWildPetBreeds = {}
 
 local LEVEL_REMOVE = gsub(UNIT_LEVEL_TEMPLATE, "%%d", "")
-local GRAY_R, GRAY_G, GRAY_B = GRAY_FONT_COLOR.r, GRAY_FONT_COLOR.g, GRAY_FONT_COLOR.b
 
 ------------------------------------------------------------------------
 
@@ -185,7 +169,8 @@ do
 
 		local petString
 
-		if PetTracker then
+		if IsAddOnLoaded("PetTracker_Breeds") then
+			-- only use PetTracker icons if the breeds module is loaded
 			petString = PetTracker.Journal:GetOwnedText(speciesID)
 			if petString and colorblindMode then
 				petString = gsub(petString, "|cff%x%x%x%x%x%x", HIGHLIGHT_FONT_COLOR_CODE)
@@ -339,8 +324,9 @@ do
 		hooksecurefunc("PetBattleUnitTooltip_UpdateForUnit", function(self, owner, index)
 			if owner == LE_BATTLE_PET_ENEMY and C_PetBattles.IsWildBattle() then
 				local _, speciesName = C_PetBattles.GetName(owner, index)
+				local color = colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or GRAY_FONT_COLOR_CODE
 				self.CollectedText:SetText(C_PetJournal.GetOwnedBattlePetString(speciesName))
-				self.CollectedText:SetTextColor(GRAY_R, GRAY_G, GRAY_B)
+				self.CollectedText:SetTextColor(color.r, color.g, color.b)
 				ColorBorderByQuality(self, C_PetBattles.GetBreedQuality(owner, index))
 			end
 		end)
@@ -422,8 +408,9 @@ local function SetTooltipPetInfo(self, species, guid)
 			addString = false
 			local petString = C_PetJournal.GetOwnedBattlePetString(species)
 			if petString then
+				local color = colorblindMode and HIGHLIGHT_FONT_COLOR or GRAY_FONT_COLOR
 				line:SetText(petString)
-				line:SetTextColor(GRAY_R, GRAY_G, GRAY_B)
+				line:SetTextColor(color.r, color.g, color.b)
 				if not colorblindMode then
 					local hex = strmatch(petString, "|cff%x%x%x%x%x%x")
 					local quality = hex and HexToPetQuality[hex]
@@ -445,7 +432,8 @@ local function SetTooltipPetInfo(self, species, guid)
 		local petString = C_PetJournal.GetOwnedBattlePetString(species or _G[tooltip.."TextLeft1"]:GetText())
 		if petString then
 			--print("Adding new line.")
-			self:AddLine(petString, GRAY_R, GRAY_G, GRAY_B)
+			local color = colorblindMode and HIGHLIGHT_FONT_COLOR or GRAY_FONT_COLOR
+			self:AddLine(petString, color.r, color.g, color.b)
 			if not colorblindMode then
 				local hex = strmatch(petString, "|cff%x%x%x%x%x%x")
 				local quality = hex and HexToPetQuality[hex]
@@ -464,7 +452,7 @@ local function SetTooltipPetInfo(self, species, guid)
 			local breed = db.showBreed and seenWildPetBreeds[guid]
 			-- print("Already battled:", quality, breed)
 			local infoString
-			if breed and PetTracker then -- icon + quality
+			if breed and IsAddOnLoaded("PetTracker_Breeds") then -- icon + quality
 				infoString = breed .. PetQualityStrings[quality]
 			elseif breed and qcolor then -- breed only
 				infoString = PetBreedNames[breed] or breed
@@ -565,6 +553,7 @@ EventFrame:SetScript("OnUpdate", function()
 		SetTooltipPetInfo(GameTooltip, name)
 	else
 		local i = 0
+		local color = colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or GRAY_FONT_COLOR_CODE
 		for text in gmatch(text, "[^\n]+") do
 			local name = strtrim(gsub(gsub(gsub(text, "|T.-|t", ""), "|cff%x%x%x%x%x%x", ""), "|r", ""))
 			local petString = C_PetJournal.GetOwnedBattlePetString(name)
@@ -572,7 +561,7 @@ EventFrame:SetScript("OnUpdate", function()
 				i = i + 1
 				multiparts[i] = text
 				i = i + 1
-				multiparts[i] = petString
+				multiparts[i] = color .. petString .. "|r"
 			else
 				i = i + 1
 				multiparts[i] = text
@@ -625,6 +614,7 @@ function EventFrame:PET_BATTLE_OPENING_START(event)
 
 		if LibPetBreedInfo then
 			breed, confidence = LibPetBreedInfo:GetBreedByPetBattleSlot(LE_BATTLE_PET_ENEMY, 1)
+			confidence = confidence or 0
 			-- print("LibPetBreedInfo sees breed:", breed, PetBreedNames[breed], confidence and confidence >= 2.5 and "|cff33ff33" or "|cff999999", confidence)
 			seenWildPetBreeds[guid] = breed
 		end
@@ -638,7 +628,8 @@ function EventFrame:PET_BATTLE_OPENING_START(event)
 			end
 		end
 
-		if PetTracker then
+		if IsAddOnLoaded("PetTracker_Breeds") then
+			-- only use PetTracker icons if the PetTracker_Breeds addon is loaded
 			breed = PetTracker.Battle:Get(LE_BATTLE_PET_ENEMY, 1):GetBreed()
 			if confidence < 2.5 then -- don't override anything else, because
 				-- PetTracker is frequently wrong for */B breeds and new pets,
