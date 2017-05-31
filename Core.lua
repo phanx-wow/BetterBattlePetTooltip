@@ -551,6 +551,7 @@ EventFrame:SetScript("OnUpdate", function()
 	elseif not strmatch(text, "\n") then
 		local name = strtrim(gsub(gsub(gsub(text, "|T.-|t", ""), "|cff%x%x%x%x%x%x", ""), "|r", ""))
 		SetTooltipPetInfo(GameTooltip, name)
+		currentText = GameTooltipTextLeft1:GetText()
 	else
 		local i = 0
 		local color = colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or GRAY_FONT_COLOR_CODE
