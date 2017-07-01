@@ -81,10 +81,10 @@ local defaults = {
 	showAll               = false,
 	showCount             = false,
 	showLevel             = true,
-	compactLevel          = false,
+	compactLevel          = true,
 	showBreed             = false,
-	showSource            = true,  -- DEBUG: default false for release
-	showSourceOnlyMissing = false, -- DEBUG: default true for release
+	showSource            = true,
+	showSourceOnlyMissing = false,
 	showWildQuality       = true,
 	colorTooltipBorder    = true,
 }
@@ -160,14 +160,14 @@ do
 			return
 		end
 
+		local petString
+
 		if not speciesIsOwned[speciesID] then
 			--print("Not collected")
 			petString = (colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[6].hex) .. L.NotCollected
 			petStringCache[speciesID] = petString
 			return petString
 		end
-
-		local petString
 
 		if IsAddOnLoaded("PetTracker_Breeds") then
 			-- only use PetTracker icons if the breeds module is loaded
@@ -339,7 +339,7 @@ do
 		function EventFrame:ADDON_LOADED(event, addon)
 			if PetBattleUnitTooltip_UpdateForUnit then
 				HookPetBattleUI()
-				f:UnregisterEvents(event)
+				self:UnregisterEvents(event)
 			end
 		end
 	end
