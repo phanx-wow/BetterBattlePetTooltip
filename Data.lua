@@ -9,10 +9,11 @@ local _, private = ...
 -- Feel free to use this file, or the data it contains, in your addons!
 -- Data compiled by Phanx. Credits appreciated but not required.
 
--- Last updated 2017-05-21 for Patch 7.2
+-- Last updated 2017-06-20 for Patch 7.2.5
 
 private.PetItemToSpecies = {
 	[122106] = 1624, -- Abyssius <= Shard of Supremus
+	[151828] = 2072, -- Ageless Bronze Drake
 	[136910] = 1805, -- Alarm-o-Bot
 	[142448] = 1984, -- Albino Buzzard
 	[119434] = 1385, -- Albino Chimaeraling
@@ -66,6 +67,7 @@ private.PetItemToSpecies = {
 	[128424] = 1466, -- Brightpaw
 	[ 71387] =  325, -- Brilliant Kaliri
 	[118107] = 1540, -- Brilliant Spore
+	[151829] = 2071, -- Bronze Proto-Whelp
 	[118675] = 1563, -- Bronze Whelpling <= Time-Locked Box
 	[129362] = 1777, -- Broot
 	[ 10394] =   70, -- Brown Prairie Dog <= Prairie Dog Whistle
@@ -73,6 +75,7 @@ private.PetItemToSpecies = {
 	[ 10361] =   77, -- Brown Snake
 	[116403] = 1516, -- Bush Chicken <= Frightened Bush Chicken
 	[ 46398] =  224, -- Calico Cat <= Cat Carrier (Calico Cat)
+	[143754] = 1999, -- Cavern Moccasin
 	[136923] = 1888, -- Celestial Calf
 	[ 54810] =  255, -- Celestial Dragon
 	[ 70099] =  316, -- Cenarion Hatchling
@@ -132,6 +135,7 @@ private.PetItemToSpecies = {
 	[ 67418] =  294, -- Deathy <= Smoldering Murloc Egg
 	[ 48114] =  233, -- Deviate Hatchling
 	[ 94573] = 1205, -- Direhorn Runt
+	[151633] = 2065, -- Dig Rat
 	[ 20769] =  114, -- Disgusting Oozeling
 	[118709] = 1564, -- Doom Bloom
 	[119142] = 1450, -- Draenei Micro Defender
@@ -187,6 +191,7 @@ private.PetItemToSpecies = {
 	[118578] = 1545, -- Firewing
 	[ 84105] =  847, -- Fishy
 	[136898] = 1716, -- Fledgling Warden Owl
+	[150742] = 2058, -- Foe Reaper 0.9 <= Pet Reaper 0.9
 	[119149] = 1430, -- Forest Sproutling <= Captured Forest Sproutling
 	[ 60955] =  266, -- Fossilized Hatchling
 	[ 64403] =  278, -- Fox Kit [Drop]
@@ -323,10 +328,12 @@ private.PetItemToSpecies = {
 	[  4408] =   39, -- Mechanical Squirrel <= Schematic: Mechanical Squirrel Box
 	[ 45002] =  215, -- Mechanopeep
 	[ 97549] = 1227, -- Menagerie Custodian <= Instant Arcane Sanctum Security Kit
+	[101426] =  666, -- Micronax <= Micronax Controller
 	[ 13584] =   93, -- Mini Diablo <= Diablo Stone
 	[ 93041] = 1156, -- Mini Mindslayer <= Jewel of Maddening Whispers
 	[ 56806] =  258, -- Mini Thor
 	[ 39656] =  189, -- Mini Tyrael <= Tyrael's Hilt
+	[151632] = 2064, -- Mining Monkey
 	[ 31760] =  149, -- Miniwing
 	[141893] = 1936, -- Mischief
 	[ 33993] =  165, -- Mojo
@@ -395,6 +402,7 @@ private.PetItemToSpecies = {
 	[ 94903] = 1204, -- Pierre
 	[ 46707] =  166, -- Pint-Sized Pink Pachyderm
 	[129798] = 1755, -- Plump Jelly
+	[150739] = 2041, -- Pocket Cannon
 	[ 97555] = 1233, -- Pocket Reaver <= Tiny Fel Engine Key
 	[ 22781] =  124, -- Poley <= Polar Bear Collar
 	[ 89587] =  381, -- Porcupette
@@ -463,12 +471,14 @@ private.PetItemToSpecies = {
 	[ 68673] =   90, -- Smolderweb Hatchling <= Smolderweb Egg
 	[142091] = 1960, -- Snaplasher <= Blessed Seed
 	[ 35349] =  173, -- Snarly <= Snarly's Bucket
+	[151569] = 2063, -- Sneaky Marmot
 	[142084] = 1953, -- Snobold Runt <= Magnataur Hunting Horn
 	[141530] = 1941, -- Snowfang <= Snowfang's Trust
 	[  8497] =   72, -- Snowshoe Rabbit <= Rabbit Crate (Snowshoe)
 	[ 94209] = 1197, -- Snowy Panda
 	[ 94152] = 1183, -- Son of Animus
 	[119143] = 1574, -- Son of Sethe
+	[147543] = 2049, -- Son of Skum
 	[ 78916] =  347, -- Soul of the Aspects
 	[119328] = 1569, -- Soul of the Forge
 	[119329] = 1569, -- Soul of the Forge <= Recipe: Soul of the Forge
@@ -497,6 +507,7 @@ private.PetItemToSpecies = {
 	[ 94191] = 1184, -- Stunted Direhorn
 	[118598] = 1434, -- Sun Sproutling
 	[122113] = 1632, -- Sunblade Micro-Defender <= Sunblade Rune of Activation
+	[142223] =  382, -- Sun Darter Hatchling
 	[136920] = 1885, -- Sunborne Val'kyr
 	[119468] = 1570, -- Sunfire Kaliri
 	[ 94208] = 1196, -- Sunfur Panda
@@ -533,6 +544,7 @@ private.PetItemToSpecies = {
 	[143842] = 2004, -- Trashy
 	[106256] = 1365, -- Treasure Goblin <= Treasure Goblin's Pack
 	[ 11026] =   65, -- Tree Frog <= Tree Frog Box
+	[150741] = 2057, -- Tricorne
 	[132519] = 1886, -- Trigger
 	[136921] = 1886, -- Trigger
 	[120121] = 1605, -- Trunks
