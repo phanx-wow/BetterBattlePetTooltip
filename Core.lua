@@ -246,13 +246,15 @@ do
 		return petString
 	end
 
---	EventFrame:RegisterEvent("PET_JOURNAL_LIST_UPDATE")
 	function EventFrame:PET_JOURNAL_LIST_UPDATE()
-		--print("PET_JOURNAL_LIST_UPDATE")
+		-- print("PET_JOURNAL_LIST_UPDATE")
 		wipe(petStringCache)
 		wipe(speciesIsOwned)
 		for _, petID in LibPetJournal:IteratePetIDs() do
-			speciesIsOwned[C_PetJournal.GetPetInfoByPetID(petID)] = true
+			local speciesID = C_PetJournal.GetPetInfoByPetID(petID)
+			if speciesID then
+				speciesIsOwned[speciesID] = true
+			end
 		end
 		for _, speciesID in LibPetJournal:IterateSpeciesIDs() do
 			if speciesIsOwned[speciesID] and db.showSourceOnlyMissing then
@@ -263,6 +265,8 @@ do
 			end
 		end
 	end
+
+	-- EventFrame:RegisterEvent("PET_JOURNAL_LIST_UPDATE")
 	LibPetJournal.RegisterCallback(EventFrame, "PetListUpdated", EventFrame.PET_JOURNAL_LIST_UPDATE)
 
 	hooksecurefunc("SetCVar", function(cvar, value)
