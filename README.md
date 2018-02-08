@@ -9,5 +9,5 @@ Better Battle Pet Tooltip
 **Português** — Mostrar o mais alto nível e qualidade dos mascotes de batalha capturados nas dicas.  
 **Русский** — Отображать наивысший уровень и качество боевых питомцев во всплывающих подсказках.
 
-* [Download from Curse](https://mods.curse.com/addons/wow/betterbattlepettooltip)
+* [Download from Curse](https://www.curseforge.com/addons/wow/betterbattlepettooltip)
 * [Download from WoWInterface](https://www.wowinterface.com/downloads/info21978-BetterBattlePetTooltip.html)
