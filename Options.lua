@@ -1,7 +1,7 @@
 --[[--------------------------------------------------------------------
 	BetterBattlePetTooltip
-	Copyright (c) 2012-2017 Phanx <addons@phanx.net>. All rights reserved.
-	http://www.wowinterface.com/downloads/info21978-BetterBattlePetTooltip.html
+	Copyright (c) 2012-2018 Phanx <addons@phanx.net>. All rights reserved.
+	https://www.wowinterface.com/downloads/info21978-BetterBattlePetTooltip.html
 	https://mods.curse.com/addons/wow/betterbattlepettooltip
 	https://github.com/phanx-wow/BetterBattlePetTooltip
 ----------------------------------------------------------------------]]
@@ -35,7 +35,7 @@ do
 	local chex = {}
 	local function click(self)
 		local checked = self:GetChecked()
-		PlaySound(checked and "igMainMenuOptionCheckBoxOn" or "igMainmenuOptionCheckBoxOff")
+		PlaySound(checked and SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON or SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
 		BBPTDB[self.key] = checked
 		Addon.EventFrame:PET_JOURNAL_LIST_UPDATE() -- wipe text cache
 		Options:refresh() -- update enabled state of dependencies etc.
