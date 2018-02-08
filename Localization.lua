@@ -1,7 +1,7 @@
 --[[--------------------------------------------------------------------
 	BetterBattlePetTooltip
-	Copyright (c) 2012-2017 Phanx <addons@phanx.net>. All rights reserved.
-	http://www.wowinterface.com/downloads/info21978-BetterBattlePetTooltip.html
+	Copyright (c) 2012-2018 Phanx <addons@phanx.net>. All rights reserved.
+	https://www.wowinterface.com/downloads/info21978-BetterBattlePetTooltip.html
 	https://mods.curse.com/addons/wow/betterbattlepettooltip
 	https://github.com/phanx-wow/BetterBattlePetTooltip
 ----------------------------------------------------------------------]]
@@ -42,6 +42,7 @@ L["ShowAll"] = "Show all collected pets"
 L["ShowAll_Tooltip"] = "This will show all your collected pets of the same species, not just the best one."
 L["ShowBreed"] = "Show collected breed"
 L["ShowCount"] = "Show collected count"
+L["ShowCount_Tooltip"] = "This option has no effect when all pets are shown."
 L["ShowLevel"] = "Show collected level"
 L["ShowSource"] = "Show pet source info"
 L["ShowSourceOnlyMissing"] = "Only on missing pets"
