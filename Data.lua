@@ -9,7 +9,7 @@ local _, private = ...
 -- Feel free to use this file, or the data it contains, in your addons!
 -- Data compiled by Phanx. Credits appreciated but not required.
 
--- Last updated 2017-06-20 for Patch 7.2.5
+-- Last updated 2018-02-07 for Patch 7.3.5
 
 private.PetItemToSpecies = {
 	[122106] = 1624, -- Abyssius <= Shard of Supremus
@@ -335,6 +335,7 @@ private.PetItemToSpecies = {
 	[ 67312] =  292, -- Magic Lamp <= Formula: Magic Lamp
 	[ 27445] =  132, -- Magical Crawdad <= Magical Crawdad Box
 	[142086] = 1955, -- Magma Rageling <= Red-Hot Coal
+	[156721] = 2158, -- Mailemental
 	[ 29363] =  136, -- Mana Wyrmling
 	[114834] = 1446, -- Meadowstomper Calf
 	[111402] = 1403, -- Mechanical Axebeak
@@ -451,7 +452,7 @@ private.PetItemToSpecies = {
 	[140274] = 1453, -- River Calf
 	[ 34492] =  168, -- Rocket Chicken
 	[104317] = 1349, -- Rotten Little Helper <= Rotten Helper Box
-	[111866] = 1411, -- Royal Peacock
+	[111866] = 1411, -- Royal Peachick <= Royal Peacock
 	[104159] = 1328, -- Ruby Droplet
 	[142088] = 1957, -- Runeforged Servitor <= Stormforged Rune
 	[ 63355] =  271, -- Rustberg Gull [Alliance]
@@ -472,11 +473,13 @@ private.PetItemToSpecies = {
 	[118923] = 1567, -- Sentinel's Companion
 	[119431] = 1601, -- Servant of Demidos
 	[136904] = 1754, -- Sewer-Pipe Jelly
+	[151234] = 2062, -- Shadow
 	[128309] = 1690, -- Shard of Cyrukh
 	[ 46820] =  229, -- Shimmering Wyrmling
 	[ 46821] =  229, -- Shimmering Wyrmling
 	[ 69992] =  229, -- Shimmering Wyrmling
 	[  8490] =   44, -- Siamese Cat <= Cat Carrier (Siamese)
+	[156851] = 2163, -- Silithid Mini-Tank
 	[ 29957] =  144, -- Silver Dragonhawk Hatchling
 	[ 34519] =  171, -- Silver Pig <= Silver Pig Coin
 	[  8488] =   45, -- Silver Tabby Cat <= Cat Carrier (Silver Tabby)
@@ -609,7 +612,7 @@ private.PetItemToSpecies = {
 	[ 69239] =  306, -- Winterspring Cub
 	[ 46325] =  220, -- Withers
 	[ 32233] =  153, -- Wolpertinger <= Wolpertinger's Tankard
-	[141348] = 1937, -- Wonderous Wisdomball
+	[141348] = 1937, -- Wondrous Wisdomball
 	[ 11027] =   64, -- Wood Frog <= Wood Frog Box
 	[ 12264] =   89, -- Worg Pup <= Worg Carrier
 	[122115] = 1634, -- Wretched Servant <= Servant's Bell
