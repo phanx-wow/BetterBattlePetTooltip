@@ -1,3 +1,8 @@
+### Version 7.3.5.0
+
+* Fixed an error when changing options
+* Added item data for pets added in Patch 7.3.5
+
 ### Version 7.3.0.0
 
 * Added item data for pets added in Patch 7.3
