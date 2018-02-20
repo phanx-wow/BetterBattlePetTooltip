@@ -486,7 +486,7 @@ private.PetItemToSpecies = {
 	[ 88147] =  820, -- Singing Cricket <= Singing Cricket Cage
 	[ 66067] =  291, -- Singing Sunflower <= Brazie's Sunflower Seeds
 	[ 33154] =  162, -- Sinister Squashling
-	[122100] = 1628, -- Sister of Temptation <= Sultry Grimoire
+	[122110] = 1628, -- Sister of Temptation <= Sultry Grimoire
 	[104167] = 1336, -- Skunky Alemental
 	[119150] = 1575, -- Sky Fry
 	[104332] = 1350, -- Sky Lantern
