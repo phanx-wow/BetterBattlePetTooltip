@@ -328,7 +328,7 @@ do
 		hooksecurefunc("PetBattleUnitTooltip_UpdateForUnit", function(self, owner, index)
 			if owner == LE_BATTLE_PET_ENEMY and C_PetBattles.IsWildBattle() then
 				local _, speciesName = C_PetBattles.GetName(owner, index)
-				local color = colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or GRAY_FONT_COLOR_CODE
+				local color = colorblindMode and HIGHLIGHT_FONT_COLOR or GRAY_FONT_COLOR
 				self.CollectedText:SetText(C_PetJournal.GetOwnedBattlePetString(speciesName))
 				self.CollectedText:SetTextColor(color.r, color.g, color.b)
 				ColorBorderByQuality(self, C_PetBattles.GetBreedQuality(owner, index))
