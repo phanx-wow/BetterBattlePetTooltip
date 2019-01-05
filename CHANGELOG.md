@@ -1,3 +1,9 @@
+### Version 8.1.0.0
+
+* Fixed tooltip text coloring
+* Added item data for pets added in Patch 8.1
+* Added support for getting breed info from BattlePetBreedID
+
 ### Version 8.0.0.0
 
 * Added item data for pets added in Patch 8.0

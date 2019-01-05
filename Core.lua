@@ -1,6 +1,6 @@
 --[[--------------------------------------------------------------------
 	BetterBattlePetTooltip
-	Copyright (c) 2012-2018 Phanx <addons@phanx.net>. All rights reserved.
+	Copyright (c) 2012-2019 Phanx <addons@phanx.net>. All rights reserved.
 	https://github.com/phanx-wow/BetterBattlePetTooltip
 	https://www.curseforge.com/wow/addons/betterbattlepettooltip
 	https://www.wowinterface.com/downloads/info21978
