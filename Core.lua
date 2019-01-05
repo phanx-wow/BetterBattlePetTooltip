@@ -179,7 +179,7 @@ do
 		end
 
 		if not petString then
-			local showBreed = db.showBreed and LibPetBreedInfo
+			local showBreed = db.showBreed and (GetBreedID_Journal or LibPetBreedInfo)
 			local baseString = db.showAll and (showBreed or db.showLevel) and (NORMAL_FONT_COLOR_CODE .. L.Collected .. L.Colon .. "|r")
 			local numCollected, bestLevel, bestQuality, bestBreed = 0, 0, 0
 			for _, petID in LibPetJournal:IteratePetIDs() do
@@ -189,7 +189,7 @@ do
 					local _, _, _, _, quality = C_PetJournal.GetPetStats(petID)
 					if baseString then
 						-- Show all, append
-						local breed = showBreed and PetBreedNames[LibPetBreedInfo:GetBreedByPetID(petID)]
+						local breed = showBreed and (GetBreedID_Journal and GetBreedID_Journal(petID) or PetBreedNames[LibPetBreedInfo:GetBreedByPetID(petID)])
 						local color = colorblindMode and HIGHLIGHT_FONT_COLOR_CODE or PetQualityColors[quality].hex
 						local qText = colorblindMode and format(L.Parentheses, PetQualityStrings[quality]) or ""
 						if breed then
@@ -201,7 +201,7 @@ do
 						-- Show highest level of best quality only
 						bestQuality = quality
 						bestLevel = max(bestLevel, level)
-						bestBreed = showBreed and PetBreedNames[LibPetBreedInfo:GetBreedByPetID(petID)]
+						bestBreed = showBreed and (GetBreedID_Journal and GetBreedID_Journal(petID) or PetBreedNames[LibPetBreedInfo:GetBreedByPetID(petID)])
 					end
 				end
 			end
