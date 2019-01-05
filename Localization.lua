@@ -60,7 +60,7 @@ if CURRENT_LOCALE == "deDE" then
 
 L["AlreadyBattled"] = "Bereits bekämpft"
 L["ColorTooltipBorder"] = "Rand des Tooltips einfärben"
-L["ColorTooltipBorder_Tooltip"] = "Deaktivieren, wenn Ihr ein weiteres Addon verwendet um den Rand des Tooltips zu einzufärben. "
+L["ColorTooltipBorder_Tooltip"] = "Deaktivieren, wenn Ihr ein weiteres Addon verwendet um den Rand des Tooltips zu einzufärben."
 L["CompactLevel"] = "Kompaktes Anzeigeformat"
 L["NotCapturable"] = "Nicht einfangbar"
 L["ShowAll"] = "Zeige alle eingefangenen Haustiere"
