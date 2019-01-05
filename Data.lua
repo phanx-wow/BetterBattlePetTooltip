@@ -9,7 +9,7 @@ local _, private = ...
 -- Feel free to use this file, or the data it contains, in your addons!
 -- Data compiled by Phanx. Credits appreciated but not required.
 
--- Last updated 2018-07-29 for Patch 8.0.1
+-- Last updated 2019-01-05 for Patch 8.1
 
 private.PetItemToSpecies = {
 	[163489] = 2403, -- Abyssal Eel
@@ -17,8 +17,11 @@ private.PetItemToSpecies = {
 	[163506] = 2420, -- Accursed Hexxer
 	[151828] = 2072, -- Ageless Bronze Drake
 	[136910] = 1805, -- Alarm-o-Bot
+	[165857] = 2533, -- Alarm-O-Dog <= Rechargeable Alarm-O-Dog Battery
+	[166714] = 2566, -- Albatross Hatchling <= Albatross Feather
 	[142448] = 1984, -- Albino Buzzard
 	[119434] = 1385, -- Albino Chimaeraling
+	[166491] = 2555, -- Albino Duskwatcher
 	[119148] = 1571, -- Albino River Calf <= Indentured Albino River Calf
 	[ 44822] =   74, -- Albino Snake
 	[163650] = 2433, -- Aldrusian Sproutling
@@ -46,10 +49,11 @@ private.PetItemToSpecies = {
 	[ 44819] =  202, -- Baby Blizzard Bear
 	[163859] = 2477, -- Baby Crawg
 	[136919] = 1884, -- Baby Elderhorn
+	[166486] = 2551, -- Baby Stonehide
 	[134047] = 1828, -- Baby Winston
-	[147542] = 2047, -- Ban-Fu, Cub of Ban-Lu
 	[ 32588] =  156, -- Bananas <= Banana Charm
 	[ 90177] =  903, -- Baneling
+	[147542] = 2047, -- Ban-Fu, Cub of Ban-Lu
 	[163799] = 2456, -- Barnaby
 	[163511] = 2425, -- Barnacled Hermit Crab
 	[140934] = 1934, -- Benax
@@ -62,6 +66,7 @@ private.PetItemToSpecies = {
 	[128478] = 1693, -- Blazing Firehawk
 	[129188] = 1753, -- Bleakwater Jelly
 	[142096] = 1965, -- Blightbreath <= Putricide's Alchemy Supplies
+	[163861] = 2476, -- Bloated Bloodfeaster <= Undulating Blue Sac
 	[142095] = 1964, -- Blood Boil <= Remains of a Blood Beast
 	[147539] = 2035, -- Bloodbrood Whelpling
 	[163500] = 2414, -- Bloodfeaster Larva
@@ -95,6 +100,7 @@ private.PetItemToSpecies = {
 	[163776] = 2442, -- Bumbles <= Large Honeycomb Cluster
 	[116403] = 1516, -- Bush Chicken <= Frightened Bush Chicken
 	[ 46398] =  224, -- Calico Cat <= Cat Carrier (Calico Cat)
+	[160588] = 2185, -- Cap'n Crackers
 	[163798] = 2455, -- Captain Nibs
 	[163514] = 2428, -- Carnivorous Lasher <= Violent Looking Flower Pot
 	[143754] = 1999, -- Cavern Moccasin
@@ -103,9 +109,10 @@ private.PetItemToSpecies = {
 	[ 70099] =  316, -- Cenarion Hatchling
 	[122114] = 1633, -- Chaos Pup <= Void Collar
 	[102145] = 1303, -- Chi-Chi, Hatchling of Chi-Ji
-	[ 89368] =  849, -- Chi-ji Kite
 	[ 11110] =  646, -- Chicken <= Chicken Egg
+	[ 89368] =  849, -- Chi-ji Kite
 	[163504] = 2418, -- Child of Jani
+	[165846] = 2527, -- Child of Pa'ku <= Enchanted Talon of Pa’ku
 	[ 93038] = 1152, -- Chrominius <= Whistle of Chromatic Bone
 	[ 35350] =  174, -- Chuck <= Chuck's Bucket
 	[ 92707] = 1117, -- Cinder Kitten
@@ -114,6 +121,7 @@ private.PetItemToSpecies = {
 	[ 93025] = 1142, -- Clock'em
 	[ 64372] =  277, -- Clockwork Gnome
 	[ 34425] =  191, -- Clockwork Rocket Bot
+	[166718] = 2568, -- Cobalt Raven <= Cobalt Raven Hatchling
 	[ 39898] =  197, -- Cobra Hatchling
 	[  8496] =   47, -- Cockatiel <= Parrot Cage (Cockatiel)
 	[ 97554] = 1232, -- Coilfang Stalker <= Dripping Strider Egg
@@ -134,8 +142,10 @@ private.PetItemToSpecies = {
 	[110721] = 1396, -- Crazy Carrot
 	[142093] = 1962, -- Creeping Tentacle <= Wriggling Darkness
 	[ 71076] =  321, -- Creepy Crate
+	[166716] = 2567, -- Crimson Bat Pup <= Pair of Tiny Bat Wings
 	[163510] = 2424, -- Crimson Frog
 	[ 70160] =  318, -- Crimson Lasher
+	[166500] = 2562, -- Crimson Octopode
 	[ 10392] =   78, -- Crimson Snake
 	[118106] = 1537, -- Crimson Spore
 	[  8499] =   58, -- Crimson Whelpling <= Tiny Crimson Whelpling
@@ -158,15 +168,18 @@ private.PetItemToSpecies = {
 	[ 73903] =  338, -- Darkmoon Tonk
 	[ 73765] =  335, -- Darkmoon Turtle
 	[ 73905] =  339, -- Darkmoon Zeppelin
+	[166449] = 2544, -- Darkshore Sentinel
 	[156566] = 2157, -- Dart
 	[ 48112] =  232, -- Darting Hatchling
-	[ 60216] =  262, -- De-Weaponized Mechanical Companion
+	[166345] = 2538, -- Dasher
 	[104161] = 1330, -- Death Adder Hatchling
 	[ 93037] = 1153, -- Death Talon Whelpguard <= Blackwing Banner
 	[163809] = 2464, -- Deathsting Scorpid
 	[114968] = 1449, -- Deathwatch Hatchling
 	[ 67418] =  294, -- Deathy <= Smoldering Murloc Egg
+	[166451] = 2546, -- Detective Ray <= Rattling Bones
 	[ 48114] =  233, -- Deviate Hatchling
+	[ 60216] =  262, -- De-Weaponized Mechanical Companion
 	[151645] = 2001, -- Dibbler <= Model D1-BB-L3R
 	[151633] = 2065, -- Dig Rat
 	[151633] = 2065, -- Dig Rat
@@ -213,6 +226,7 @@ private.PetItemToSpecies = {
 	[ 37298] =  180, -- Essence of Competition <= Competitor's Souvenir
 	[ 38050] =  183, -- Ethereal Soul-Trader <= Soul-Trader Beacon
 	[118921] = 1566, -- Everbloom Peachick
+	[166453] = 2548, -- Everburning Treant
 	[143756] = 1998, -- Everliving Spore
 	[136899] = 1717, -- Extinguished Eye
 	[136901] = 1719, -- Eye of Inquisition
@@ -238,6 +252,7 @@ private.PetItemToSpecies = {
 	[160704] = 2187, -- Filthy Slime <= Filthy Bucket
 	[140316] = 1928, -- Firebat Pup
 	[ 29960] =  146, -- Firefly <= Captured Firefly
+	[166493] = 2557, -- Firesting Buzzer
 	[118578] = 1545, -- Firewing
 	[ 84105] =  847, -- Fishy
 	[136898] = 1716, -- Fledgling Warden Owl
@@ -246,9 +261,9 @@ private.PetItemToSpecies = {
 	[ 60955] =  266, -- Fossilized Hatchling
 	[153057] = 2121, -- Fossorial Bile Larva
 	[163690] = 2438, -- Foulfeather <= Plagued Egg
+	[ 90898] =  278, -- Fox Kit [Alliance]
 	[ 64403] =  278, -- Fox Kit [Drop]
 	[ 90897] =  278, -- Fox Kit [Horde]
-	[ 90898] =  278, -- Fox Kit [Alliance]
 	[163711] = 2440, -- Fozling <= Shard of Fozruk
 	[122107] = 1625, -- Fragment of Anger
 	[122109] = 1627, -- Fragment of Desire
@@ -291,10 +306,10 @@ private.PetItemToSpecies = {
 	[128354] = 1705, -- Grumpy <= Grumpy's Leash
 	[ 46802] =  228, -- Grunty <= Heavy Murloc Egg
 	[ 49662] =  245, -- Gryphon Hatchling
-	[104291] = 1345, -- Gu'chi Swarmling <= Swarmling of Gu'chi
 	[160847] = 2190, -- Guardian Cobra Hatchling <= Snake Charmer's Flute
-	[ 69847] =  311, -- Guardian Cub [BoP]
 	[ 72068] =  311, -- Guardian Cub [BoE]
+	[ 69847] =  311, -- Guardian Cub [BoP]
+	[104291] = 1345, -- Gu'chi Swarmling <= Swarmling of Gu'chi
 	[ 65364] =  282, -- Guild Herald [Alliance]
 	[ 65363] =  283, -- Guild Herald [Horde]
 	[ 65361] =  280, -- Guild Page [Alliance]
@@ -302,6 +317,7 @@ private.PetItemToSpecies = {
 	[104169] = 1338, -- Gulp Froglet
 	[ 48116] =  234, -- Gundrak Hatchling
 	[ 22114] =  121, -- Gurky <= Pink Murloc Egg
+	[166448] = 2545, -- Gust of Cyclarus <= Binding of Cylcarus
 	[ 93669] = 1174, -- Gusting Grimoire
 	[ 93033] = 1147, -- Harbinger of Flame <= Mark of Flame
 	[104295] = 1346, -- Harmonious Porcupette
@@ -317,6 +333,7 @@ private.PetItemToSpecies = {
 	[140261] = 1926, -- Hungering Claw
 	[  8494] =   49, -- Hyacinth Macaw <= Parrot Cage (Hyacinth Macaw)
 	[118207] = 1541, -- Hydraling
+	[166452] = 2547, -- Hydrath Droplet <= Bottled Essence of Hydrath
 	[ 70140] =  317, -- Hyjal Bear Cub
 	[122112] = 1631, -- Hyjal Wisp
 	[141714] = 1949, -- Igneous Flameling
@@ -336,13 +353,13 @@ private.PetItemToSpecies = {
 	[ 94835] = 1202, -- Ji-Kun Hatchling
 	[ 19450] =  106, -- Jubling <= A Jubling's Tiny Home
 	[163821] = 2453, -- Juvenile Brineshell
-	[122116] = 1635, -- K'ute <= Holy Chime
 	[120051] = 1597, -- Kaliri Hatchling
 	[163804] = 2447, -- Kindleweb Spiderling
 	[ 44738] =  199, -- Kirin Tor Familiar
 	[136911] = 1806, -- Knockoff Blingtron
 	[104165] = 1334, -- Kovok
 	[163822] = 2454, -- Kunchong Hatchling
+	[122116] = 1635, -- K'ute <= Holy Chime
 	[140323] = 1930, -- Lagan
 	[117404] =  115, -- Land Shark
 	[ 68840] =  302, -- Landro's Lichling
@@ -351,8 +368,10 @@ private.PetItemToSpecies = {
 	[ 69251] =  307, -- Lashtail Hatchling
 	[163812] = 2468, -- Laughing Stonekin
 	[ 48118] =  235, -- Leaping Hatchling
+	[166487] = 2552, -- Leatherwing Screecher
 	[127856] = 1687, -- Left Shark
 	[ 69648] =  308, -- Legs
+	[165855] = 2532, -- Leper Rat <= Leper Rat Tail
 	[ 97556] = 1234, -- Lesser Voidcaller <= Crystal of the Void
 	[122104] = 1623, -- Leviathan Hatchling <= Leviathan Egg
 	[136914] = 1808, -- Leyline Broodling
@@ -378,6 +397,7 @@ private.PetItemToSpecies = {
 	[163815] = 2471, -- Littlehoof
 	[ 97959] = 1243, -- Living Fluid <= Quivering Blob
 	[ 94125] = 1177, -- Living Sandling
+	[166494] = 2558, -- Lord Woofington
 	[127705] = 1661, -- Lost Netherpup
 	[163568] = 2430, -- Lost Platysaur
 	[116155] = 1511, -- Lovebird Hatchling
@@ -398,6 +418,7 @@ private.PetItemToSpecies = {
 	[111402] = 1403, -- Mechanical Axebeak
 	[118484] = 1403, -- Mechanical Axebeak <= Schematic: Mechanical Axebeak
 	[ 10398] =   83, -- Mechanical Chicken
+	[165854] = 2531, -- Mechanical Cockroach
 	[ 87526] =  844, -- Mechanical Pandaren Dragonling
 	[163496] = 2410, -- Mechanical Prairie Dog <= Strange Looking Mechanical Squirrel
 	[118741] = 1565, -- Mechanical Scorpid
@@ -405,11 +426,13 @@ private.PetItemToSpecies = {
 	[  4401] =   39, -- Mechanical Squirrel <= Mechanical Squirrel Box
 	[  4408] =   39, -- Mechanical Squirrel <= Schematic: Mechanical Squirrel Box
 	[ 45002] =  215, -- Mechanopeep
+	[165849] = 2530, -- Mechantula
 	[ 97549] = 1227, -- Menagerie Custodian <= Instant Arcane Sanctum Security Kit
 	[101426] =  666, -- Micronax <= Micronax Controller
 	[161214] = 2202, -- Miimii <= Thousand Year Old Mummy Wraps
 	[ 13584] =   93, -- Mini Diablo <= Diablo Stone
 	[ 93041] = 1156, -- Mini Mindslayer <= Jewel of Maddening Whispers
+	[165894] = 2534, -- Mini Spider Tank
 	[ 56806] =  258, -- Mini Thor
 	[ 39656] =  189, -- Mini Tyrael <= Tyrael's Hilt
 	[151632] = 2064, -- Mining Monkey
@@ -438,6 +461,7 @@ private.PetItemToSpecies = {
 	[163820] = 2458, -- Muskflank Calfling
 	[116258] = 1514, -- Mystical Spring Bouquet
 	[151269] = 2002, -- Naxxy
+	[166489] = 2554, -- Needleback Pup
 	[142085] = 1954, -- Nerubian Swarmer <= Nerubian Relic
 	[ 38628] =  186, -- Nether Ray Fry
 	[ 97550] = 1228, -- Netherspace Abyssal <= Netherspace Portal-Stone
@@ -451,6 +475,7 @@ private.PetItemToSpecies = {
 	[ 68841] =  303, -- Nightsaber Cub
 	[118595] = 1432, -- Nightshade Sproutling
 	[129878] = 1715, -- Nightwatch Swooper
+	[166528] = 2563, -- Nightwreathed Watcher
 	[141532] = 1943, -- Noblegarden Bunny
 	[136897] = 1714, -- Northern Hawk Owl
 	[129826] = 1727, -- Nursery Spider
@@ -510,10 +535,13 @@ private.PetItemToSpecies = {
 	[ 48124] =  238, -- Razormaw Hatchling
 	[ 48126] =  239, -- Razzashi Hatchling
 	[153252] = 2135, -- Rebellious Imp
+	[166715] = 2564, -- Rebuilt Gorilla Bot
+	[166723] = 2565, -- Rebuilt Mechanical Spider
 	[ 85222] = 1042, -- Red Cricket
 	[ 29956] =  143, -- Red Dragonhawk Hatchling
 	[ 29902] =  139, -- Red Moth <= Red Moth Egg
 	[ 94025] = 1176, -- Red Panda
+	[165722] = 2525, -- Redridge Tarantula <= Redridge Tarantula Egg
 	[141352] = 1938, -- Rescued Fawn
 	[161089] = 2199, -- Restored Revenant <= Pile of Bones
 	[136905] = 1756, -- Ridgeback Piglet
@@ -522,6 +550,7 @@ private.PetItemToSpecies = {
 	[ 34492] =  168, -- Rocket Chicken
 	[163220] = 2401, -- Rooter
 	[104317] = 1349, -- Rotten Little Helper <= Rotten Helper Box
+	[166488] = 2553, -- Rotting Ghoul
 	[111866] = 1411, -- Royal Peachick <= Royal Peacock
 	[104159] = 1328, -- Ruby Droplet
 	[142088] = 1957, -- Runeforged Servitor <= Stormforged Rune
@@ -538,17 +567,19 @@ private.PetItemToSpecies = {
 	[163684] = 2436, -- Scabby
 	[ 66073] =  289, -- Scooter the Snail <= Snail Shell
 	[146953] = 2042, -- Scraps
+	[166498] = 2560, -- Scritches
 	[163797] = 2445, -- Scuttle
 	[114919] = 1448, -- Sea Calf
 	[ 73953] =  340, -- Sea Pony
 	[118105] = 1539, -- Seaborne Spore
 	[163490] = 2404, -- Seabreeze Bumblebee <= Pair of Bee Wings
 	[ 34955] =  172, -- Searing Scorchling <= Scorched Stone
-	[ 45606] =  218, -- Sen'jin Fetish
 	[  8495] =   51, -- Senegal <= Parrot Cage (Senegal)
+	[ 45606] =  218, -- Sen'jin Fetish
 	[118923] = 1567, -- Sentinel's Companion
 	[119431] = 1601, -- Servant of Demidos
 	[136904] = 1754, -- Sewer-Pipe Jelly
+	[166492] = 2556, -- Shadefeather Hatchling
 	[151234] = 2062, -- Shadow
 	[151234] = 2062, -- Shadow
 	[128309] = 1690, -- Shard of Cyrukh
@@ -593,6 +624,7 @@ private.PetItemToSpecies = {
 	[142097] = 1966, -- Soulbroken Whelpling <= Skull of a Frozen Whelp
 	[163803] = 2446, -- Sparkleshell Sandcrawler
 	[ 94595] = 1201, -- Spawn of G'nathus
+	[165848] = 2528, -- Spawn of Krag'wa
 	[160702] = 2186, -- Spawn of Merektha
 	[ 90953] = 1127, -- Spectral Cub
 	[ 94190] = 1185, -- Spectral Porcupette
@@ -628,6 +660,7 @@ private.PetItemToSpecies = {
 	[163505] = 2419, -- Swamp Toad <= Toad in a Box
 	[116064] = 1478, -- Syd the Squid
 	[ 97553] = 1231, -- Tainted Waveling <= Tainted Core
+	[166347] = 2540, -- Tanzil
 	[161081] = 2198, -- Taptaf
 	[163677] = 2435, -- Teeny Titan Orb
 	[ 44965] =  204, -- Teldrassil Sproutling
@@ -637,7 +670,9 @@ private.PetItemToSpecies = {
 	[136908] = 1759, -- Thaumaturgical Piglet
 	[163810] = 2469, -- Thistlebrush Bud
 	[130167] = 1803, -- Thistleleaf Adventurer
+	[165847] = 2529, -- Thunder Lizard Runt <= Thundering Scale of Akunda
 	[ 85513] =  802, -- Thundering Serpent Hatchling
+	[166499] = 2561, -- Thunderscale Whelpling
 	[ 39896] =  194, -- Tickbird Hatchling
 	[ 97552] = 1230, -- Tideskipper <= Shell of Tide-Calling
 	[163807] = 2450, -- Tinder Pup
@@ -657,6 +692,7 @@ private.PetItemToSpecies = {
 	[152966] = 2078, -- Tinytron <= Rough-Hewn Remote
 	[ 44971] =  206, -- Tirisfal Batling
 	[ 97558] = 1236, -- Tito <= Tito's Basket
+	[166495] = 2559, -- Tonguelasher
 	[ 33816] =  163, -- Toothy <= Toothy's Bucket
 	[153541] = 2143, -- Tottle
 	[ 50446] =  251, -- Toxic Wasteling
@@ -665,6 +701,7 @@ private.PetItemToSpecies = {
 	[139789] = 1920, -- Transmutant
 	[143842] = 2004, -- Trashy
 	[106256] = 1365, -- Treasure Goblin <= Treasure Goblin's Pack
+	[166346] = 2539, -- Trecker <= Trecker’s Cage
 	[ 11026] =   65, -- Tree Frog <= Tree Frog Box
 	[150741] = 2057, -- Tricorne
 	[132519] = 1886, -- Trigger
@@ -687,8 +724,10 @@ private.PetItemToSpecies = {
 	[103637] = 1344, -- Vengeful Porcupette
 	[ 89736] =  855, -- Venus
 	[147541] = 2037, -- Vilebrood Whelpling
+	[166719] = 2569, -- Violet Abyssal Eel
 	[ 93039] = 1154, -- Viscidus Globule
 	[ 97960] = 1244, -- Viscous Horror <= Dark Quivering Blob
+	[166454] = 2549, -- Void Jelly <= Squishy Purple Goo
 	[163652] = 2434, -- Voidwiggler <= Tiny Grimoire
 	[ 69824] =  310, -- Voodoo Figurine
 	[163824] = 2460, -- Voru'kar Leecher
@@ -699,8 +738,10 @@ private.PetItemToSpecies = {
 	[  8489] =   46, -- White Kitten <= Cat Carrier (White Kitten)
 	[ 29904] =  141, -- White Moth <= White Moth Egg
 	[ 39899] =  195, -- White Tickbird Hatchling
+	[160587] = 2184, -- Whomper
 	[142099] = 1968, -- Wicked Soul <= Call of the Frozen Blade
 	[163497] = 2411, -- Wicker Pup <= Spooky Bundle of Sticks
+	[165907] = 2535, -- Wicker Wraith
 	[116804] = 1523, -- Widget the Departed
 	[ 32617] =  157, -- Willy <= Sleepy Willy
 	[ 49663] =  246, -- Wind Rider Cub
@@ -734,4 +775,5 @@ private.PetItemToSpecies = {
 	[ 49664] =  247, -- Zipao Tiger <= Enchanted Purple Jade
 	[113554] = 1428, -- Zomstrok
 	[137298] = 1903, -- Zoom
+	[166455] = 2550, -- Zur'aj the Depleted
 }
